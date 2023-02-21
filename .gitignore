@@ -1,0 +1,12 @@
+
+*.obj
+*.tlog
+*.exe
+*.vsidx
+*.ipch
+*.lock
+FisioPacerGPU/.vs/FisioPacerGPU/v17/.suo
+*.db
+*.db-shm
+*.db-wal
+*.opendb

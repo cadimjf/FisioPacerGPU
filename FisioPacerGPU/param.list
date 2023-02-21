@@ -1,0 +1,17 @@
+mecSim
+paSim
+dt
+dtSave
+NRegions
+VV0 VV1 VV2 VV3 VV4 VF0 VF1 VF2 VF3 VF4 APTime1 APTime2 APTime3 APTime4 FTime1 FTime2 FTime3 FTime4 v_fiber v_sheet v_nsheet forceMultiplier kStiff_f kStiff_s kStiff_ns kVol_f kVol_s kVol_ns kDamp kA_fs kA_fn kA_sn p_eletrotonic
+gravityX
+gravityY
+gravityZ
+printOutput
+numThreads
+simulationTime
+inputFolder
+outputFolder
+
+
+dispersionFR DELAY_ELETRO_FORCE VV0 VV1 VV2 VV3 VV4 VF0 VF1 VF2 VF3 VF4 APTime1 APTime2 APTime3 APTime4 FTime1 FTime2 FTime3 FTime4 v_fiber v_sheet v_nsheet velFastRepolWave forceMultiplier kStiff_f kStiff_s kStiff_ns kVol_f kVol_s kVol_ns kDamp kA_fs kA_fn kA_sn
