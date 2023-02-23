@@ -10,10 +10,9 @@ D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\kernel.cu(118)
   Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
   
   kernel.cu
-  tmpxft_0000464c_00000000-7_kernel.cudafe1.cpp
+  tmpxft_00001bcc_00000000-7_kernel.cudafe1.cpp
   CellularAutomaton.cpp
   Geometry.cpp
-  main.cpp
   Mechanics.cpp
   NumericalMethods.cpp
   WriteOutput.cpp
@@ -33,7 +32,6 @@ D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cp
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(503,45): warning C4244: '=': conversão de 'double' para 'float', possível perda de dados
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(447,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(449,18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  main.cpp
   Gerando Código...
-     Criando biblioteca D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\FisioPacerGPU.lib e objeto D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\FisioPacerGPU.exp
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
   FisioPacerGPU.vcxproj -> D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\FisioPacerGPU.exe

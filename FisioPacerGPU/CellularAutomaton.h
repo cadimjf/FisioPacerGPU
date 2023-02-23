@@ -11,7 +11,7 @@
 #include "Constants.h"
 #include "Geometry.h"
 #include "DataStructures.h"
-#include "Mechanics.h"
+//#include "Mechanics.h"
 #include "MyStdLib.h"
 //#include "LinearAlg.h"
 //#include "ReadMesh.h"

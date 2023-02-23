@@ -10,3 +10,9 @@ FisioPacerGPU/.vs/FisioPacerGPU/v17/.suo
 *.db-shm
 *.db-wal
 *.opendb
+*.ilk
+*.log
+*.pdb
+*.idb
+*.pdb
+*.iobj

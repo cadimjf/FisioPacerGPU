@@ -14,6 +14,7 @@
 #include "MyStdLib.h"
 #include "CellularAutomaton.h"
 #include "pressure.h"
+#include "Mechanics.h"
 using namespace std;
 #include "WriteOutput.h"
 
