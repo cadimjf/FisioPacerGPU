@@ -21,7 +21,7 @@ inline void HouseHolder(double A[3][3], double Q[3][3], double d[3], double e[2]
 // ---------------------------------------------------------------------------
 {
   const int n = 3;
-  double u[n], q[n];
+  double u[n] = { 0. }, q[n] = { 0. };
   double omega, f;
   double K, h, g;
   
@@ -286,10 +286,10 @@ void printMatrix(double a[3][3]){
   */
  void computeSqrtMatrix(double U2[3][3], double U[3][3])
  {
-    double eigenVectors[3][3];
-    double eigenValues[3];    
+    double eigenVectors[3][3] = { 0. };
+    double eigenValues[3] = { 0. };
     eigen(U2, eigenVectors, eigenValues);
-    double diagEigVal[3][3], invEigVec[3][3], aux[3][3];
+    double diagEigVal[3][3] = { 0. }, invEigVec[3][3] = { 0. }, aux[3][3] = { 0. };
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++){
             if(i==j)
@@ -313,7 +313,7 @@ void invertMatrixEigenValue(double M[3][3], double N[3][3]){
     double eigenValues[3];
 
     eigen(M, eigenVectors, eigenValues);
-    double diagEigVal[3][3], invEigVec[3][3], aux[3][3];
+    double diagEigVal[3][3] = { 0. }, invEigVec[3][3] = { 0. }, aux[3][3] = { 0. };
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++)
         {

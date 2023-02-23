@@ -75,7 +75,7 @@ void pressIntPoint(double forceAxis[3][2], double fSurf[3], int col){
 int MecStep_i(typ_ca *CA, int i, double *forcesOnPts)
 {
 
-    double forceSheet[3][2], forceNSheet[3][2], forceFiber[3][2];
+    double forceSheet[3][2]={0.0}, forceNSheet[3][2] = { 0. }, forceFiber[3][2] = { 0. };
     for (int ind = 0; ind < 3; ind++) {
         forceSheet[ind][0] = forceSheet[ind][1] = 0.0f;
         forceNSheet[ind][0] = forceNSheet[ind][1] = 0.0f;
@@ -99,7 +99,7 @@ int MecStep_i(typ_ca *CA, int i, double *forcesOnPts)
     getExternalForce(forceNSheet, i, CA);
     
     //finds the force on the faces intercepted
-    double forcePts[3][4];
+    double forcePts[3][4] = { 0. };
     for (int j = 0; j < 3; j++)
         for (int k = 0; k < 4; k++)
             forcePts[j][k] = 0.0f;
@@ -253,13 +253,12 @@ void getActiveForce( int i, double force[3][2], typ_ca *CA)
  * @param time
  * @return
  */
-void simulationStep( int nThreads,
-                typ_ca* CA,
+void simulationStep(typ_ca* CA,
                 double *forcesOnPts)
 {
     double volT=0.0;
     int contCA=0;
-    #pragma omp parallel for schedule(static) num_threads(nThreads) reduction(+:volT)
+    //#pragma omp parallel for schedule(static) num_threads(nThreads) reduction(+:volT)
     for(int i=0;i<CA->params->elementsNum;i++){
         if(CA->params->paSim==1){
             CAStep_i(i, CA);

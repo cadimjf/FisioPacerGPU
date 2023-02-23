@@ -273,7 +273,7 @@ struct MyException : public std::exception
         this->fileName     = fn;
         this->lineNumber   = l;
     }
-    ~MyException() throw () {} // Updated
+    ~MyException() {} // Updated
     const char* what() const throw() { 
         stringstream ss;
         ss<<"Error in file "<<this->fileName<< " at line "<<this->lineNumber<<":"<<endl;

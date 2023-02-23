@@ -1,0 +1,160 @@
+D:\Programas\CudaToolkit\dev\include\builtin_types.h
+D:\Programas\CudaToolkit\dev\include\channel_descriptor.h
+D:\Programas\CudaToolkit\dev\include\crt\common_functions.h
+D:\Programas\CudaToolkit\dev\include\crt\cudacc_ext.h
+D:\Programas\CudaToolkit\dev\include\crt\device_double_functions.h
+D:\Programas\CudaToolkit\dev\include\crt\device_double_functions.hpp
+D:\Programas\CudaToolkit\dev\include\crt\device_functions.h
+D:\Programas\CudaToolkit\dev\include\crt\device_functions.hpp
+D:\Programas\CudaToolkit\dev\include\crt\host_config.h
+D:\Programas\CudaToolkit\dev\include\crt\host_defines.h
+D:\Programas\CudaToolkit\dev\include\crt\math_functions.h
+D:\Programas\CudaToolkit\dev\include\crt\math_functions.hpp
+D:\Programas\CudaToolkit\dev\include\crt\sm_70_rt.h
+D:\Programas\CudaToolkit\dev\include\crt\sm_80_rt.h
+D:\Programas\CudaToolkit\dev\include\crt\sm_90_rt.h
+D:\Programas\CudaToolkit\dev\include\cuda_device_runtime_api.h
+D:\Programas\CudaToolkit\dev\include\cuda_runtime.h
+D:\Programas\CudaToolkit\dev\include\cuda_runtime_api.h
+D:\Programas\CudaToolkit\dev\include\device_atomic_functions.h
+D:\Programas\CudaToolkit\dev\include\device_launch_parameters.h
+D:\Programas\CudaToolkit\dev\include\device_types.h
+D:\Programas\CudaToolkit\dev\include\driver_functions.h
+D:\Programas\CudaToolkit\dev\include\driver_types.h
+D:\Programas\CudaToolkit\dev\include\library_types.h
+D:\Programas\CudaToolkit\dev\include\sm_20_atomic_functions.h
+D:\Programas\CudaToolkit\dev\include\sm_20_intrinsics.h
+D:\Programas\CudaToolkit\dev\include\sm_30_intrinsics.h
+D:\Programas\CudaToolkit\dev\include\sm_32_atomic_functions.h
+D:\Programas\CudaToolkit\dev\include\sm_32_intrinsics.h
+D:\Programas\CudaToolkit\dev\include\sm_35_atomic_functions.h
+D:\Programas\CudaToolkit\dev\include\sm_35_intrinsics.h
+D:\Programas\CudaToolkit\dev\include\sm_60_atomic_functions.h
+D:\Programas\CudaToolkit\dev\include\sm_61_intrinsics.h
+D:\Programas\CudaToolkit\dev\include\surface_indirect_functions.h
+D:\Programas\CudaToolkit\dev\include\surface_types.h
+D:\Programas\CudaToolkit\dev\include\texture_indirect_functions.h
+D:\Programas\CudaToolkit\dev\include\texture_types.h
+D:\Programas\CudaToolkit\dev\include\vector_functions.h
+D:\Programas\CudaToolkit\dev\include\vector_functions.hpp
+D:\Programas\CudaToolkit\dev\include\vector_types.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\atomic
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cctype
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cerrno
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cfloat
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\climits
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\clocale
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cmath
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\concurrencysal.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\crtdefs.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstddef
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstdint
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstdio
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstdlib
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstring
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\ctime
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cwchar
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\eh.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\exception
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\fstream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\initializer_list
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\intrin0.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\intrin0.inl.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\ios
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\iosfwd
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\iostream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\isa_availability.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\istream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\iterator
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\limits
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\limits.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\memory
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\new
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\omp.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\ostream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\sal.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\sstream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\stdexcept
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\stdint.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\streambuf
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\string
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\system_error
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\typeinfo
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\type_traits
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\use_ansi.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\utility
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vadefs.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_exception.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_new.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_new_debug.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_string.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_typeinfo.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xatomic.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xcall_once.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xerrc.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xfacet
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xiosbase
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xkeycheck.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xlocale
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xlocinfo
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xlocnum
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xmemory
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xstddef
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xstring
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xthreads.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xtimec.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xtr1common
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xutility
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\yvals.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\yvals_core.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\__msvc_iter_core.hpp
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\__msvc_system_error_abi.hpp
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\__msvc_xlocinfo_types.hpp
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\CellularAutomaton.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Constants.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\ContinuumMech.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\DataStructures.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Geometry.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\kernel.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\LinearAlg.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Mechanics.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\MyStdLib.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\NumericalMethods.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\pressure.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\ReadMesh.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_malloc.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_math.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_memcpy_s.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_memory.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_search.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_share.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_stdio_config.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_terminate.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wconio.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wctype.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wdirect.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wio.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wprocess.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wstdio.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wstdlib.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wstring.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\corecrt_wtime.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\crtdbg.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\ctype.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\errno.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\float.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\locale.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\malloc.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\math.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\share.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\stddef.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\stdio.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\stdlib.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\string.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\sys\stat.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\sys\types.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\time.h
+D:\Windows Kits\10\Include\10.0.22000.0\ucrt\wchar.h

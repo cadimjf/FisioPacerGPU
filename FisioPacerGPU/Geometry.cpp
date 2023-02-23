@@ -41,7 +41,7 @@ double getN3(double etha, double ksi)
  double getVolumeTetrahedron(typ_ca *CA, int index)
 {
     //assembly a matrix (a-d, b-d, c-d)
-    double aux[3][3];
+    double aux[3][3] = { { 0., 0., 0. } , {0., 0., 0.} , {0., 0., 0.} };
     int pt1, pt2, pt3, pt4;
     pt4=CA->ini[index]->iPt4;
     //
@@ -100,9 +100,9 @@ void getBarycenter(typ_ca *CA, int index)
 */
 double areaTriangulo(double A[3], double B[3], double C[3])
 {
-    double aux1[3]; //A-B
-    double aux2[3]; //B-C
-    double aux3[3]; //cross product
+    double aux1[3] = { 0., 0., 0. }; //A-B
+    double aux2[3] = { 0., 0., 0. }; //B-C
+    double aux3[3] = { 0., 0., 0. }; //cross product
     for(int i=0;i<3;i++){
         aux1[i] = A[i] - B[i];
         aux2[i] = B[i] - C[i];
@@ -139,7 +139,7 @@ void findLineAxisBary(double bary[3], double dir[3], double retaParal[3][2]){
  * @param n
  */
 void findFaceNormal(typ_ca *CA, int pt1, int pt2, int pt3, double n[3]){
-    double aux1[3], aux2[3];
+    double aux1[3]={0., 0., 0.}, aux2[3] = { 0., 0., 0. };
     aux1[0]=CA->pnts_old[pt1]->x - CA->pnts_old[pt2]->x;
     aux1[1]=CA->pnts_old[pt1]->y - CA->pnts_old[pt2]->y;
     aux1[2]=CA->pnts_old[pt1]->z - CA->pnts_old[pt2]->z;
@@ -182,13 +182,13 @@ void findFaceNormal(typ_ca *CA, int pt1, int pt2, int pt3, double n[3]){
  * @return 
  */
 double findT(double eqLine[3][2], double randomPtFace[3], double nFace[3], double *checkDot){
-    double aux[3];
+    double aux[3] = { 0., 0., 0. };
     //X0-Xb (Xb is at eqLine[:][1])
     aux[0] = randomPtFace[0] - eqLine[0][1];
     aux[1] = randomPtFace[1] - eqLine[1][1];
     aux[2] = randomPtFace[2] - eqLine[2][1];
     //
-    double aux2[3];
+    double aux2[3] = { 0., 0., 0. };
     aux2[0] = eqLine[0][0];
     aux2[1] = eqLine[1][0];
     aux2[2] = eqLine[2][0];
@@ -370,7 +370,7 @@ void findIntersectionPlaneLine(int index, typ_ca *CA,
     getElementPtsInVector(index, CA, pt1, pt2, pt3, pt4);
     int check=0;
     double ptI1[3], ptI2[3], ptI3[3], ptI4[3];
-    double ptIValid1[3], ptIValid2[3];
+    double ptIValid1[3] = { 0., 0., 0. }, ptIValid2[3] = { 0., 0., 0. };
     ptIValid1[0]=ptIValid2[0]=0.0;
     ptIValid1[1]=ptIValid2[1]=0.0;
     ptIValid1[2]=ptIValid2[2]=0.0;
@@ -379,7 +379,7 @@ void findIntersectionPlaneLine(int index, typ_ca *CA,
     double ksi, etha, relError=0.0;
     //index for insert the interpolation function on the proper 
     int col;
-    int smallestErrorID;
+    int smallestErrorID=-1;
     double smallestError=DBL_MAX;
     //face 1: 123
     if(checkPtBelongsToFace(reta, pt1, pt2, pt3, n[0], ptI1, &ksi, &etha, &relError)==1)
@@ -685,7 +685,7 @@ void iniGeometry(int i, typ_ca *CA)
     findLineAxisBary(CA->t_old[i]->bary, CA->t_old[i]->fiberDir,  retaParalFibra);
     findLineAxisBary(CA->t_old[i]->bary, CA->t_old[i]->sheetDir,  retaParalSheet);
     findLineAxisBary(CA->t_old[i]->bary, CA->t_old[i]->nsheetDir, retaParalNSheet);
-    double n[4][3];
+    double n[4][3] = { 0. };
     for(int ii=0;ii<4;ii++){
         n[ii][0]=n[ii][1]=n[ii][2]=0.0;
     }
@@ -783,7 +783,7 @@ void iniGeometry(int i, typ_ca *CA)
     interceptionPntPressure(i,CA);
 }
 void getIntercMasses(typ_ca *CA, int iElem){
-    double pntMass[4];
+    double pntMass[4] = { 0., 0., 0. ,0.};
     
     int iPt1 = CA->ini[iElem]->iPt1;
     int iPt2 = CA->ini[iElem]->iPt2;
@@ -792,7 +792,7 @@ void getIntercMasses(typ_ca *CA, int iElem){
     pntMass[0] = CA->pnts_old[iPt1]->mass;
     pntMass[1] = CA->pnts_old[iPt2]->mass;
     pntMass[2] = CA->pnts_old[iPt3]->mass;
-    pntMass[0] = CA->pnts_old[iPt4]->mass;
+    pntMass[3] = CA->pnts_old[iPt4]->mass;
     
     double mass=0.0;
     for (int d = 0 ; d < 6 ; d++ ){
@@ -810,7 +810,7 @@ void getIntercMasses(typ_ca *CA, int iElem){
  */
 void computeKs(typ_ca *CA, int iElem){
     getIntercMasses(CA, iElem);
-    double area_L0[3], area[3];  
+    double area_L0[3] = { 0., 0., 0. }, area[3] = { 0., 0., 0. };
     typ_t0_element *ini = CA->ini[iElem];
     //calcula o damp de um jeito novo para tentar amortecer o cisalhamento
     //fibra
@@ -915,7 +915,7 @@ void computeKs(typ_ca *CA, int iElem){
   */
  void getInterceptPtsByInterpolation(typ_ca *CA, int i)
  {
-    double points[3][4];
+    double points[3][4] = { 0. };
     int iPt1=CA->ini[i]->iPt1;
     int iPt2=CA->ini[i]->iPt2;
     int iPt3=CA->ini[i]->iPt3;
@@ -962,8 +962,8 @@ void findAxis(typ_ca *CA, int i)
  void findVelocities(typ_ca *CA,  int iElem, 
          double velsIter[6][3])
 {
-    double velsIterTEMP[3][6];
-    double velPts[3][4];
+    double velsIterTEMP[3][6] = { 0. };
+    double velPts[3][4] = { 0. };
     
     int iPt1=CA->ini[iElem]->iPt1;
     int iPt2=CA->ini[iElem]->iPt2;
@@ -988,9 +988,9 @@ void findAxis(typ_ca *CA, int i)
         throw MyException("velPts", __FILE__, __LINE__);
     if(CA->ini[iElem]->ck==NULL)
         throw MyException("CA->ini[iElem]->ck", __FILE__, __LINE__);
-    ////////
-    //findDataByInterpol(velPts, CA->ini[iElem]->ck, velsIterTEMP);
-    double sum=0.0;
+    //////// TODO FIXME nao sei porque este codigo estava replicado em vez de chamar a funcao
+    findDataByInterpol(velPts, CA->ini[iElem]->ck, velsIterTEMP);
+    /*double sum = 0.0;
     for (int c = 0 ; c < 3 ; c++ )
     {
         for (int d = 0 ; d < 6 ; d++ )
@@ -1002,37 +1002,14 @@ void findAxis(typ_ca *CA, int i)
             velsIterTEMP[c][d] = sum;
             sum = 0.0;
         }
-    }
+    }*/
     //tranpose
     for(int ii=0;ii<3;ii++){
         for(int jj=0;jj<6;jj++){
             velsIter[jj][ii] = velsIterTEMP[ii][jj];
         }
     }
-    /*if(iElem==25){
-        cout<<"VelPts"<<endl;
-        for(int ii=0;ii<3;ii++){
-           for(int jj=0;jj<4;jj++){
-               printf("%f\t",velPts[ii][jj]);
-           }
-           cout<<endl;
-        }   
-        cout<<"ck"<<endl;
-        for(int ii=0;ii<4;ii++){
-           for(int jj=0;jj<6;jj++){
-               printf("%f\t",CA->ini[iElem]->ck[ii][jj]);
-           }
-           cout<<endl;
-        }  
-        cout<<"VelInt"<<endl;
-        for(int ii=0;ii<3;ii++){
-           for(int jj=0;jj<6;jj++){
-               printf("%f\t",velsIterTEMP[ii][jj]);
-           }
-           cout<<endl;
-        }
-        cout<<"----------------"<<endl;
-    }*/
+
  }
 
  /**
@@ -1097,7 +1074,7 @@ void updateGeometry(
  */
 void getProjection(double inA[3], double inB[3], double out[3], double *dotAB)
 {
-    double bHat[3];
+    double bHat[3] = { 0., 0., 0. };
     bHat[0]=inB[0]; bHat[1]=inB[1]; bHat[2]=inB[2];
     normalizeVector(bHat, -1);
     *dotAB = dot(inA, bHat);

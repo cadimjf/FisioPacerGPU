@@ -320,7 +320,7 @@ void saveDebug(
    
     fprintf(file, "<DataArray Name=\"displacement\" type=\"Float32\"  NumberOfComponents=\"3\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        double displacement[3];
+        double displacement[3] = { 0. };
         displacement[0] = CA->pnts_old[i]->x - CA->pnts_old[i]->x0;
         displacement[1] = CA->pnts_old[i]->y - CA->pnts_old[i]->y0;
         displacement[2] = CA->pnts_old[i]->z - CA->pnts_old[i]->z0;
@@ -331,7 +331,7 @@ void saveDebug(
     
     fprintf(file, "<DataArray Name=\"force\" type=\"Float32\"  NumberOfComponents=\"3\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        double aForce[3];
+        double aForce[3] = { 0. };
         aForce[0] = forcesOnPts[I2d(i,0,3)];
         aForce[1] = forcesOnPts[I2d(i,1,3)];
         aForce[2] = forcesOnPts[I2d(i,2,3)];

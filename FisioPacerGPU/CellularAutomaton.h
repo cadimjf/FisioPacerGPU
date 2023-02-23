@@ -13,11 +13,11 @@
 #include "DataStructures.h"
 #include "Mechanics.h"
 #include "MyStdLib.h"
-#include "LinearAlg.h"
-#include "ReadMesh.h"
+//#include "LinearAlg.h"
+//#include "ReadMesh.h"
 //#include "Stopwatch.h"
-#include "WriteOutput.h"
-#include "NumericalMethods.h"
+//#include "WriteOutput.h"
+//#include "NumericalMethods.h"
 
 #include "pressure.h"
 #include <iostream>
@@ -38,7 +38,7 @@ using namespace std;
 double getActiveTension(int i, typ_ca *CA);
 double getActiveTensionNormalized(int i, typ_ca *CA);
 double getActiveTensionDiscrete( int i, typ_ca *CA);
-void initializeCA( typ_ca *CA );
+
 double getV(int i ,typ_ca *CA);
 double getVdiscret( int i,typ_ca *CA);
 int isStimulationTime(int i, typ_ca *CA);
@@ -48,11 +48,7 @@ void incStates(int i, double dt, typ_ca *CA);
 void CAStep_i(int i, typ_ca *CA);
 
 int getNumThreads(int numThreads, int *threadsByIndividual);
-int simulate(  typ_ca *CA, bool save, int *threadsByIndividual=NULL);
-int startCA(string paramFile, bool save, int *threadsByIndividual=NULL);
 
-void allocCA(typ_ca* CA);
-void deallocCA(typ_ca *CA);
 
 void computeNewAPDElectroTonic(int i, typ_ca *CA);
 void restartAPDElectroTonic(int i, typ_ca *CA);

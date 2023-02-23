@@ -10,12 +10,7 @@
 #include <string>
 #include <omp.h>
 
-#include "Constants.h"
-#include "MyStdLib.h"
-#include "ReadMesh.h"
-#include "CellularAutomaton.h"
-#include "WriteOutput.h"
-#include "DataStructures.h"
+#include "kernel.h"
 //#include "Stopwatch.h"
 
 
@@ -42,7 +37,7 @@ int main(int argc, char** argv) {
 //./dist/Release/GNU-Linux-x86/fisiopacerrun /home/ricardo/tese/cubo6/malha.param
     //Stopwatch watch;
    // watch.start();
-    startCA(paramFile, true, NULL);
+    startCA(paramFile, true);
     //watch.stop();
     //cout<<"Time "<< watch.timeMS() <<" "<< (watch.timeMS()/1000)/60 
     //<<"'"<<(watch.timeMS()/1000)%60<<endl;

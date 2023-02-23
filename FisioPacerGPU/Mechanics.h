@@ -11,7 +11,7 @@
 #include "Geometry.h"
 #include "DataStructures.h"
 #include "CellularAutomaton.h"
-#include "MyStdLib.h"
+//#include "MyStdLib.h"
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>
@@ -32,7 +32,7 @@ int MecStep_i(typ_ca *CA, int i, double *forcesOnPts);
 void getPassiveForce(int i, int iAxis, double force[3][2], double vel1[3], double vel2[3] , typ_ca *CA);
 void getExternalForce(double force[3][2], int i, typ_ca *CA);
 void getActiveForce( int i, double force[3][2], typ_ca *CA);
-void simulationStep( int nThreads, typ_ca* CA, double *forcesOnPts);
+void simulationStep( typ_ca* CA, double *forcesOnPts);
 void computeForceOnElement(typ_ca *CA, double *forcesOnPts, int i);
 void computeForceIntermediaria(typ_ca *CA, double *forcesOnPts);
 void getForceOnSurface(typ_face *face, typ_ca *CA, double *aForce);
