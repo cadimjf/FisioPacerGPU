@@ -449,10 +449,7 @@ int readSize(string file){
  * @param p
  */
 void readParameterFile(string fName, typ_ca *CA){
-    CA->params = (typ_param*)malloc(sizeof(typ_param));
-    if(CA->params==NULL){
-        throw MyException("Allocation failure for parameter structure.", __FILE__, __LINE__);
-    }
+    
     ifstream myfile(fName.c_str());
     string line;
     if (myfile.is_open())

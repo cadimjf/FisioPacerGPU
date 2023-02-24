@@ -11,15 +11,9 @@
 #include "Constants.h"
 #include "Geometry.h"
 #include "DataStructures.h"
-//#include "Mechanics.h"
 #include "MyStdLib.h"
-//#include "LinearAlg.h"
-//#include "ReadMesh.h"
-//#include "Stopwatch.h"
-//#include "WriteOutput.h"
-//#include "NumericalMethods.h"
 
-#include "pressure.h"
+//#include "pressure.h"
 #include <iostream>
 #include <stdio.h>
 #include "omp.h"
@@ -45,7 +39,7 @@ int isStimulationTime(int i, typ_ca *CA);
 double getPropagationTime(int iElemNeighbor, int i, typ_ca *CA);
 void cellActivation(int i, typ_ca *CA);
 void incStates(int i, double dt, typ_ca *CA);
-void CAStep_i(int i, typ_ca *CA);
+void CAStep_i(int i, typ_ca* CA);
 
 int getNumThreads(int numThreads, int *threadsByIndividual);
 

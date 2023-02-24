@@ -247,53 +247,6 @@ void getActiveForce( int i, double force[3][2], typ_ca *CA)
 }
 /**
  *
- * @param nThreads
- * @param POINTS_OLD
- * @param forcesOnPts
- * @param time
- * @return
- */
-void simulationStep(typ_ca* CA,
-                double *forcesOnPts)
-{
-    double volT=0.0;
-    int contCA=0;
-    //#pragma omp parallel for schedule(static) num_threads(nThreads) reduction(+:volT)
-    for(int i=0;i<CA->params->elementsNum;i++){
-        if(CA->params->paSim==1){
-            CAStep_i(i, CA);
-            contCA++;
-            computeNewAPDElectroTonic(i, CA);
-        }
-        computeForceOnElement(CA, forcesOnPts, i);
-        //verifica se o volume da celula é menor que 1% do inicial - netste caso, mata o processo pq é sinal de erro.
-        if(CA->t_new[i]->volCel< 0.001 * CA->ini[i]->volCel_ini){
-            CA->params->mecSim=0;
-            CA->params->paSim=0;
-            if(CA->params->printOutput==1){
-                cout<<"Mata por volume pequeno["<<i<<"]: "<<CA->time<<endl;
-                cout<<"Inicial: "<<CA->ini[i]->volCel_ini<<" | Atual: "<<CA->t_new[i]->volCel<<endl;
-                cout<<  CA->pnts_old[CA->ini[i]->iPt1]->x<<" "<<
-                        CA->pnts_old[CA->ini[i]->iPt1]->y<<" "<<
-                        CA->pnts_old[CA->ini[i]->iPt1]->z<<endl;
-                cout<<  CA->pnts_old[CA->ini[i]->iPt2]->x<<" "<<
-                        CA->pnts_old[CA->ini[i]->iPt2]->y<<" "<<
-                        CA->pnts_old[CA->ini[i]->iPt2]->z<<endl;
-
-                throw MyException("1percent volume.", __FILE__, __LINE__);
-
-            }
-        }
-        volT+= CA->t_new[i]->volCel;      
-    }//fim pragma
-    //exit(0);
-    if(CA->params->mecSim==1){
-       computePressurePoints(CA, forcesOnPts);
-    }
-    CA->volume=volT;
-}
-/**
- *
  * @param POINTS_OLD
  * @param forcesOnPts
  * @param i

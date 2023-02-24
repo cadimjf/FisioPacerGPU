@@ -18,6 +18,6 @@ int simulate(typ_ca* CA, bool save);
 void initializeCA(typ_ca* CA);
 void stats(typ_ca* CA, double* forcesOnPts);
 int startCA(string paramFile, bool save);
-
+void simulationStep(typ_ca* CA, double* forcesOnPts);
 void allocCA(typ_ca* CA);
 void deallocCA(typ_ca* CA);

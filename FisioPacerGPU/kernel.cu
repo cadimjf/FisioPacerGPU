@@ -1,6 +1,16 @@
-﻿
+﻿#include "kernel.h"
 
-#include "kernel.h"
+#define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+inline void gpuAssert(cudaError_t code, const char* file, int line, bool abort = true)
+{
+    if (code != cudaSuccess)
+    {
+        fprintf(stderr, "GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+        if (abort) exit(code);
+    }
+}
+
+
 /**
  *
  * @param CA
@@ -39,13 +49,6 @@ void initializeCA(typ_ca* CA)
         //F state
         CA->t_new[i]->F_state = CA->t_old[i]->F_state = F0;
         iniGeometry(i, CA);
-        /*if(i==0){
-            cout << "initializeCA"<<endl;
-            cout<<CA->t_old[i]->axisLengthT[0]<<" "<<
-                  CA->t_old[i]->axisLengthT[1]<<" "<<
-                  CA->t_old[i]->axisLengthT[2]<<endl;
-            cout<<"__________"<<endl;
-        }*/
         //sets the pacemaker up
         for (int iS = 0; iS < CA->params->stimSize; iS++) {
             t_stim* s = CA->params->aStim[iS];
@@ -167,6 +170,55 @@ int simulate(typ_ca* CA, bool save) {
 
 /**
  *
+ * @param nThreads
+ * @param POINTS_OLD
+ * @param forcesOnPts
+ * @param time
+ * @return
+ */
+void simulationStep(typ_ca* CA,
+    double* forcesOnPts)
+{
+    double volT = 0.0;
+    int contCA = 0;
+    //#pragma omp parallel for schedule(static) num_threads(nThreads) reduction(+:volT)
+    for (int i = 0; i < CA->params->elementsNum; i++) {
+        if (CA->params->paSim == 1) {
+            CAStep_i(i, CA);
+            contCA++;
+            computeNewAPDElectroTonic(i, CA);
+        }
+        computeForceOnElement(CA, forcesOnPts, i);
+        //verifica se o volume da celula é menor que 1% do inicial - netste caso, mata o processo pq é sinal de erro.
+        if (CA->t_new[i]->volCel < 0.001 * CA->ini[i]->volCel_ini) {
+            CA->params->mecSim = 0;
+            CA->params->paSim = 0;
+            if (CA->params->printOutput == 1) {
+                cout << "Mata por volume pequeno[" << i << "]: " << CA->time << endl;
+                cout << "Inicial: " << CA->ini[i]->volCel_ini << " | Atual: " << CA->t_new[i]->volCel << endl;
+                cout << CA->pnts_old[CA->ini[i]->iPt1]->x << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt1]->y << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt1]->z << endl;
+                cout << CA->pnts_old[CA->ini[i]->iPt2]->x << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt2]->y << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt2]->z << endl;
+
+                throw MyException("1percent volume.", __FILE__, __LINE__);
+
+            }
+        }
+        volT += CA->t_new[i]->volCel;
+    }//fim pragma
+    //exit(0);
+    if (CA->params->mecSim == 1) {
+        computePressurePoints(CA, forcesOnPts);
+    }
+    CA->volume = volT;
+}
+
+
+/**
+ *
  * @param CA
  * @param forcesOnPts
  */
@@ -225,6 +277,10 @@ int startCA(string paramFile, bool save)
         typ_ca* CA = (typ_ca*)malloc(sizeof(typ_ca));
         if (CA == NULL) {
             throw MyException("Allocation failure for CA.", __FILE__, __LINE__);
+        }
+        CA->params = (typ_param*)malloc(sizeof(typ_param));
+        if (CA->params == NULL) {
+            throw MyException("Allocation failure for parameter structure.", __FILE__, __LINE__);
         }
         readParameterFile(paramFile, CA);
         allocCA(CA);
@@ -318,6 +374,7 @@ void allocCA(typ_ca* CA) {
         //le o tamanho das malhas nos arquivos de entrada
         CA->params->pointsNum = readSize(strPtsFile);
         CA->params->elementsNum = readSize(strEleFile);
+        
         readStimFile(strStmFile, CA);
         CA->omega_a = iniAList(CA->params->elementsNum);
         if (CA->omega_a == NULL) {

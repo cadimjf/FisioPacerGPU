@@ -75,6 +75,7 @@
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
+      <CodeGeneration>compute_50,sm_50</CodeGeneration>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -83,6 +84,7 @@
     <ClInclude Include="ContinuumMech.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="kernel.h" />
     <ClInclude Include="LinearAlg.h" />
     <ClInclude Include="Mechanics.h" />
     <ClInclude Include="MyStdLib.h" />

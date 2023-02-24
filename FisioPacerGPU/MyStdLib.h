@@ -25,10 +25,7 @@ double min(double a, double b);
 
 int midpoint(int imin, int imax);
 int binary_search(int A[], int key, int imin, int imax);
-int** arraysAllocationINT(int x, int y);
-void arraysDeallocationINT(int **myarray, int x);
-double** arraysAllocationDOUBLE(int x, int y);
-void arraysDeallocationDOUBLE(double **myarray, int x);
+
 void printParameters(typ_ca *CA);
 void setDefaultFolders();
 void copyPoint(typ_point *from, typ_point *to);

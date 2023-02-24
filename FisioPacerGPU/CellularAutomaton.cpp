@@ -2,6 +2,8 @@
 #include <float.h>
 
 #include "CellularAutomaton.h"
+
+
 /**
  *
  * @param el
@@ -293,7 +295,8 @@ void incStates(int i, double dt, typ_ca *CA)
  * @param i
  * @param CA
  */
-void CAStep_i(int i, typ_ca *CA)
+
+void CAStep_i(int i, typ_ca* CA)
 {
     int countStimulingNeighbors=0;
 

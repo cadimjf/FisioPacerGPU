@@ -16,3 +16,6 @@ FisioPacerGPU/.vs/FisioPacerGPU/v17/.suo
 *.idb
 *.pdb
 *.iobj
+*.log
+*.ilk
+*.vcxproj

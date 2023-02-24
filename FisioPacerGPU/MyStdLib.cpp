@@ -48,61 +48,6 @@ int binary_search(int A[], int key, int imin, int imax)
     // key not found
     return KEY_NOT_FOUND;
 }
-/**
- * 
- * @param x
- * @param y
- * @return 
- */
-int** arraysAllocationINT(int x, int y){
-    int **array = (int**)malloc(sizeof(int*)*x);
-    if(array==NULL) throw MyException("Allocation Failure", __FILE__, __LINE__);
-    for(int i=0;i<x;i++){
-       array[i] = (int*)malloc(sizeof(int)*y);
-       if(array[i]==NULL) throw MyException("Allocation Failure", __FILE__, __LINE__);
-       for(int j=0;j<y;j++){
-           array[i][j]=EMPTY_FLAG;
-       }
-    }
-    return array;
-}
-
-double** arraysAllocationDOUBLE(int x, int y){
-    double **array = (double**)malloc(sizeof(double*)*x);
-    if(array==NULL) throw MyException("Allocation Failure",__FILE__,__LINE__);
-    for(int i=0;i<x;i++){
-       array[i] = (double*)malloc(sizeof(double)*y);
-       if(array[i]==NULL) throw MyException("Allocation Failure",__FILE__,__LINE__);
-       for(int j=0;j<y;j++){
-           array[i][j]=EMPTY_FLAG;
-       }
-    }
-    return array;
-}
-/**
- * 
- * @param array
- * @param x
- */
-void arraysDeallocationINT(int **array, int x){
-    if(array!=NULL){
-        //dealloc
-        for(int i=0;i<x;i++){
-            if(array[i]!=NULL)free(array[i]);
-        }
-        free(array);
-    }
-}
-void arraysDeallocationDOUBLE(double **array, int x){
-    if(array!=NULL){
-        //dealloc
-        for(int i=0;i<x;i++){
-            if(array[i]!=NULL)free(array[i]);
-        }
-        free(array);
-    }
-}
-
 
 void printParameters(typ_ca *CA){
     cout<<CA->params->mecSim<<endl;
