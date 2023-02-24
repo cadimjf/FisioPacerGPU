@@ -19,3 +19,10 @@ FisioPacerGPU/.vs/FisioPacerGPU/v17/.suo
 *.log
 *.ilk
 *.vcxproj
+*.idb
+*.idb
+*.pdb
+*.log
+*.ilk
+*.vcxproj
+*.user

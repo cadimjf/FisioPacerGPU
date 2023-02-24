@@ -1,0 +1,42 @@
+Experimetno descrito no email
+Novo experimento - artigo benchmark massa mola.
+
+
+Agora nós gostaríamos de fazer um novo experimento, só para mostrar que o massa mola pode reproduzir um ciclo de sístole X diástole completo. Queremos comparar a contração e o tempo de execução com o cardiax. 
+
+Acredito que possa ser a mesma malha do experimento 3, se ela rodar sem travar no cardiax. Gerar malhas e fibras novas nos exigiria um grande esforço desnecessário e não agregaria valor nenhum ao objetivo do experimento. 
+No caso, a meta é mostrar que a vantagem do fisiopacer é ser mais rápido, o que trará uma gigante diminuição no tempo de ajuste do AG, para criarmos modelos específicos de pacientes através de imagens. Neste caso, não é tão simples determinar os parâmetros dos simuladores robustos , sendo necessário realizar ajustes com AG também.
+Estou mandando a malha grosseira, que nós já rodamos no cardiax, em anexo.
+
+O que eu preciso é:
+Simular cerca de 1s do coração. Pode ser um pouco mais longa se a curva do Ta for mto grande. Simulação somente mecânica, com essa malha do exp 3;
+Usar uma tensão ativa variante no tempo, com aquele formato de sino. Pode ser qualquer modelo celular, ou até valores prescritos, desde que mudem em cada passo de tempo, vide a figura abaixo. 
+Todas as células devem iniciar e terminar a aplicação de tensão ao mesmo tempo. O ideal era começar com 10 ou 20 ms, se começar do 0, a figura costuma ficar feia. 
+Não pode ter força externa, aplicada na parede do ventrículo (sem PVLOOP);
+Seria bom que o modelo constitutivo e parâmetros fossem o mais parecidos possíveis com o experimento 3. Mas o mais importante é que a altura ventricular diminua a no máximo a um valor em torno de 20% do tamanho original, para bater com a literatura do ventrículo real. 
+Preciso que vc salve a malha a cada 1 ou 10ms. 
+Preciso do tempo de execução, de preferência sem escrever os resultados.
+Aqui tem uma figura do Ta q eu usei e da deformação na altura. Se vc tiver algum modelo de Ta pronto aí na mão, pode usar, q eu ajusto o meu automato para ficar igual ao seu.
+É só salvar os valores de Ta no tempo e me mandar q eu ajusto. 
+
+_______________
+
+Oi Pessoal,
+
+desculpa a demora em responder com o resultado.
+Achei um código aqui no meu notebook hoje e consegui rodar.
+O tempo total de execução foi de 183,7 s
+Seguem em anexo o arquivo com o resultado e o xml com a malha. No xml também tem o valor de Ta aplicado em cada passo de tempo.
+
+___________________________________
+Só uma coisa, Juvs. Tem como ele contrair menos? 
+A altura inicial é de 25cm, e atinge a altura mínima de 13cm. Ou seja, quase metade. Desculpa ser chato, mas a gente tá comparando isso com a contração fisiológica, que contrai cerca de 20% da altura inicial. Além disso, principalmente, não acredito que o massa mola chegue a tanta deformação :(
+Será que vc consegue diminuir a força ativa ou aumentar a resistência do tecido? 
+
+Fonte dos 20%: https://pubmed.ncbi.nlm.nih.gov/28951022/
+In the present study, the mean value of global LV longitudinal strain for the overall population was −18.9% and did not differ significantly across the different age categories.
+
+________________________________-
+Aumentei a rigidez, diminui o Tref da tensão ativa e aumentei o kappa (incompressibilidade).
+Rodou em 216s.
+_________________________________________--

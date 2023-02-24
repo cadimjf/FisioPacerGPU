@@ -375,7 +375,7 @@ void allocCA(typ_ca* CA) {
         CA->params->pointsNum = readSize(strPtsFile);
         CA->params->elementsNum = readSize(strEleFile);
         
-        readStimFile(strStmFile, CA);
+        
         CA->omega_a = iniAList(CA->params->elementsNum);
         if (CA->omega_a == NULL) {
             throw MyException("Allocation failure for CA->omega_a.", __FILE__, __LINE__);
@@ -417,7 +417,7 @@ void allocCA(typ_ca* CA) {
             throw MyException("Allocation failure for stats structure.", __FILE__, __LINE__);
         }
         //opens the files and fill arrays
-        openFile(CA, strPtsFile, strEleFile, strFibFile, strBoundFile, strPressFile);
+        openFile(CA, strPtsFile, strEleFile, strFibFile, strBoundFile, strPressFile, strStmFile);
         CA->pressureCA = (typ_press*)malloc(sizeof(typ_press));
         if (CA->pressureCA == NULL) {
             throw MyException("Allocation failure for stats structure.", __FILE__, __LINE__);

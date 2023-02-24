@@ -268,10 +268,11 @@ void elementsFile(string fileName, typ_ca *CA)
  */
 void openFile(typ_ca *CA,
         string strFilePts, string strFileEle, string strFileFib, string boundFile,
-        string strPressFile)
+        string strPressFile, string strStmFile)
 {
 
-    using namespace std;
+    
+    readStimFile(strStmFile, CA);
     //reads the points file
     pointsFile(strFilePts,CA);
     //reads the boundary conditions
@@ -281,6 +282,7 @@ void openFile(typ_ca *CA,
     OmegaANeighborhood(CA);
     fillFiberFile(strFileFib, CA);
     readPressFile(strPressFile, CA);
+    
 }
 /**
  * 
@@ -328,6 +330,10 @@ void OmegaANeighborhood(typ_ca *CA){
         }
 
     }
+
+}
+
+void getStimSize(string strFileSt, typ_ca* CA) {
 
 }
 /**

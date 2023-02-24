@@ -98,7 +98,6 @@
     <ClCompile Include="ContinuumMech.cpp" />
     <ClCompile Include="DataStructures.cpp" />
     <ClCompile Include="Geometry.cpp" />
-    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="LinearAlg.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mechanics.cpp" />
