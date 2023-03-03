@@ -18,7 +18,10 @@ inline void gpuAssert(cudaError_t code, const char* file, int line, bool abort =
 typ_ca *deviceCA;
 typ_stats *deviceStats;
 typ_press *devicePressureCA;
-typ_param* deviceParams;
+typ_param *deviceParams;
+typ_point *devicePntsNew;//
+typ_point *devicePntsOld;//
+typ_point *devicePntsIntrm;//
 
 void deviceAlloc(typ_ca *CA) {
 
@@ -26,9 +29,10 @@ void deviceAlloc(typ_ca *CA) {
     chker(cudaMalloc((void**)&deviceStats,      sizeof(typ_stats)));
     chker(cudaMalloc((void**)&devicePressureCA, sizeof(typ_press)));
     chker(cudaMalloc((void**)&deviceParams,     sizeof(typ_param)));
+    chker(cudaMalloc((void**)&devicePntsNew,    sizeof(typ_point) * CA->params->pointsNum));
+    chker(cudaMalloc((void**)&devicePntsOld,    sizeof(typ_point) * CA->params->pointsNum));
+    chker(cudaMalloc((void**)&devicePntsIntrm,  sizeof(typ_point) * CA->params->pointsNum));
 
-   
-  
     /*
     typ_face** aFaces;
 
@@ -52,24 +56,25 @@ void deviceCopy(typ_ca *hCA) {
     chker(cudaMemcpy(deviceCA,         hCA,                 sizeof(typ_ca),     cudaMemcpyHostToDevice));
     chker(cudaMemcpy(deviceStats,      hCA->stats,          sizeof(typ_stats),  cudaMemcpyHostToDevice));
     chker(cudaMemcpy(devicePressureCA, hCA->pressureCA,     sizeof(typ_press),  cudaMemcpyHostToDevice));
-    chker(cudaMemcpy(deviceParams,     hCA->params,         sizeof(typ_param), cudaMemcpyHostToDevice));
-    for (int i = 0; i < hCA->params->numFaces; i++) {
-       // chker(cudaMemcpy(deviceAFaces[i], hCA->params->aFaces[i], sizeof(typ_face), cudaMemcpyHostToDevice));
-
-    }
+    chker(cudaMemcpy(deviceParams,     hCA->params,         sizeof(typ_param),  cudaMemcpyHostToDevice));
+    int pn = hCA->params->pointsNum;
+    chker(cudaMemcpy(devicePntsNew,    hCA->pnts_new,       sizeof(typ_point) * pn, cudaMemcpyHostToDevice));
+    chker(cudaMemcpy(devicePntsOld,    hCA->pnts_old,       sizeof(typ_point) * pn, cudaMemcpyHostToDevice));
+    chker(cudaMemcpy(devicePntsIntrm,  hCA->pnts_intrm,     sizeof(typ_point) * pn, cudaMemcpyHostToDevice));
+    
+   
 }
 
 
 __global__ void teste(
-    typ_ca* devCA,
-    typ_stats* devStats,
-    typ_press* devPressureCA)
+    typ_ca* dCA,
+    typ_stats* dStats,
+    typ_press* dPressureCA,
+    typ_point* dPntsNew, typ_point* dPntsOld, typ_point* devPntsIntrm)
 {
     testedef();
     //int i = threadIdx.x;
     //devCA->time = deviceAFaces[0]->pt1;
-    devStats->volIni = devStats->volIni * 2.0;
-//    devAFaces[0]-> = 666;;
 }
 
 
@@ -78,6 +83,10 @@ void deviceDealloc( ) {
     chker(cudaFree(devicePressureCA));
     chker(cudaFree(deviceCA));
     chker(cudaFree(deviceParams));
+
+    chker(cudaFree(devicePntsIntrm));
+    chker(cudaFree(devicePntsOld));
+    chker(cudaFree(devicePntsNew));
 }
 
 /*
@@ -215,14 +224,17 @@ int simulate(typ_ca* CA, bool save) {
     deviceCopy(CA);
 
     cout << "vol ini antes: "<<CA->stats->volIni << endl;
-    teste <<< 1, 1>>> (deviceCA, deviceStats, devicePressureCA);
+    teste <<< 1, 1>>> (deviceCA, deviceStats, devicePressureCA, devicePntsNew, devicePntsOld, devicePntsIntrm);
     cudaMemcpy(CA->stats, deviceStats, sizeof(typ_stats), cudaMemcpyDeviceToHost);
     cudaMemcpy(CA, deviceCA, sizeof(typ_ca), cudaMemcpyDeviceToHost);
+    
+    cudaMemcpy(CA->pnts_intrm, devicePntsIntrm, sizeof(typ_point)*CA->params->pointsNum, cudaMemcpyDeviceToHost);
+    
     cout << "time: "<<CA->time << endl;
     cout << "volini depois : " << CA->stats->volIni << endl;
     deviceDealloc();
 
-    // exit(0);
+    exit(0);
 
     //cout<<"VOlume ini " << CA->volume<<endl;
     while (CA->time <= CA->params->simulationTime)

@@ -2,5 +2,5 @@
   
   D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU>"D:\Programas\CudaToolkit\dev\bin\nvcc.exe" -gencode=arch=compute_50,code=\"sm_50,compute_50\" --use-local-env -ccbin "D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\bin\HostX64\x64" -x cu   -ID:\Programas\CudaToolkit\dev\include -ID:\Programas\CudaToolkit\dev\include  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /FS /Zi /RTC1 /MDd " -Xcompiler "/Fdx64\Debug\vc143.pdb" -o D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\kernel.cu.obj "D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\kernel.cu" 
   kernel.cu
-  tmpxft_00005648_00000000-7_kernel.cudafe1.cpp
+  tmpxft_00001bec_00000000-7_kernel.cudafe1.cpp
   FisioPacerGPU.vcxproj -> D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\FisioPacerGPU.exe
