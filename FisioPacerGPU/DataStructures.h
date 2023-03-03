@@ -1,12 +1,12 @@
 /* 
- * File:   Globals.h
+ * File:   DATASTRUCTURE_H.h
  * Author: Ricardo
  *
  * Created on 27 de Setembro de 2013, 06:28
  */
 
-#ifndef GLOBALS_H
-#define	GLOBALS_H
+#ifndef DATASTRUCTURE_H
+#define	DATASTRUCTURE_H
 
 #include <string>
 #include <iostream>
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+
 using namespace std;
 //Contains the points ids that define a tetrahedron face on the surface, where is applied external pressure
 typedef struct sSurfacePressure {
@@ -248,21 +249,23 @@ typedef struct str_stats{
 } typ_stats;
 
 typedef struct str_cellularautomata{
-    typ_t0_element   **ini;//
+    typ_t0_element **ini;//
     typ_dt_element **t_old;//
     typ_dt_element **t_new;//
     lst_item **omega_b;  //
     lst_item **omega_a;//
     typ_param* params;//
-    typ_point **pnts_new;//
-    typ_point **pnts_old;//
-    typ_point **pnts_intrm;//
+    typ_point *pnts_new;//
+    typ_point *pnts_old;//
+    typ_point *pnts_intrm;//
     double volume;
     double time;
     double timeSaving;
     typ_stats *stats;//
     typ_press *pressureCA;
 }typ_ca;// automato cellular
+/**
+*/
 struct MyException : public std::exception
 {
     std::string msg;
@@ -289,17 +292,7 @@ struct MyException : public std::exception
         
     }
 };
-/**
- * 
- * @param length
- * @return 
- */
-template< typename T > T* myAllocation( int length )
-{
-   T* al = (T*) malloc(length * sizeof(T));
-   if(al==NULL) throw ("Allocation Failure", __FILE__, __LINE__);
-   else  return al;
-}
+
 
 template< typename T > T** myArrayAllocation( int length )
 {
@@ -309,6 +302,9 @@ template< typename T > T** myArrayAllocation( int length )
    }else{
         for(int i=0;i<length;i++){
             array[i] =  (T*) malloc(sizeof(T));
+            if (array[i] == NULL) {
+                throw MyException("Allocation Failure", __FILE__, __LINE__);
+            }
         }
         return array;
    }
@@ -331,4 +327,4 @@ lst_item* createListItem(int value);
 void addItem(lst_item** head, int value);
 void printList(lst_item* list);
 
-#endif	/* GLOBALS_H */
+#endif	/* DATASTRUCTURE_H */

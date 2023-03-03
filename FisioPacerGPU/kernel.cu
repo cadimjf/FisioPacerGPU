@@ -1,6 +1,10 @@
 ﻿#include "kernel.h"
+#include <vector>
 
-#define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+
+inline __device__ __host__ int testedef(){return 0;}
+
+#define chker(ans) { gpuAssert((ans), __FILE__, __LINE__); }
 inline void gpuAssert(cudaError_t code, const char* file, int line, bool abort = true)
 {
     if (code != cudaSuccess)
@@ -9,6 +13,87 @@ inline void gpuAssert(cudaError_t code, const char* file, int line, bool abort =
         if (abort) exit(code);
     }
 }
+
+
+typ_ca *deviceCA;
+typ_stats *deviceStats;
+typ_press *devicePressureCA;
+typ_param* deviceParams;
+
+void deviceAlloc(typ_ca *CA) {
+
+    chker(cudaMalloc((void**)&deviceCA,         sizeof(typ_ca)));
+    chker(cudaMalloc((void**)&deviceStats,      sizeof(typ_stats)));
+    chker(cudaMalloc((void**)&devicePressureCA, sizeof(typ_press)));
+    chker(cudaMalloc((void**)&deviceParams,     sizeof(typ_param)));
+
+   
+  
+    /*
+    typ_face** aFaces;
+
+    int stimSize;
+    t_stim** aStim; //
+    int nRegions;
+    t_par_ac** aParam;//
+    //pressure faces
+    int numFaces;
+    typ_face** aFaces;//*/
+
+
+
+    //gpuErrchk(cudaMalloc((void**)&CA_dev->params, sizeof(typ_param));
+    //CA->params->aParam = (t_par_ac**)malloc(sizeof(t_par_ac*) * CA->params->nRegions);
+
+    //gpuErrchk(cudaMalloc((void**)&CA_dev->params->aParam));
+}
+
+void deviceCopy(typ_ca *hCA) {
+    chker(cudaMemcpy(deviceCA,         hCA,                 sizeof(typ_ca),     cudaMemcpyHostToDevice));
+    chker(cudaMemcpy(deviceStats,      hCA->stats,          sizeof(typ_stats),  cudaMemcpyHostToDevice));
+    chker(cudaMemcpy(devicePressureCA, hCA->pressureCA,     sizeof(typ_press),  cudaMemcpyHostToDevice));
+    chker(cudaMemcpy(deviceParams,     hCA->params,         sizeof(typ_param), cudaMemcpyHostToDevice));
+    for (int i = 0; i < hCA->params->numFaces; i++) {
+       // chker(cudaMemcpy(deviceAFaces[i], hCA->params->aFaces[i], sizeof(typ_face), cudaMemcpyHostToDevice));
+
+    }
+}
+
+
+__global__ void teste(
+    typ_ca* devCA,
+    typ_stats* devStats,
+    typ_press* devPressureCA)
+{
+    testedef();
+    //int i = threadIdx.x;
+    //devCA->time = deviceAFaces[0]->pt1;
+    devStats->volIni = devStats->volIni * 2.0;
+//    devAFaces[0]-> = 666;;
+}
+
+
+void deviceDealloc( ) {
+    chker(cudaFree(deviceStats));
+    chker(cudaFree(devicePressureCA));
+    chker(cudaFree(deviceCA));
+    chker(cudaFree(deviceParams));
+}
+
+/*
+typedef struct str_cellularautomata{
+    typ_t0_element   **ini;//
+    typ_dt_element **t_old;//
+    typ_dt_element **t_new;//
+    lst_item **omega_b;  //
+    lst_item **omega_a;//
+    typ_param* params;//
+    typ_point **pnts_new;//
+    typ_point **pnts_old;//
+    typ_point **pnts_intrm;//
+}typ_ca;// automato cellular
+
+*/
 
 
 /**
@@ -30,7 +115,7 @@ void initializeCA(typ_ca* CA)
             mass += CA->ini[cur->value]->volCel_ini;
             cur = cur->next;
         }
-        CA->pnts_new[i]->mass = CA->pnts_old[i]->mass = ro_mass_dens * mass / 4.0;
+        CA->pnts_new[i].mass = CA->pnts_old[i].mass = ro_mass_dens * mass / 4.0;
     }
     for (int i = 0; i < CA->params->elementsNum; i++)
     {
@@ -92,7 +177,7 @@ int simulate(typ_ca* CA, bool save) {
     CA->stats->maxVol = 0.0;
 
     int count = 0;
-    typ_point** aux3;
+    typ_point* aux3;
     typ_dt_element** auxCA;
     char filename[255];
     sprintf(filename, "%sfisiopacer.txt", CA->params->outputFolder/*.c_str()*/);
@@ -118,12 +203,27 @@ int simulate(typ_ca* CA, bool save) {
     }
     CA->volume = CA->stats->volIni;
     int retValFinal = 0;
-    int nThreads = 1;
 
     CA->stats->maxDeltaVol = 0.0;
     CA->stats->volMaxDelta = 0.0;
     CA->stats->avgVel = 0.0;
+
+
     stats(CA, forcesOnPts);
+
+    deviceAlloc(CA);
+    deviceCopy(CA);
+
+    cout << "vol ini antes: "<<CA->stats->volIni << endl;
+    teste <<< 1, 1>>> (deviceCA, deviceStats, devicePressureCA);
+    cudaMemcpy(CA->stats, deviceStats, sizeof(typ_stats), cudaMemcpyDeviceToHost);
+    cudaMemcpy(CA, deviceCA, sizeof(typ_ca), cudaMemcpyDeviceToHost);
+    cout << "time: "<<CA->time << endl;
+    cout << "volini depois : " << CA->stats->volIni << endl;
+    deviceDealloc();
+
+    // exit(0);
+
     //cout<<"VOlume ini " << CA->volume<<endl;
     while (CA->time <= CA->params->simulationTime)
     {
@@ -196,12 +296,12 @@ void simulationStep(typ_ca* CA,
             if (CA->params->printOutput == 1) {
                 cout << "Mata por volume pequeno[" << i << "]: " << CA->time << endl;
                 cout << "Inicial: " << CA->ini[i]->volCel_ini << " | Atual: " << CA->t_new[i]->volCel << endl;
-                cout << CA->pnts_old[CA->ini[i]->iPt1]->x << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt1]->y << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt1]->z << endl;
-                cout << CA->pnts_old[CA->ini[i]->iPt2]->x << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt2]->y << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt2]->z << endl;
+                cout << CA->pnts_old[CA->ini[i]->iPt1].x << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt1].y << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt1].z << endl;
+                cout << CA->pnts_old[CA->ini[i]->iPt2].x << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt2].y << " " <<
+                    CA->pnts_old[CA->ini[i]->iPt2].z << endl;
 
                 throw MyException("1percent volume.", __FILE__, __LINE__);
 
@@ -237,14 +337,14 @@ void stats(typ_ca* CA, double* forcesOnPts) {
         //Zero the forces
         //Essa linha foi pra o método de verlet forcesOnPts[I2d(k,0,3)]=forcesOnPts[I2d(k,1,3)]=forcesOnPts[I2d(k,2,3)]=0.0f;
         //
-        CA->stats->min[0] = min(CA->stats->min[0], CA->pnts_old[k]->x);
-        CA->stats->min[1] = min(CA->stats->min[1], CA->pnts_old[k]->y);
-        CA->stats->min[2] = min(CA->stats->min[2], CA->pnts_old[k]->z);
-        CA->stats->max[0] = my_max(CA->stats->max[0], CA->pnts_old[k]->x);
-        CA->stats->max[1] = my_max(CA->stats->max[1], CA->pnts_old[k]->y);
-        CA->stats->max[2] = my_max(CA->stats->max[2], CA->pnts_old[k]->z);
+        CA->stats->min[0] = min(CA->stats->min[0], CA->pnts_old[k].x);
+        CA->stats->min[1] = min(CA->stats->min[1], CA->pnts_old[k].y);
+        CA->stats->min[2] = min(CA->stats->min[2], CA->pnts_old[k].z);
+        CA->stats->max[0] = my_max(CA->stats->max[0], CA->pnts_old[k].x);
+        CA->stats->max[1] = my_max(CA->stats->max[1], CA->pnts_old[k].y);
+        CA->stats->max[2] = my_max(CA->stats->max[2], CA->pnts_old[k].z);
 
-        double v[3] = { CA->pnts_old[k]->xV, CA->pnts_old[k]->yV, CA->pnts_old[k]->zV };
+        double v[3] = { CA->pnts_old[k].xV, CA->pnts_old[k].yV, CA->pnts_old[k].zV };
         sumVel += my_norm(v);
     }
     CA->stats->avgVel = sumVel / CA->params->pointsNum;
@@ -304,9 +404,9 @@ void deallocCA(typ_ca* CA) {
         myArrayDeallocation<typ_dt_element>(CA->t_new, CA->params->elementsNum);
         myArrayDeallocation<typ_t0_element>(CA->ini, CA->params->elementsNum);
         //
-        myArrayDeallocation<typ_point>(CA->pnts_old, CA->params->pointsNum);
-        myArrayDeallocation<typ_point>(CA->pnts_new, CA->params->pointsNum);
-        myArrayDeallocation<typ_point>(CA->pnts_intrm, CA->params->pointsNum);
+        if (CA->pnts_new    != NULL) free(CA->pnts_new);
+        if (CA->pnts_old    != NULL) free(CA->pnts_old);
+        if (CA->pnts_intrm  != NULL) free(CA->pnts_intrm);
         //
         freeAList(CA->omega_a, CA->params->elementsNum);
         freeAList(CA->omega_b, CA->params->pointsNum);
@@ -385,15 +485,15 @@ void allocCA(typ_ca* CA) {
             throw MyException("Allocation failure for CA->omega_b.", __FILE__, __LINE__);
         }
         //points
-        CA->pnts_new = myArrayAllocation<typ_point>(CA->params->pointsNum);
+        CA->pnts_new = (typ_point*)malloc(CA->params->pointsNum * sizeof(typ_point));
         if (CA->pnts_new == NULL) {
             throw MyException("Allocation failure for CA->pnts_new.", __FILE__, __LINE__);
         }
-        CA->pnts_old = myArrayAllocation<typ_point>(CA->params->pointsNum);
+        CA->pnts_old = (typ_point*)malloc(CA->params->pointsNum * sizeof(typ_point));
         if (CA->pnts_old == NULL) {
             throw MyException("Allocation failure for CA->pnts_old.", __FILE__, __LINE__);
         }
-        CA->pnts_intrm = myArrayAllocation<typ_point>(CA->params->pointsNum);
+        CA->pnts_intrm = (typ_point*)malloc(CA->params->pointsNum * sizeof(typ_point));
         if (CA->pnts_intrm == NULL) {
             throw MyException("Allocation failure for CA->pnts_intrm.", __FILE__, __LINE__);
         }

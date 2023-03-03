@@ -56,7 +56,7 @@ void getProjection(double inA[3], double inB[3], double out[3], double *);
 void findAxis(typ_ca *CA, int i, 
          double axis1[3], double axis2[3], double axis3[3], double interPts[3][6]);
 
-void getPtsInVector(typ_point **pts, int i, double pt[3]);
+void getPtsInVector(typ_point *pts, int i, double pt[3]);
     
 void findFaceNormal(typ_ca *CA, int pt1, int pt2, int pt3, double n[3]);
 void findIntersectionPlaneLine(int index, typ_ca *CA, 

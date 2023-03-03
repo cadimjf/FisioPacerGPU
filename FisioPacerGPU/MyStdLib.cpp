@@ -139,13 +139,13 @@ void copyPoint(typ_point *from, typ_point *to){
     to->x        = from->x;
     to->y        = from->y;
     to->z        = from->z;
-    to->mass        = from->mass;
-    to->xRestr    = from->xRestr;
-    to->yRestr    = from->yRestr;
-    to->zRestr    = from->zRestr;
-    to->xV        = from->xV;
-    to->yV        = from->yV;
-    to->zV        = from->zV;
+    to->mass     = from->mass;
+    to->xRestr   = from->xRestr;
+    to->yRestr   = from->yRestr;
+    to->zRestr   = from->zRestr;
+    to->xV       = from->xV;
+    to->yV       = from->yV;
+    to->zV       = from->zV;
     
     
 }

@@ -26,3 +26,7 @@ FisioPacerGPU/.vs/FisioPacerGPU/v17/.suo
 *.ilk
 *.vcxproj
 *.user
+*.bin
+*.enc
+*.ilk
+*.log

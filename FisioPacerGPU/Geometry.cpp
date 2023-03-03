@@ -46,19 +46,19 @@ double getN3(double etha, double ksi)
     pt4=CA->ini[index]->iPt4;
     //
     pt1=CA->ini[index]->iPt1;
-    aux[0][0]= CA->pnts_old[pt1]->x - CA->pnts_old[pt4]->x;
-    aux[1][0]= CA->pnts_old[pt1]->y - CA->pnts_old[pt4]->y;
-    aux[2][0]= CA->pnts_old[pt1]->z - CA->pnts_old[pt4]->z;
+    aux[0][0]= CA->pnts_old[pt1].x - CA->pnts_old[pt4].x;
+    aux[1][0]= CA->pnts_old[pt1].y - CA->pnts_old[pt4].y;
+    aux[2][0] = CA->pnts_old[pt1].z - CA->pnts_old[pt4].z;
     //
     pt2=CA->ini[index]->iPt2;
-    aux[0][1]= CA->pnts_old[pt2]->x - CA->pnts_old[pt4]->x;
-    aux[1][1]= CA->pnts_old[pt2]->y - CA->pnts_old[pt4]->y;
-    aux[2][1]= CA->pnts_old[pt2]->z - CA->pnts_old[pt4]->z;
+    aux[0][1]= CA->pnts_old[pt2].x - CA->pnts_old[pt4].x;
+    aux[1][1]= CA->pnts_old[pt2].y - CA->pnts_old[pt4].y;
+    aux[2][1]= CA->pnts_old[pt2].z - CA->pnts_old[pt4].z;
     //
     pt3=CA->ini[index]->iPt3;
-    aux[0][2]= CA->pnts_old[pt3]->x - CA->pnts_old[pt4]->x;
-    aux[1][2]= CA->pnts_old[pt3]->y - CA->pnts_old[pt4]->y;
-    aux[2][2]= CA->pnts_old[pt3]->z - CA->pnts_old[pt4]->z;
+    aux[0][2]= CA->pnts_old[pt3].x - CA->pnts_old[pt4].x;
+    aux[1][2]= CA->pnts_old[pt3].y - CA->pnts_old[pt4].y;
+    aux[2][2]= CA->pnts_old[pt3].z - CA->pnts_old[pt4].z;
     
     return fabs(det(aux))/6.0f;
  }
@@ -81,14 +81,14 @@ void getBarycenter(typ_ca *CA, int index)
     pt4=CA->ini[index]->iPt4;
     
     //
-    CA->t_new[index]->bary[0] = CA->pnts_old[pt1]->x + CA->pnts_old[pt2]->x +
-           CA->pnts_old[pt3]->x + CA->pnts_old[pt4]->x;
+    CA->t_new[index]->bary[0] = CA->pnts_old[pt1].x + CA->pnts_old[pt2].x +
+           CA->pnts_old[pt3].x + CA->pnts_old[pt4].x;
     //
-    CA->t_new[index]->bary[1] = CA->pnts_old[pt1]->y + CA->pnts_old[pt2]->y + 
-           CA->pnts_old[pt3]->y + CA->pnts_old[pt4]->y;
+    CA->t_new[index]->bary[1] = CA->pnts_old[pt1].y + CA->pnts_old[pt2].y +
+           CA->pnts_old[pt3].y + CA->pnts_old[pt4].y;
     //
-    CA->t_new[index]->bary[2] = CA->pnts_old[pt1]->z + CA->pnts_old[pt2]->z +
-           CA->pnts_old[pt3]->z + CA->pnts_old[pt4]->z;
+    CA->t_new[index]->bary[2] = CA->pnts_old[pt1].z + CA->pnts_old[pt2].z +
+           CA->pnts_old[pt3].z + CA->pnts_old[pt4].z;
 
     CA->t_new[index]->bary[0] = CA->t_new[index]->bary[0]/elementsCols;
     CA->t_new[index]->bary[1] = CA->t_new[index]->bary[1]/elementsCols;
@@ -140,13 +140,13 @@ void findLineAxisBary(double bary[3], double dir[3], double retaParal[3][2]){
  */
 void findFaceNormal(typ_ca *CA, int pt1, int pt2, int pt3, double n[3]){
     double aux1[3]={0., 0., 0.}, aux2[3] = { 0., 0., 0. };
-    aux1[0]=CA->pnts_old[pt1]->x - CA->pnts_old[pt2]->x;
-    aux1[1]=CA->pnts_old[pt1]->y - CA->pnts_old[pt2]->y;
-    aux1[2]=CA->pnts_old[pt1]->z - CA->pnts_old[pt2]->z;
+    aux1[0]=CA->pnts_old[pt1].x - CA->pnts_old[pt2].x;
+    aux1[1]=CA->pnts_old[pt1].y - CA->pnts_old[pt2].y;
+    aux1[2] = CA->pnts_old[pt1]. z - CA->pnts_old[pt2].z;
     //
-    aux2[0]=CA->pnts_old[pt2]->x - CA->pnts_old[pt3]->x;
-    aux2[1]=CA->pnts_old[pt2]->y - CA->pnts_old[pt3]->y;
-    aux2[2]=CA->pnts_old[pt2]->z - CA->pnts_old[pt3]->z;
+    aux2[0]=CA->pnts_old[pt2].x - CA->pnts_old[pt3].x;
+    aux2[1]=CA->pnts_old[pt2].y - CA->pnts_old[pt3].y;
+    aux2[2]=CA->pnts_old[pt2].z - CA->pnts_old[pt3].z;
     //finds the cross product n=aux1 x aux2
     cross(aux1, aux2, n);
  //normalizes the vector
@@ -162,9 +162,9 @@ void findFaceNormal(typ_ca *CA, int pt1, int pt2, int pt3, double n[3]){
         ss<<aux2[0]<<" "<<aux2[1]<<" "<<aux2[2]<<endl;
         ss<<n[0]<<" "<<n[1]<<" "<<n[2]<<endl;
         ss<<"- -=-=-=-=-=-"<<endl;
-        ss<<CA->pnts_old[pt1]->x<<" "<<CA->pnts_old[pt1]->y<<" "<<CA->pnts_old[pt1]->z<<endl;
-        ss<<CA->pnts_old[pt2]->x<<" "<<CA->pnts_old[pt2]->y<<" "<<CA->pnts_old[pt2]->z<<endl;
-        ss<<CA->pnts_old[pt3]->x<<" "<<CA->pnts_old[pt3]->y<<" "<<CA->pnts_old[pt3]->z<<endl;
+        ss<<CA->pnts_old[pt1].x<<" "<<CA->pnts_old[pt1].y<<" "<<CA->pnts_old[pt1].z<<endl;
+        ss<<CA->pnts_old[pt2].x<<" "<<CA->pnts_old[pt2].y<<" "<<CA->pnts_old[pt2].z<<endl;
+        ss<<CA->pnts_old[pt3].x<<" "<<CA->pnts_old[pt3].y<<" "<<CA->pnts_old[pt3].z<<endl;
         
         string str = ss.str();
         if(CA->params->printOutput==1){
@@ -324,10 +324,10 @@ bool addPoint(double ptIValid1[3], double ptIValid2[3], double ptI[3], int *chec
     return false;
 }
 
-void getPtsInVector(typ_point **pts, int i, double pt[3]){
-    pt[0]=pts[i]->x;
-    pt[1]=pts[i]->y;
-    pt[2]=pts[i]->z;    
+void getPtsInVector(typ_point *pts, int i, double pt[3]){
+    pt[0]=pts[i].x;
+    pt[1]=pts[i].y;
+    pt[2]=pts[i].z;    
 }
 /**
  * 
@@ -789,10 +789,10 @@ void getIntercMasses(typ_ca *CA, int iElem){
     int iPt2 = CA->ini[iElem]->iPt2;
     int iPt3 = CA->ini[iElem]->iPt3;
     int iPt4 = CA->ini[iElem]->iPt4;
-    pntMass[0] = CA->pnts_old[iPt1]->mass;
-    pntMass[1] = CA->pnts_old[iPt2]->mass;
-    pntMass[2] = CA->pnts_old[iPt3]->mass;
-    pntMass[3] = CA->pnts_old[iPt4]->mass;
+    pntMass[0] = CA->pnts_old[iPt1].mass;
+    pntMass[1] = CA->pnts_old[iPt2].mass;
+    pntMass[2] = CA->pnts_old[iPt3].mass;
+    pntMass[3] = CA->pnts_old[iPt4].mass;
     
     double mass=0.0;
     for (int d = 0 ; d < 6 ; d++ ){
@@ -860,21 +860,21 @@ void computeKs(typ_ca *CA, int iElem){
     int iPt3=CA->ini[i]->iPt3;
     int iPt4=CA->ini[i]->iPt4;
     cout<<"ponto: "<<iPt1<<" ";
-    cout<<CA->pnts_old[iPt1]->x<<" ";
-    cout<<CA->pnts_old[iPt1]->y<<" ";
-    cout<<CA->pnts_old[iPt1]->z<<endl;
+    cout<<CA->pnts_old[iPt1].x<<" ";
+    cout<<CA->pnts_old[iPt1].y<<" ";
+    cout<<CA->pnts_old[iPt1].z<<endl;
     cout<<"ponto: "<<iPt2<<" ";
-    cout<<CA->pnts_old[iPt2]->x<<" ";
-    cout<<CA->pnts_old[iPt2]->y<<" ";
-    cout<<CA->pnts_old[iPt2]->z<<endl;
+    cout<<CA->pnts_old[iPt2].x<<" ";
+    cout<<CA->pnts_old[iPt2].y<<" ";
+    cout<<CA->pnts_old[iPt2].z<<endl;
     cout<<"ponto: "<<iPt3<< " ";
-    cout<<CA->pnts_old[iPt3]->x<<" ";
-    cout<<CA->pnts_old[iPt3]->y<<" ";
-    cout<<CA->pnts_old[iPt3]->z<<endl;
+    cout<<CA->pnts_old[iPt3].x<<" ";
+    cout<<CA->pnts_old[iPt3].y<<" ";
+    cout<<CA->pnts_old[iPt3].z<<endl;
     cout<<"ponto: "<<iPt4<< " ";
-    cout<<CA->pnts_old[iPt4]->x<<" ";
-    cout<<CA->pnts_old[iPt4]->y<<" ";
-    cout<<CA->pnts_old[iPt4]->z<<endl;
+    cout<<CA->pnts_old[iPt4].x<<" ";
+    cout<<CA->pnts_old[iPt4].y<<" ";
+    cout<<CA->pnts_old[iPt4].z<<endl;
     cout<<"============="<<endl;
     for(int j=0; j<3; j++)
     {
@@ -920,18 +920,18 @@ void computeKs(typ_ca *CA, int iElem){
     int iPt2=CA->ini[i]->iPt2;
     int iPt3=CA->ini[i]->iPt3;
     int iPt4=CA->ini[i]->iPt4;
-    points[0][0]    = CA->pnts_old[iPt1]->x;
-    points[1][0]    = CA->pnts_old[iPt1]->y;
-    points[2][0]    = CA->pnts_old[iPt1]->z;
-    points[0][1]    = CA->pnts_old[iPt2]->x;
-    points[1][1]    = CA->pnts_old[iPt2]->y;
-    points[2][1]    = CA->pnts_old[iPt2]->z;
-    points[0][2]    = CA->pnts_old[iPt3]->x;
-    points[1][2]    = CA->pnts_old[iPt3]->y;
-    points[2][2]    = CA->pnts_old[iPt3]->z;
-    points[0][3]    = CA->pnts_old[iPt4]->x;
-    points[1][3]    = CA->pnts_old[iPt4]->y;
-    points[2][3]    = CA->pnts_old[iPt4]->z;
+    points[0][0]    = CA->pnts_old[iPt1].x;
+    points[1][0]    = CA->pnts_old[iPt1].y;
+    points[2][0]    = CA->pnts_old[iPt1].z;
+    points[0][1]    = CA->pnts_old[iPt2].x;
+    points[1][1]    = CA->pnts_old[iPt2].y;
+    points[2][1]    = CA->pnts_old[iPt2].z;
+    points[0][2]    = CA->pnts_old[iPt3].x;
+    points[1][2]    = CA->pnts_old[iPt3].y;
+    points[2][2]    = CA->pnts_old[iPt3].z;
+    points[0][3]    = CA->pnts_old[iPt4].x;
+    points[1][3]    = CA->pnts_old[iPt4].y;
+    points[2][3]    = CA->pnts_old[iPt4].z;
     //    
     findDataByInterpol(points, CA->ini[i]->ck, CA->t_new[i]->intPts);
  }
@@ -970,18 +970,18 @@ void findAxis(typ_ca *CA, int i)
     int iPt3=CA->ini[iElem]->iPt3;
     int iPt4=CA->ini[iElem]->iPt4;
     
-    velPts[0][0]    = CA->pnts_old[iPt1]->xV;
-    velPts[1][0]    = CA->pnts_old[iPt1]->yV;
-    velPts[2][0]    = CA->pnts_old[iPt1]->zV;
-    velPts[0][1]    = CA->pnts_old[iPt2]->xV;
-    velPts[1][1]    = CA->pnts_old[iPt2]->yV;
-    velPts[2][1]    = CA->pnts_old[iPt2]->zV;
-    velPts[0][2]    = CA->pnts_old[iPt3]->xV;
-    velPts[1][2]    = CA->pnts_old[iPt3]->yV;
-    velPts[2][2]    = CA->pnts_old[iPt3]->zV;
-    velPts[0][3]    = CA->pnts_old[iPt4]->xV;
-    velPts[1][3]    = CA->pnts_old[iPt4]->yV;
-    velPts[2][3]    = CA->pnts_old[iPt4]->zV;
+    velPts[0][0]    = CA->pnts_old[iPt1].xV;
+    velPts[1][0]    = CA->pnts_old[iPt1].yV;
+    velPts[2][0]    = CA->pnts_old[iPt1].zV;
+    velPts[0][1]    = CA->pnts_old[iPt2].xV;
+    velPts[1][1]    = CA->pnts_old[iPt2].yV;
+    velPts[2][1]    = CA->pnts_old[iPt2].zV;
+    velPts[0][2]    = CA->pnts_old[iPt3].xV;
+    velPts[1][2]    = CA->pnts_old[iPt3].yV;
+    velPts[2][2]    = CA->pnts_old[iPt3].zV;
+    velPts[0][3]    = CA->pnts_old[iPt4].xV;
+    velPts[1][3]    = CA->pnts_old[iPt4].yV;
+    velPts[2][3]    = CA->pnts_old[iPt4].zV;
     if(velsIterTEMP==NULL)
         throw MyException("velsIterTEMP", __FILE__, __LINE__);
     if(velPts==NULL)

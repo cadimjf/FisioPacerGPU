@@ -359,15 +359,15 @@ void computePressurePoints(typ_ca *CA, double *forcesOnPts){
  */
 void applyPressureForcePoint(typ_ca *CA,double surfaceForces[3], double *forcesOnPts, int iPnt){
     
-    if (!CA->pnts_old[iPnt]->xRestr) {
+    if (!CA->pnts_old[iPnt].xRestr) {
         forcesOnPts[I2d(iPnt, 0, 3)] += surfaceForces[0];
     }
     //
-    if (!CA->pnts_old[iPnt]->yRestr) {
+    if (!CA->pnts_old[iPnt].yRestr) {
         forcesOnPts[I2d(iPnt, 1, 3)] += surfaceForces[1];
     }
     //
-    if (!CA->pnts_old[iPnt]->zRestr) {
+    if (!CA->pnts_old[iPnt].zRestr) {
         forcesOnPts[I2d(iPnt, 2, 3)] += surfaceForces[2];
     }
 

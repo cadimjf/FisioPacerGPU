@@ -135,31 +135,31 @@ void pointsFile(string fileName, typ_ca *CA)
             while (getline(strstream, token, ' ')) {
                 aux_line = atof(token.c_str());
                 if(countCoord==0)                    
-                    CA->pnts_old[iLine]->x = CA->pnts_new[iLine]->x = aux_line;
+                    CA->pnts_old[iLine].x = CA->pnts_new[iLine].x = aux_line;
                 else if(countCoord==1)
-                    CA->pnts_old[iLine]->y = CA->pnts_new[iLine]->y = aux_line;
+                    CA->pnts_old[iLine].y = CA->pnts_new[iLine].y = aux_line;
                 else if(countCoord==2)
-                    CA->pnts_old[iLine]->z = CA->pnts_new[iLine]->z = aux_line;
+                    CA->pnts_old[iLine].z = CA->pnts_new[iLine].z = aux_line;
                 countCoord++;
             }
-            CA->pnts_old[iLine]->mass    = CA->pnts_new[iLine]->mass      = 0.0f;
+            CA->pnts_old[iLine].mass    = CA->pnts_new[iLine].mass      = 0.0f;
 
-            CA->pnts_old[iLine]->xV      = CA->pnts_new[iLine]->xV        = 0.0f;
-            CA->pnts_old[iLine]->yV      = CA->pnts_new[iLine]->yV        = 0.0f;
-            CA->pnts_old[iLine]->zV      = CA->pnts_new[iLine]->zV        = 0.0f;
+            CA->pnts_old[iLine].xV      = CA->pnts_new[iLine].xV        = 0.0f;
+            CA->pnts_old[iLine].yV      = CA->pnts_new[iLine].yV        = 0.0f;
+            CA->pnts_old[iLine].zV      = CA->pnts_new[iLine].zV        = 0.0f;
 
-            CA->pnts_old[iLine]->xRestr  = CA->pnts_new[iLine]->xRestr    = false;
-            CA->pnts_old[iLine]->yRestr  = CA->pnts_new[iLine]->yRestr    = false;
-            CA->pnts_old[iLine]->zRestr  = CA->pnts_new[iLine]->zRestr    = false;
+            CA->pnts_old[iLine].xRestr  = CA->pnts_new[iLine].xRestr    = false;
+            CA->pnts_old[iLine].yRestr  = CA->pnts_new[iLine].yRestr    = false;
+            CA->pnts_old[iLine].zRestr  = CA->pnts_new[iLine].zRestr    = false;
 
-            CA->pnts_old[iLine]->xPreMov = CA->pnts_new[iLine]->xPreMov   = 0.0f;
-            CA->pnts_old[iLine]->yPreMov = CA->pnts_new[iLine]->yPreMov   = 0.0f;
-            CA->pnts_old[iLine]->zPreMov = CA->pnts_new[iLine]->zPreMov   = 0.0f;
+            CA->pnts_old[iLine].xPreMov = CA->pnts_new[iLine].xPreMov   = 0.0f;
+            CA->pnts_old[iLine].yPreMov = CA->pnts_new[iLine].yPreMov   = 0.0f;
+            CA->pnts_old[iLine].zPreMov = CA->pnts_new[iLine].zPreMov   = 0.0f;
 
-            CA->pnts_new[iLine]->x0      = CA->pnts_old[iLine]->x0        = CA->pnts_old[iLine]->x;
-            CA->pnts_new[iLine]->y0      = CA->pnts_old[iLine]->y0        = CA->pnts_old[iLine]->y;
-            CA->pnts_new[iLine]->z0      = CA->pnts_old[iLine]->z0        = CA->pnts_old[iLine]->z;
-            CA->pnts_new[iLine]->presFcs = CA->pnts_old[iLine]->presFcs   = 0;
+            CA->pnts_new[iLine].x0      = CA->pnts_old[iLine].x0        = CA->pnts_old[iLine].x;
+            CA->pnts_new[iLine].y0      = CA->pnts_old[iLine].y0        = CA->pnts_old[iLine].y;
+            CA->pnts_new[iLine].z0      = CA->pnts_old[iLine].z0        = CA->pnts_old[iLine].z;
+            CA->pnts_new[iLine].presFcs = CA->pnts_old[iLine].presFcs   = 0;
             iLine++;
             if(iLine>=CA->params->pointsNum)
             {
@@ -333,9 +333,6 @@ void OmegaANeighborhood(typ_ca *CA){
 
 }
 
-void getStimSize(string strFileSt, typ_ca* CA) {
-
-}
 /**
  * 
  * @param strFileSt
@@ -359,6 +356,12 @@ void readStimFile(string strFileSt, typ_ca * CA){
             return;
         }
         CA->params->aStim = (t_stim**)malloc(sizeof(t_stim*)*CA->params->stimSize);
+        if (!CA->params->aStim) {
+            stringstream ss;
+            ss << "Stim allocation problem: "<< endl << strFileSt;
+            string str = ss.str();
+            throw MyException(str, __FILE__, __LINE__);
+        }
         int cont = 0;
         while ( myfile2.good() && CA->params->stimSize>0)
         {
@@ -674,14 +677,14 @@ void readBoundaryFile(string boundFile, typ_ca *CA){
                 countColumns++;
             }
             if(iAxis==0){
-                CA->pnts_new[iPnt]->xRestr = CA->pnts_old[iPnt]->xRestr  = true;
-                CA->pnts_new[iPnt]->xPreMov= CA->pnts_old[iPnt]->xPreMov = preMov;
+                CA->pnts_new[iPnt].xRestr = CA->pnts_old[iPnt].xRestr  = true;
+                CA->pnts_new[iPnt].xPreMov= CA->pnts_old[iPnt].xPreMov = preMov;
             }else if(iAxis==1){
-                CA->pnts_new[iPnt]->yRestr = CA->pnts_old[iPnt]->yRestr  = true;
-                CA->pnts_new[iPnt]->yPreMov= CA->pnts_old[iPnt]->yPreMov = preMov;
+                CA->pnts_new[iPnt].yRestr = CA->pnts_old[iPnt].yRestr  = true;
+                CA->pnts_new[iPnt].yPreMov= CA->pnts_old[iPnt].yPreMov = preMov;
             }else if(iAxis==2){
-                CA->pnts_new[iPnt]->zRestr = CA->pnts_old[iPnt]->zRestr  = true;
-                CA->pnts_new[iPnt]->zPreMov= CA->pnts_old[iPnt]->zPreMov = preMov;
+                CA->pnts_new[iPnt].zRestr = CA->pnts_old[iPnt].zRestr  = true;
+                CA->pnts_new[iPnt].zPreMov= CA->pnts_old[iPnt].zPreMov = preMov;
             }
             if(cont>=boundSize){
                 stringstream ss;
@@ -750,18 +753,18 @@ void readPressFile(string strFilePress, typ_ca *CA){
                 switch(countColumns){
                     case 0:
                         face->pt1 = atoi(token.c_str());
-                        CA->pnts_new[face->pt1]->presFcs++;
-                        CA->pnts_old[face->pt1]->presFcs++;
+                        CA->pnts_new[face->pt1].presFcs++;
+                        CA->pnts_old[face->pt1].presFcs++;
                     break;
                     case 1:
                         face->pt2 = atoi(token.c_str());
-                        CA->pnts_new[face->pt2]->presFcs++;
-                        CA->pnts_old[face->pt2]->presFcs++;
+                        CA->pnts_new[face->pt2].presFcs++;
+                        CA->pnts_old[face->pt2].presFcs++;
                     break;
                     case 2:
                         face->pt3 = atoi(token.c_str());
-                        CA->pnts_new[face->pt3]->presFcs++;
-                        CA->pnts_old[face->pt3]->presFcs++;
+                        CA->pnts_new[face->pt3].presFcs++;
+                        CA->pnts_old[face->pt3].presFcs++;
                     break;
                     default:
                         cout<<"Invalid press file: "<<countColumns<<" columns!"<<endl;

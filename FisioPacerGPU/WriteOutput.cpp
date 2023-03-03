@@ -46,7 +46,7 @@ void saveCSV( typ_ca *CA, string outFolder)
     //fprintf(file, "%d\n",CA->params->pointsNum);
 //    fprintf(file, "x y z\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        fprintf(file, "%f %f %f\n", CA->pnts_old[i]->x, CA->pnts_old[i]->y, CA->pnts_old[i]->z);
+        fprintf(file, "%f %f %f\n", CA->pnts_old[i].x, CA->pnts_old[i].y, CA->pnts_old[i].z);
     }
     if(fclose(file)!=0)throw MyException("Failed to close file.", __FILE__, __LINE__);
 }
@@ -70,9 +70,9 @@ void saveVTK_V_cell(
     fprintf(file, "<Points>\n");
     fprintf(file, "<DataArray  type=\"Float32\"  NumberOfComponents=\"3\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        fprintf(file, "%g ",CA->pnts_old[i]->x );
-        fprintf(file, "%g ",CA->pnts_old[i]->y );
-        fprintf(file, "%g ",CA->pnts_old[i]->z );
+        fprintf(file, "%g ",CA->pnts_old[i].x );
+        fprintf(file, "%g ",CA->pnts_old[i].y );
+        fprintf(file, "%g ",CA->pnts_old[i].z );
 
     }
     fprintf(file, "</DataArray>\n");
@@ -106,7 +106,7 @@ void saveVTK_V_cell(
 
     fprintf(file, "<CellData>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"v\" format=\"ascii\">\n");
-    float v;
+    double v;
     for(int i=0;i<CA->params->elementsNum;i++){
         v= getV(i, CA);
         fprintf(file, "%.7f ", v);
@@ -203,9 +203,9 @@ void saveVTK_V_point(
     
     for(int i=0;i<CA->params->pointsNum;i++){
         fprintf(file, "%f %f %f ",
-                CA->pnts_old[i]->x/*/10.0*//**1000.0*/,
-                CA->pnts_old[i]->y/*/10.0*//**1000.0*/,
-                CA->pnts_old[i]->z/*/10.0*//**1000.0*/);
+                CA->pnts_old[i].x/*/10.0*//**1000.0*/,
+                CA->pnts_old[i].y/*/10.0*//**1000.0*/,
+                CA->pnts_old[i].z/*/10.0*//**1000.0*/);
 
     }
     fprintf(file, "</DataArray>\n");
@@ -283,9 +283,9 @@ void saveDebug(
     
     for(int i=0;i<CA->params->pointsNum;i++){
         fprintf(file, "%f %f %f ",
-                CA->pnts_old[i]->x/*/10.0*//**1000.0*/,
-                CA->pnts_old[i]->y/*/10.0*//**1000.0*/,
-                CA->pnts_old[i]->z/*/10.0*//**1000.0*/);
+                CA->pnts_old[i].x/*/10.0*//**1000.0*/,
+                CA->pnts_old[i].y/*/10.0*//**1000.0*/,
+                CA->pnts_old[i].z/*/10.0*//**1000.0*/);
 
     }
     fprintf(file, "</DataArray>\n");
@@ -321,9 +321,9 @@ void saveDebug(
     fprintf(file, "<DataArray Name=\"displacement\" type=\"Float32\"  NumberOfComponents=\"3\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
         double displacement[3] = { 0. };
-        displacement[0] = CA->pnts_old[i]->x - CA->pnts_old[i]->x0;
-        displacement[1] = CA->pnts_old[i]->y - CA->pnts_old[i]->y0;
-        displacement[2] = CA->pnts_old[i]->z - CA->pnts_old[i]->z0;
+        displacement[0] = CA->pnts_old[i].x - CA->pnts_old[i].x0;
+        displacement[1] = CA->pnts_old[i].y - CA->pnts_old[i].y0;
+        displacement[2] = CA->pnts_old[i].z - CA->pnts_old[i].z0;
         //fprintf(file, "%e ", my_norm(aForce));
         fprintf(file, "%e %e %e ", displacement[0], displacement[1], displacement[2]);
     }
@@ -342,12 +342,12 @@ void saveDebug(
     
     fprintf(file, "<DataArray Name=\"vel\" type=\"Float32\"  NumberOfComponents=\"3\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        fprintf(file, "%.7f %.7f %.7f ", CA->pnts_old[i]->xV, CA->pnts_old[i]->yV, CA->pnts_old[i]->zV);
+        fprintf(file, "%.7f %.7f %.7f ", CA->pnts_old[i].xV, CA->pnts_old[i].yV, CA->pnts_old[i].zV);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "<DataArray Name=\"restr\" type=\"Float32\"  NumberOfComponents=\"3\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        fprintf(file, "%d %d %d ", CA->pnts_old[i]->xRestr, CA->pnts_old[i]->yRestr, CA->pnts_old[i]->zRestr);
+        fprintf(file, "%d %d %d ", CA->pnts_old[i].xRestr, CA->pnts_old[i].yRestr, CA->pnts_old[i].zRestr);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "</PointData>\n");
@@ -355,7 +355,7 @@ void saveDebug(
     fprintf(file, "<CellData>\n");
             
     fprintf(file, "<DataArray type=\"Float32\" Name=\"f\" format=\"ascii\">\n");
-    float f;
+    double f;
     for(int i=0;i<CA->params->elementsNum;i++){
         f= getActiveTension(i, CA);
         fprintf(file, "%g ", f);
@@ -455,7 +455,7 @@ void saveVTK_Simples(
     fprintf(file, "<Points>\n");
     fprintf(file, "<DataArray  type=\"Float32\"  NumberOfComponents=\"3\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        fprintf(file, "%g %g %g ",CA->pnts_old[i]->x, CA->pnts_old[i]->y, CA->pnts_old[i]->z);
+        fprintf(file, "%g %g %g ",CA->pnts_old[i].x, CA->pnts_old[i].y, CA->pnts_old[i].z);
 
     }
     fprintf(file, "</DataArray>\n");
@@ -489,9 +489,9 @@ void saveVTK_Simples(
     fprintf(file, "</Cells>\n");
     fprintf(file, "<PointData>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"v\" format=\"ascii\">\n");
-    float V,vol, numerador, denominador;
+    double V,vol, numerador, denominador;
     int adjacentElement;
-    float maior;
+    double maior;
     for(int i=0;i<CA->params->pointsNum;i++){
         maior = -99999.0;
         numerador=0.0;
@@ -518,7 +518,7 @@ void saveVTK_Simples(
 
     fprintf(file, "<DataArray Name=\"restriction\" type=\"UInt32\"  NumberOfComponents=\"1\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->pointsNum;i++){
-        fprintf(file, "%d ",CA->pnts_old[i]->zRestr);
+        fprintf(file, "%d ",CA->pnts_old[i].zRestr);
 //        fprintf(file, "%d ",points[i]->isRestrictedY);
 //        fprintf(file, "%d ",points[i]->isRestrictedZ);
 
