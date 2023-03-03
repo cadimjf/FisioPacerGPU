@@ -249,9 +249,9 @@ typedef struct str_stats{
 } typ_stats;
 
 typedef struct str_cellularautomata{
-    typ_t0_element **ini;//
-    typ_dt_element **t_old;//
-    typ_dt_element **t_new;//
+    typ_t0_element *ini;//
+    typ_dt_element *t_old;//
+    typ_dt_element *t_new;//
     lst_item **omega_b;  //
     lst_item **omega_a;//
     typ_param* params;//

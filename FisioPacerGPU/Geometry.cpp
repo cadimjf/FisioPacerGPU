@@ -43,19 +43,19 @@ double getN3(double etha, double ksi)
     //assembly a matrix (a-d, b-d, c-d)
     double aux[3][3] = { { 0., 0., 0. } , {0., 0., 0.} , {0., 0., 0.} };
     int pt1, pt2, pt3, pt4;
-    pt4=CA->ini[index]->iPt4;
+    pt4=CA->ini[index].iPt4;
     //
-    pt1=CA->ini[index]->iPt1;
+    pt1=CA->ini[index].iPt1;
     aux[0][0]= CA->pnts_old[pt1].x - CA->pnts_old[pt4].x;
     aux[1][0]= CA->pnts_old[pt1].y - CA->pnts_old[pt4].y;
     aux[2][0] = CA->pnts_old[pt1].z - CA->pnts_old[pt4].z;
     //
-    pt2=CA->ini[index]->iPt2;
+    pt2=CA->ini[index].iPt2;
     aux[0][1]= CA->pnts_old[pt2].x - CA->pnts_old[pt4].x;
     aux[1][1]= CA->pnts_old[pt2].y - CA->pnts_old[pt4].y;
     aux[2][1]= CA->pnts_old[pt2].z - CA->pnts_old[pt4].z;
     //
-    pt3=CA->ini[index]->iPt3;
+    pt3=CA->ini[index].iPt3;
     aux[0][2]= CA->pnts_old[pt3].x - CA->pnts_old[pt4].x;
     aux[1][2]= CA->pnts_old[pt3].y - CA->pnts_old[pt4].y;
     aux[2][2]= CA->pnts_old[pt3].z - CA->pnts_old[pt4].z;
@@ -71,28 +71,28 @@ double getN3(double etha, double ksi)
  */
 void getBarycenter(typ_ca *CA, int index)
 {
-    CA->t_new[index]->bary[0]=0.0f;
-    CA->t_new[index]->bary[1]=0.0f;
-    CA->t_new[index]->bary[2]=0.0f;
+    CA->t_new[index].bary[0]=0.0f;
+    CA->t_new[index].bary[1]=0.0f;
+    CA->t_new[index].bary[2]=0.0f;
     int pt1, pt2, pt3, pt4;
-    pt1=CA->ini[index]->iPt1;
-    pt2=CA->ini[index]->iPt2;
-    pt3=CA->ini[index]->iPt3;
-    pt4=CA->ini[index]->iPt4;
+    pt1=CA->ini[index].iPt1;
+    pt2=CA->ini[index].iPt2;
+    pt3=CA->ini[index].iPt3;
+    pt4=CA->ini[index].iPt4;
     
     //
-    CA->t_new[index]->bary[0] = CA->pnts_old[pt1].x + CA->pnts_old[pt2].x +
+    CA->t_new[index].bary[0] = CA->pnts_old[pt1].x + CA->pnts_old[pt2].x +
            CA->pnts_old[pt3].x + CA->pnts_old[pt4].x;
     //
-    CA->t_new[index]->bary[1] = CA->pnts_old[pt1].y + CA->pnts_old[pt2].y +
+    CA->t_new[index].bary[1] = CA->pnts_old[pt1].y + CA->pnts_old[pt2].y +
            CA->pnts_old[pt3].y + CA->pnts_old[pt4].y;
     //
-    CA->t_new[index]->bary[2] = CA->pnts_old[pt1].z + CA->pnts_old[pt2].z +
+    CA->t_new[index].bary[2] = CA->pnts_old[pt1].z + CA->pnts_old[pt2].z +
            CA->pnts_old[pt3].z + CA->pnts_old[pt4].z;
 
-    CA->t_new[index]->bary[0] = CA->t_new[index]->bary[0]/elementsCols;
-    CA->t_new[index]->bary[1] = CA->t_new[index]->bary[1]/elementsCols;
-    CA->t_new[index]->bary[2] = CA->t_new[index]->bary[2]/elementsCols;
+    CA->t_new[index].bary[0] = CA->t_new[index].bary[0]/elementsCols;
+    CA->t_new[index].bary[1] = CA->t_new[index].bary[1]/elementsCols;
+    CA->t_new[index].bary[2] = CA->t_new[index].bary[2]/elementsCols;
 }
 
 /*
@@ -341,10 +341,10 @@ void getPtsInVector(typ_point *pts, int i, double pt[3]){
 void getElementPtsInVector(int i, typ_ca *CA, 
         double pt1[3], double pt2[3], double pt3[3], double pt4[3])
 {
-    getPtsInVector(CA->pnts_old, CA->ini[i]->iPt1, pt1);
-    getPtsInVector(CA->pnts_old, CA->ini[i]->iPt2, pt2);
-    getPtsInVector(CA->pnts_old, CA->ini[i]->iPt3, pt3);
-    getPtsInVector(CA->pnts_old, CA->ini[i]->iPt4, pt4);
+    getPtsInVector(CA->pnts_old, CA->ini[i].iPt1, pt1);
+    getPtsInVector(CA->pnts_old, CA->ini[i].iPt2, pt2);
+    getPtsInVector(CA->pnts_old, CA->ini[i].iPt3, pt3);
+    getPtsInVector(CA->pnts_old, CA->ini[i].iPt4, pt4);
     
 }
 /**
@@ -387,11 +387,11 @@ void findIntersectionPlaneLine(int index, typ_ca *CA,
         if(addPoint(ptIValid1, ptIValid2, ptI1, &check))
         {
             col = iTipoFibra+check-1;
-            CA->ini[index]->iFaces[col]= 0;
-            CA->ini[index]->ck[0][col] = getN1(etha, ksi);
-            CA->ini[index]->ck[1][col] = getN2(etha, ksi);
-            CA->ini[index]->ck[2][col] = getN3(etha, ksi);
-            CA->ini[index]->ck[3][col] = 0.0f;
+            CA->ini[index].iFaces[col]= 0;
+            CA->ini[index].ck[0][col] = getN1(etha, ksi);
+            CA->ini[index].ck[1][col] = getN2(etha, ksi);
+            CA->ini[index].ck[2][col] = getN3(etha, ksi);
+            CA->ini[index].ck[3][col] = 0.0f;
         }
     }else{
         //o ponto não pertece à face. Guarda o índice 
@@ -406,11 +406,11 @@ void findIntersectionPlaneLine(int index, typ_ca *CA,
         if(addPoint(ptIValid1, ptIValid2, ptI2, &check))
         {
             col = iTipoFibra+check-1;
-            CA->ini[index]->iFaces[col]= 1;
-            CA->ini[index]->ck[0][col] = getN1(etha, ksi);
-            CA->ini[index]->ck[1][col] = getN2(etha, ksi);
-            CA->ini[index]->ck[2][col] = 0.0f;
-            CA->ini[index]->ck[3][col] = getN3(etha, ksi);
+            CA->ini[index].iFaces[col]= 1;
+            CA->ini[index].ck[0][col] = getN1(etha, ksi);
+            CA->ini[index].ck[1][col] = getN2(etha, ksi);
+            CA->ini[index].ck[2][col] = 0.0f;
+            CA->ini[index].ck[3][col] = getN3(etha, ksi);
         }
     }else{
         //o ponto não pertece à face. Guarda o índice 
@@ -425,11 +425,11 @@ void findIntersectionPlaneLine(int index, typ_ca *CA,
         if(addPoint(ptIValid1, ptIValid2, ptI3, &check))
         {
             col = iTipoFibra+check-1;
-            CA->ini[index]->iFaces[col]= 2;
-            CA->ini[index]->ck[0][col] = getN1(etha, ksi);
-            CA->ini[index]->ck[1][col] = 0.0f;
-            CA->ini[index]->ck[2][col] = getN2(etha, ksi);
-            CA->ini[index]->ck[3][col] = getN3(etha, ksi);
+            CA->ini[index].iFaces[col]= 2;
+            CA->ini[index].ck[0][col] = getN1(etha, ksi);
+            CA->ini[index].ck[1][col] = 0.0f;
+            CA->ini[index].ck[2][col] = getN2(etha, ksi);
+            CA->ini[index].ck[3][col] = getN3(etha, ksi);
         }
     }else{
         //o ponto não pertece à face. Guarda o índice 
@@ -444,11 +444,11 @@ void findIntersectionPlaneLine(int index, typ_ca *CA,
         if(addPoint(ptIValid1, ptIValid2, ptI4, &check))
         {
             col = iTipoFibra+check-1;
-            CA->ini[index]->iFaces[col]= 3;
-            CA->ini[index]->ck[0][col] = 0.0f;
-            CA->ini[index]->ck[1][col] = getN1(etha, ksi);
-            CA->ini[index]->ck[2][col] = getN2(etha, ksi);
-            CA->ini[index]->ck[3][col] = getN3(etha, ksi);
+            CA->ini[index].iFaces[col]= 3;
+            CA->ini[index].ck[0][col] = 0.0f;
+            CA->ini[index].ck[1][col] = getN1(etha, ksi);
+            CA->ini[index].ck[2][col] = getN2(etha, ksi);
+            CA->ini[index].ck[3][col] = getN3(etha, ksi);
         }
     }else{
         //o ponto não pertece à face. Guarda o índice 
@@ -464,44 +464,44 @@ void findIntersectionPlaneLine(int index, typ_ca *CA,
             if(addPoint(ptIValid1, ptIValid2, ptI1, &check))
             {
                 col = iTipoFibra+check-1;
-                CA->ini[index]->iFaces[col]= 0;
-                CA->ini[index]->ck[0][col] = getN1(etha, ksi);
-                CA->ini[index]->ck[1][col] = getN2(etha, ksi);
-                CA->ini[index]->ck[2][col] = getN3(etha, ksi);
-                CA->ini[index]->ck[3][col] = 0.0f;
+                CA->ini[index].iFaces[col]= 0;
+                CA->ini[index].ck[0][col] = getN1(etha, ksi);
+                CA->ini[index].ck[1][col] = getN2(etha, ksi);
+                CA->ini[index].ck[2][col] = getN3(etha, ksi);
+                CA->ini[index].ck[3][col] = 0.0f;
             }
         }else if(smallestErrorID==1){
             checkPtBelongsToFace(reta, pt1, pt2, pt4, n[1], ptI2, &ksi, &etha, &relError);
             if(addPoint(ptIValid1, ptIValid2, ptI2, &check))
             {
                 col = iTipoFibra+check-1;
-                CA->ini[index]->iFaces[col]= 1;
-                CA->ini[index]->ck[0][col] = getN1(etha, ksi);
-                CA->ini[index]->ck[1][col] = getN2(etha, ksi);
-                CA->ini[index]->ck[2][col] = 0.0f;
-                CA->ini[index]->ck[3][col] = getN3(etha, ksi);
+                CA->ini[index].iFaces[col]= 1;
+                CA->ini[index].ck[0][col] = getN1(etha, ksi);
+                CA->ini[index].ck[1][col] = getN2(etha, ksi);
+                CA->ini[index].ck[2][col] = 0.0f;
+                CA->ini[index].ck[3][col] = getN3(etha, ksi);
             }
         }else if(smallestErrorID==2){
             checkPtBelongsToFace(reta, pt1, pt3, pt4, n[2], ptI3, &ksi, &etha, &relError);
             if(addPoint(ptIValid1, ptIValid2, ptI3, &check))
             {
                 col = iTipoFibra+check-1;
-                CA->ini[index]->iFaces[col]= 2;
-                CA->ini[index]->ck[0][col] = getN1(etha, ksi);
-                CA->ini[index]->ck[1][col] = 0.0f;
-                CA->ini[index]->ck[2][col] = getN2(etha, ksi);
-                CA->ini[index]->ck[3][col] = getN3(etha, ksi);
+                CA->ini[index].iFaces[col]= 2;
+                CA->ini[index].ck[0][col] = getN1(etha, ksi);
+                CA->ini[index].ck[1][col] = 0.0f;
+                CA->ini[index].ck[2][col] = getN2(etha, ksi);
+                CA->ini[index].ck[3][col] = getN3(etha, ksi);
             }
         }else if(smallestErrorID==3){
             checkPtBelongsToFace(reta, pt2, pt3, pt4, n[3], ptI4, &ksi, &etha, &relError);
             if(addPoint(ptIValid1, ptIValid2, ptI4, &check))
             {
                 col = iTipoFibra+check-1;
-                CA->ini[index]->iFaces[col]= 3;
-                CA->ini[index]->ck[0][col] = 0.0f;
-                CA->ini[index]->ck[1][col] = getN1(etha, ksi);
-                CA->ini[index]->ck[2][col] = getN2(etha, ksi);
-                CA->ini[index]->ck[3][col] = getN3(etha, ksi);
+                CA->ini[index].iFaces[col]= 3;
+                CA->ini[index].ck[0][col] = 0.0f;
+                CA->ini[index].ck[1][col] = getN1(etha, ksi);
+                CA->ini[index].ck[2][col] = getN2(etha, ksi);
+                CA->ini[index].ck[3][col] = getN3(etha, ksi);
             }
         }
     }
@@ -531,13 +531,13 @@ void findAllNormals(typ_ca *CA, int i, double normals[4][3])
     
     //finds the normal of the 4 faces
     //face 1 points 123   
-    findFaceNormal(CA, CA->ini[i]->iPt1, CA->ini[i]->iPt2, CA->ini[i]->iPt3, normals[0]);
+    findFaceNormal(CA, CA->ini[i].iPt1, CA->ini[i].iPt2, CA->ini[i].iPt3, normals[0]);
     //face 2 points 124
-    findFaceNormal(CA, CA->ini[i]->iPt1, CA->ini[i]->iPt2, CA->ini[i]->iPt4, normals[1]);
+    findFaceNormal(CA, CA->ini[i].iPt1, CA->ini[i].iPt2, CA->ini[i].iPt4, normals[1]);
     //face 3 points 134
-    findFaceNormal(CA, CA->ini[i]->iPt1, CA->ini[i]->iPt3, CA->ini[i]->iPt4, normals[2]);
+    findFaceNormal(CA, CA->ini[i].iPt1, CA->ini[i].iPt3, CA->ini[i].iPt4, normals[2]);
     //face 4 points 234
-    findFaceNormal(CA, CA->ini[i]->iPt2, CA->ini[i]->iPt3, CA->ini[i]->iPt4, normals[3]);
+    findFaceNormal(CA, CA->ini[i].iPt2, CA->ini[i].iPt3, CA->ini[i].iPt4, normals[3]);
 }   
 
 /**
@@ -548,14 +548,14 @@ void findAllNormals(typ_ca *CA, int i, double normals[4][3])
  */
 void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
 {
-    int aux1=CA->ini[i]->iFaces[k];
-    CA->ini[i]->iFaces[k] = CA->ini[i]->iFaces[j];
-    CA->ini[i]->iFaces[j]=aux1;
+    int aux1=CA->ini[i].iFaces[k];
+    CA->ini[i].iFaces[k] = CA->ini[i].iFaces[j];
+    CA->ini[i].iFaces[j]=aux1;
     //
     for(int ii=0;ii<4;ii++){
-        double aux=CA->ini[i]->ck[ii][k];
-        CA->ini[i]->ck[ii][k] = CA->ini[i]->ck[ii][j];
-        CA->ini[i]->ck[ii][j]=aux;
+        double aux=CA->ini[i].ck[ii][k];
+        CA->ini[i].ck[ii][k] = CA->ini[i].ck[ii][j];
+        CA->ini[i].ck[ii][j]=aux;
     }    
 }
 /**
@@ -591,41 +591,41 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
  }
  //Verifica se a face de pressao pertence a face 1: 123
  int checkFace1(int i, typ_ca *CA, typ_face *face){
-     if(checkFaceByPnt(CA->ini[i]->iPt1, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt1, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt2, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt2, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt3, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt3, face)==0)
          return 0;
     return 1;
  }
  //Verifica se a face de pressao pertence a face 3: 124
  int checkFace2(int i, typ_ca *CA, typ_face *face){
-     if(checkFaceByPnt(CA->ini[i]->iPt1, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt1, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt2, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt2, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt4, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt4, face)==0)
          return 0;
     return 1;
  }
   //Verifica se a face de pressao pertence a face 3: 134
  int checkFace3(int i, typ_ca *CA, typ_face *face){
-     if(checkFaceByPnt(CA->ini[i]->iPt1, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt1, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt3, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt3, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt4, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt4, face)==0)
          return 0;
     return 1;
  }
  //Verifica se a face de pressao pertence a face 3: 234
  int checkFace4(int i, typ_ca *CA, typ_face *face){
-     if(checkFaceByPnt(CA->ini[i]->iPt2, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt2, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt3, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt3, face)==0)
          return 0;
-     if(checkFaceByPnt(CA->ini[i]->iPt4, face)==0)
+     if(checkFaceByPnt(CA->ini[i].iPt4, face)==0)
          return 0;
     return 1;
  }
@@ -637,28 +637,28 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
 void interceptionPntPressure(int i, typ_ca *CA){
     for(int iF=0; iF < CA->params->numFaces; iF++){
         typ_face *face = CA->params->aFaces[iF];
-        CA->ini[i]->pressFaces[0] = checkFace1(i, CA, face);
-        CA->ini[i]->pressFaces[1] = checkFace2(i, CA, face);
-        CA->ini[i]->pressFaces[2] = checkFace3(i, CA, face);
-        CA->ini[i]->pressFaces[3] = checkFace4(i, CA, face);
+        CA->ini[i].pressFaces[0] = checkFace1(i, CA, face);
+        CA->ini[i].pressFaces[1] = checkFace2(i, CA, face);
+        CA->ini[i].pressFaces[2] = checkFace3(i, CA, face);
+        CA->ini[i].pressFaces[3] = checkFace4(i, CA, face);
         int soma=0;
         for(int j=0;j<4;j++){
-            soma+=CA->ini[i]->pressFaces[j];
-            if(CA->ini[i]->pressFaces[j]==1){
-               CA->ini[i]->ipressFaces[j]=iF;
-               CA->ini[i]->hasPressure=1;
+            soma+=CA->ini[i].pressFaces[j];
+            if(CA->ini[i].pressFaces[j]==1){
+               CA->ini[i].ipressFaces[j]=iF;
+               CA->ini[i].hasPressure=1;
             }else{
-               CA->ini[i]->ipressFaces[j]=-1;
+               CA->ini[i].ipressFaces[j]=-1;
             }
         }
-        if(CA->ini[i]->hasPressure==1) break;        
+        if(CA->ini[i].hasPressure==1) break;        
     }
 }
 void iniVolumes(int iElem, typ_ca *CA)
 {
     //computes the volume
-    CA->ini[iElem]->volCel_ini = CA->t_new[iElem]->volCel  = 
-        CA->t_old[iElem]->volCel = getVolumeTetrahedron(CA, iElem);
+    CA->ini[iElem].volCel_ini = CA->t_new[iElem].volCel  = 
+        CA->t_old[iElem].volCel = getVolumeTetrahedron(CA, iElem);
 
 }
  
@@ -666,15 +666,15 @@ void iniGeometry(int i, typ_ca *CA)
 {   
     //Finds the barycenter
     getBarycenter(CA, i);
-    CA->ini[i]->bary_ini[0] = CA->t_old[i]->bary[0] = CA->t_new[i]->bary[0];
-    CA->ini[i]->bary_ini[1] = CA->t_old[i]->bary[1] = CA->t_new[i]->bary[1];
-    CA->ini[i]->bary_ini[2] = CA->t_old[i]->bary[2] = CA->t_new[i]->bary[2];
+    CA->ini[i].bary_ini[0] = CA->t_old[i].bary[0] = CA->t_new[i].bary[0];
+    CA->ini[i].bary_ini[1] = CA->t_old[i].bary[1] = CA->t_new[i].bary[1];
+    CA->ini[i].bary_ini[2] = CA->t_old[i].bary[2] = CA->t_new[i].bary[2];
     //Tt 0 1 2 3 1
-    /*cout<<"Tt "<<CA->ini[i]->iPt1<<" "<<CA->ini[i]->iPt2;
-    cout<<" "<<CA->ini[i]->iPt3<<" "<<CA->ini[i]->iPt4<<" ";
-    if(CA->ini[i]->bary_ini[0]<3.0){
+    /*cout<<"Tt "<<CA->ini[i].iPt1<<" "<<CA->ini[i].iPt2;
+    cout<<" "<<CA->ini[i].iPt3<<" "<<CA->ini[i].iPt4<<" ";
+    if(CA->ini[i].bary_ini[0]<3.0){
         cout<<"2";
-    }else if(CA->ini[i]->bary_ini[0]>7.0){
+    }else if(CA->ini[i].bary_ini[0]>7.0){
         cout<<"3";
     }else{
         cout<<"1";
@@ -682,9 +682,9 @@ void iniGeometry(int i, typ_ca *CA)
     cout<<endl;*/
     //Finds the line parallel to an axis that pass by the barycenter
     double retaParalFibra[3][2], retaParalSheet[3][2], retaParalNSheet[3][2];
-    findLineAxisBary(CA->t_old[i]->bary, CA->t_old[i]->fiberDir,  retaParalFibra);
-    findLineAxisBary(CA->t_old[i]->bary, CA->t_old[i]->sheetDir,  retaParalSheet);
-    findLineAxisBary(CA->t_old[i]->bary, CA->t_old[i]->nsheetDir, retaParalNSheet);
+    findLineAxisBary(CA->t_old[i].bary, CA->t_old[i].fiberDir,  retaParalFibra);
+    findLineAxisBary(CA->t_old[i].bary, CA->t_old[i].sheetDir,  retaParalSheet);
+    findLineAxisBary(CA->t_old[i].bary, CA->t_old[i].nsheetDir, retaParalNSheet);
     double n[4][3] = { 0. };
     for(int ii=0;ii<4;ii++){
         n[ii][0]=n[ii][1]=n[ii][2]=0.0;
@@ -698,17 +698,17 @@ void iniGeometry(int i, typ_ca *CA)
     // se alguma direação foi invertida. Por exemplo, a fibra era pra ser [1 0 0] e a interpolação encontrou [-1 0 0]
     //para o modelo mecanico nao faz diferença. apenas interfere na visualização das fibras no paraview
     int checkSwap=0;
-    if( checkAxis(CA->t_old[i]->fiberDir, CA->t_new[i]->fiberDir) ==1)
+    if( checkAxis(CA->t_old[i].fiberDir, CA->t_new[i].fiberDir) ==1)
     {
         swapInterpolationCols(i, 0, 1, CA);
         checkSwap++;
     }
-    if( checkAxis(CA->t_old[i]->sheetDir, CA->t_new[i]->sheetDir) ==1)
+    if( checkAxis(CA->t_old[i].sheetDir, CA->t_new[i].sheetDir) ==1)
     {
         swapInterpolationCols(i, 2, 3, CA);
         checkSwap++;
     }
-    if( checkAxis(CA->t_old[i]->nsheetDir, CA->t_new[i]->nsheetDir) ==1 )
+    if( checkAxis(CA->t_old[i].nsheetDir, CA->t_new[i].nsheetDir) ==1 )
     {
         swapInterpolationCols(i, 4, 5, CA);
         checkSwap++;
@@ -716,79 +716,79 @@ void iniGeometry(int i, typ_ca *CA)
     //se houve troca, recomputa os eixos
     if(checkSwap!=0)    updateAxisDirectionOLD(CA, i);
     //
-    CA->ini[i]->axisLength0[FIBER] = CA->t_old[i]->axisLengthT[FIBER] = CA->t_new[i]->axisLengthT[FIBER];
-    CA->t_old[i]->fiberDir[0]    = CA->t_new[i]->fiberDir[0];
-    CA->t_old[i]->fiberDir[1]    = CA->t_new[i]->fiberDir[1];
-    CA->t_old[i]->fiberDir[2]    = CA->t_new[i]->fiberDir[2];    
+    CA->ini[i].axisLength0[FIBER] = CA->t_old[i].axisLengthT[FIBER] = CA->t_new[i].axisLengthT[FIBER];
+    CA->t_old[i].fiberDir[0]    = CA->t_new[i].fiberDir[0];
+    CA->t_old[i].fiberDir[1]    = CA->t_new[i].fiberDir[1];
+    CA->t_old[i].fiberDir[2]    = CA->t_new[i].fiberDir[2];    
     //
-    CA->ini[i]->axisLength0[SHEET] = CA->t_old[i]->axisLengthT[SHEET] = CA->t_new[i]->axisLengthT[SHEET];
-    CA->t_old[i]->sheetDir[0]    = CA->t_new[i]->sheetDir[0];
-    CA->t_old[i]->sheetDir[1]    = CA->t_new[i]->sheetDir[1];
-    CA->t_old[i]->sheetDir[2]    = CA->t_new[i]->sheetDir[2];
+    CA->ini[i].axisLength0[SHEET] = CA->t_old[i].axisLengthT[SHEET] = CA->t_new[i].axisLengthT[SHEET];
+    CA->t_old[i].sheetDir[0]    = CA->t_new[i].sheetDir[0];
+    CA->t_old[i].sheetDir[1]    = CA->t_new[i].sheetDir[1];
+    CA->t_old[i].sheetDir[2]    = CA->t_new[i].sheetDir[2];
     //
-    CA->ini[i]->axisLength0[NORMAL] = CA->t_old[i]->axisLengthT[NORMAL] = CA->t_new[i]->axisLengthT[NORMAL];
-    CA->t_old[i]->nsheetDir[0]    = CA->t_new[i]->nsheetDir[0];
-    CA->t_old[i]->nsheetDir[1]    = CA->t_new[i]->nsheetDir[1];
-    CA->t_old[i]->nsheetDir[2]    = CA->t_new[i]->nsheetDir[2];
+    CA->ini[i].axisLength0[NORMAL] = CA->t_old[i].axisLengthT[NORMAL] = CA->t_new[i].axisLengthT[NORMAL];
+    CA->t_old[i].nsheetDir[0]    = CA->t_new[i].nsheetDir[0];
+    CA->t_old[i].nsheetDir[1]    = CA->t_new[i].nsheetDir[1];
+    CA->t_old[i].nsheetDir[2]    = CA->t_new[i].nsheetDir[2];
     /*if(i==0){
-        cout<<  CA->ini[i]->axisLength0[FIBER]<<" "
-            <<  CA->ini[i]->axisLength0[SHEET]<<" "
-            << CA->ini[i]->axisLength0[NORMAL]<<endl;    
+        cout<<  CA->ini[i].axisLength0[FIBER]<<" "
+            <<  CA->ini[i].axisLength0[SHEET]<<" "
+            << CA->ini[i].axisLength0[NORMAL]<<endl;    
         debugpnts(CA, i);
     }*/
-    CA->ini[i]->areaHexFSTIni = CA->ini[i]->axisLength0[FIBER]*CA->ini[i]->axisLength0[SHEET];
-    CA->ini[i]->areaHexFNTIni = CA->ini[i]->axisLength0[FIBER]*CA->ini[i]->axisLength0[NORMAL];
-    CA->ini[i]->areaHexSNTIni = CA->ini[i]->axisLength0[SHEET]*CA->ini[i]->axisLength0[NORMAL];
+    CA->ini[i].areaHexFSTIni = CA->ini[i].axisLength0[FIBER]*CA->ini[i].axisLength0[SHEET];
+    CA->ini[i].areaHexFNTIni = CA->ini[i].axisLength0[FIBER]*CA->ini[i].axisLength0[NORMAL];
+    CA->ini[i].areaHexSNTIni = CA->ini[i].axisLength0[SHEET]*CA->ini[i].axisLength0[NORMAL];
     
-    CA->t_old[i]->areaHexFST = CA->t_new[i]->areaHexFST = CA->ini[i]->areaHexFSTIni;
-    CA->t_old[i]->areaHexFNT = CA->t_new[i]->areaHexFNT = CA->ini[i]->areaHexFNTIni;
-    CA->t_old[i]->areaHexSNT = CA->t_new[i]->areaHexSNT = CA->ini[i]->areaHexSNTIni;
+    CA->t_old[i].areaHexFST = CA->t_new[i].areaHexFST = CA->ini[i].areaHexFSTIni;
+    CA->t_old[i].areaHexFNT = CA->t_new[i].areaHexFNT = CA->ini[i].areaHexFNTIni;
+    CA->t_old[i].areaHexSNT = CA->t_new[i].areaHexSNT = CA->ini[i].areaHexSNTIni;
     
     for(int j=0;j<3;j++){
-        CA->ini[i]->fiberDirIni[j]   = CA->t_new[i]->fiberDir[j];
-        CA->ini[i]->sheetDirIni[j]   = CA->t_new[i]->sheetDir[j];
-        CA->ini[i]->nsheetDirIni[j]  = CA->t_new[i]->nsheetDir[j];
+        CA->ini[i].fiberDirIni[j]   = CA->t_new[i].fiberDir[j];
+        CA->ini[i].sheetDirIni[j]   = CA->t_new[i].sheetDir[j];
+        CA->ini[i].nsheetDirIni[j]  = CA->t_new[i].nsheetDir[j];
     }
     //
-   /* CA->t_old[i]->alphaT_12 = CA->ini[i]->alpha0_12 = 0.0;
-    CA->t_old[i]->alphaT_13 = CA->ini[i]->alpha0_13 = 0.0;
-    CA->t_old[i]->alphaT_23 = CA->ini[i]->alpha0_23 = 0.0;*/
+   /* CA->t_old[i].alphaT_12 = CA->ini[i].alpha0_12 = 0.0;
+    CA->t_old[i].alphaT_13 = CA->ini[i].alpha0_13 = 0.0;
+    CA->t_old[i].alphaT_23 = CA->ini[i].alpha0_23 = 0.0;*/
     updateAlpha( i, CA);
-    CA->t_old[i]->alphaT_12 = CA->ini[i]->alpha0_12 = CA->t_new[i]->alphaT_12;
-    CA->t_old[i]->alphaT_13 = CA->ini[i]->alpha0_13 = CA->t_new[i]->alphaT_13;
-    CA->t_old[i]->alphaT_23 = CA->ini[i]->alpha0_23 = CA->t_new[i]->alphaT_23;
+    CA->t_old[i].alphaT_12 = CA->ini[i].alpha0_12 = CA->t_new[i].alphaT_12;
+    CA->t_old[i].alphaT_13 = CA->ini[i].alpha0_13 = CA->t_new[i].alphaT_13;
+    CA->t_old[i].alphaT_23 = CA->ini[i].alpha0_23 = CA->t_new[i].alphaT_23;
     
-    CA->t_old[i]->deltaAlpha_12 = CA->t_new[i]->deltaAlpha_12=0.0;
-    CA->t_old[i]->deltaAlpha_13 = CA->t_new[i]->deltaAlpha_13=0.0;
-    CA->t_old[i]->deltaAlpha_23 = CA->t_new[i]->deltaAlpha_23=0.0;
+    CA->t_old[i].deltaAlpha_12 = CA->t_new[i].deltaAlpha_12=0.0;
+    CA->t_old[i].deltaAlpha_13 = CA->t_new[i].deltaAlpha_13=0.0;
+    CA->t_old[i].deltaAlpha_23 = CA->t_new[i].deltaAlpha_23=0.0;
     
     //
     getInterceptPtsByInterpolation(CA, i);
     for(int jj=0;jj<6;jj++){
-        if(CA->ini[i]->iFaces[jj]<0 || CA->ini[i]->iFaces[jj]>4)
+        if(CA->ini[i].iFaces[jj]<0 || CA->ini[i].iFaces[jj]>4)
         {
             stringstream ss;
-            ss<<"Area index ["<<CA->ini[i]->iFaces[jj]<<"] does not exist."<<endl;
+            ss<<"Area index ["<<CA->ini[i].iFaces[jj]<<"] does not exist."<<endl;
             string str = ss.str();
             if(CA->params->printOutput==1) {
                 throw MyException(str, __FILE__, __LINE__);
             }
         }
-        CA->t_old[i]->intPts[0][jj]= CA->t_new[i]->intPts[0][jj];
-        CA->t_old[i]->intPts[1][jj]= CA->t_new[i]->intPts[1][jj];
-        CA->t_old[i]->intPts[2][jj]= CA->t_new[i]->intPts[2][jj];
+        CA->t_old[i].intPts[0][jj]= CA->t_new[i].intPts[0][jj];
+        CA->t_old[i].intPts[1][jj]= CA->t_new[i].intPts[1][jj];
+        CA->t_old[i].intPts[2][jj]= CA->t_new[i].intPts[2][jj];
     }
     computeKs(CA, i);
-    CA->ini[i]->hasPressure=0;
+    CA->ini[i].hasPressure=0;
     interceptionPntPressure(i,CA);
 }
 void getIntercMasses(typ_ca *CA, int iElem){
     double pntMass[4] = { 0., 0., 0. ,0.};
     
-    int iPt1 = CA->ini[iElem]->iPt1;
-    int iPt2 = CA->ini[iElem]->iPt2;
-    int iPt3 = CA->ini[iElem]->iPt3;
-    int iPt4 = CA->ini[iElem]->iPt4;
+    int iPt1 = CA->ini[iElem].iPt1;
+    int iPt2 = CA->ini[iElem].iPt2;
+    int iPt3 = CA->ini[iElem].iPt3;
+    int iPt4 = CA->ini[iElem].iPt4;
     pntMass[0] = CA->pnts_old[iPt1].mass;
     pntMass[1] = CA->pnts_old[iPt2].mass;
     pntMass[2] = CA->pnts_old[iPt3].mass;
@@ -797,9 +797,9 @@ void getIntercMasses(typ_ca *CA, int iElem){
     double mass=0.0;
     for (int d = 0 ; d < 6 ; d++ ){
         for (int k = 0 ; k < 4 ; k++ ){                
-            mass = mass + pntMass[k]*CA->ini[iElem]->ck[k][d];
+            mass = mass + pntMass[k]*CA->ini[iElem].ck[k][d];
         }
-        CA->ini[iElem]->intercMass[d] = mass;
+        CA->ini[iElem].intercMass[d] = mass;
         mass = 0.0;
     }
 }
@@ -811,24 +811,24 @@ void getIntercMasses(typ_ca *CA, int iElem){
 void computeKs(typ_ca *CA, int iElem){
     getIntercMasses(CA, iElem);
     double area_L0[3] = { 0., 0., 0. }, area[3] = { 0., 0., 0. };
-    typ_t0_element *ini = CA->ini[iElem];
+    typ_t0_element ini = CA->ini[iElem];
     //calcula o damp de um jeito novo para tentar amortecer o cisalhamento
     //fibra
-    area_L0[0] = ini->areaHexSNTIni / ini->axisLength0[0];
-    area[0]    = ini->areaHexSNTIni;
+    area_L0[0] = ini.areaHexSNTIni / ini.axisLength0[0];
+    area[0]    = ini.areaHexSNTIni;
     //sheet
-    area_L0[1] = ini->areaHexFNTIni / ini->axisLength0[1];
-    area[1]    = ini->areaHexFNTIni;
+    area_L0[1] = ini.areaHexFNTIni / ini.axisLength0[1];
+    area[1]    = ini.areaHexFNTIni;
     //normal
-    area_L0[2] = ini->areaHexFSTIni / ini->axisLength0[2];
-    area[2]    = ini->areaHexFSTIni;
+    area_L0[2] = ini.areaHexFSTIni / ini.axisLength0[2];
+    area[2]    = ini.areaHexFSTIni;
     
-    t_par_ac* ap = CA->params->aParam[ini->iRegion];
+    t_par_ac* ap = CA->params->aParam[ini.iRegion];
     for(int i =0;i<3;i++){
-        ini->KAxl[i] = area_L0[i]*ap->EAxl[i];
-        ini->KVol[i] = area_L0[i]*ap->EVol[i];
-        ini->KAng[i] = area[i]*ap->EAng[i];
-        ini->damp[i] = area[i]*ap->kDamp;
+        ini.KAxl[i] = area_L0[i]*ap->EAxl[i];
+        ini.KVol[i] = area_L0[i]*ap->EVol[i];
+        ini.KAng[i] = area[i]*ap->EAng[i];
+        ini.damp[i] = area[i] * ap->kDamp;
     }
 }
   
@@ -855,10 +855,10 @@ void computeKs(typ_ca *CA, int iElem){
     }
 }
  void debugpnts(typ_ca *CA, int i){
-    int iPt1=CA->ini[i]->iPt1;
-    int iPt2=CA->ini[i]->iPt2;
-    int iPt3=CA->ini[i]->iPt3;
-    int iPt4=CA->ini[i]->iPt4;
+    int iPt1=CA->ini[i].iPt1;
+    int iPt2=CA->ini[i].iPt2;
+    int iPt3=CA->ini[i].iPt3;
+    int iPt4=CA->ini[i].iPt4;
     cout<<"ponto: "<<iPt1<<" ";
     cout<<CA->pnts_old[iPt1].x<<" ";
     cout<<CA->pnts_old[iPt1].y<<" ";
@@ -879,29 +879,29 @@ void computeKs(typ_ca *CA, int iElem){
     for(int j=0; j<3; j++)
     {
         printf("%.e :: %e = %e - %e\n",  
-               CA->t_new[i]->sheetDir[j] , 
-               CA->t_new[i]->intPts[j][3]-CA->t_new[i]->intPts[j][2], 
-               CA->t_new[i]->intPts[j][3], 
-               CA->t_new[i]->intPts[j][2]);
+               CA->t_new[i].sheetDir[j] , 
+               CA->t_new[i].intPts[j][3]-CA->t_new[i].intPts[j][2], 
+               CA->t_new[i].intPts[j][3], 
+               CA->t_new[i].intPts[j][2]);
     }
     cout<<"============="<<endl;
     for (int d = 0 ; d < 6 ; d++ )
     {
         for (int k = 0 ; k < 4 ; k++ )
         {
-            printf("%.e ", CA->ini[i]->ck[k][d]);
+            printf("%.e ", CA->ini[i].ck[k][d]);
         }
         printf("\n");
     }
     printf("ifaces: \n");
     for(int jj=0;jj<6;jj++){
-        printf("%d ", CA->ini[i]->iFaces[jj]);
+        printf("%d ", CA->ini[i].iFaces[jj]);
     }
     printf("\n intPts: \n");
     for(int jj=0;jj<6;jj++){
-        printf("%e ",  CA->t_new[i]->intPts[0][jj]);
-        printf("%e ",  CA->t_new[i]->intPts[1][jj]);
-        printf("%e\n", CA->t_new[i]->intPts[2][jj]);
+        printf("%e ",  CA->t_new[i].intPts[0][jj]);
+        printf("%e ",  CA->t_new[i].intPts[1][jj]);
+        printf("%e\n", CA->t_new[i].intPts[2][jj]);
     }
     cout<<"============="<<endl;
     //getchar();  
@@ -916,10 +916,10 @@ void computeKs(typ_ca *CA, int iElem){
  void getInterceptPtsByInterpolation(typ_ca *CA, int i)
  {
     double points[3][4] = { 0. };
-    int iPt1=CA->ini[i]->iPt1;
-    int iPt2=CA->ini[i]->iPt2;
-    int iPt3=CA->ini[i]->iPt3;
-    int iPt4=CA->ini[i]->iPt4;
+    int iPt1=CA->ini[i].iPt1;
+    int iPt2=CA->ini[i].iPt2;
+    int iPt3=CA->ini[i].iPt3;
+    int iPt4=CA->ini[i].iPt4;
     points[0][0]    = CA->pnts_old[iPt1].x;
     points[1][0]    = CA->pnts_old[iPt1].y;
     points[2][0]    = CA->pnts_old[iPt1].z;
@@ -933,7 +933,7 @@ void computeKs(typ_ca *CA, int iElem){
     points[1][3]    = CA->pnts_old[iPt4].y;
     points[2][3]    = CA->pnts_old[iPt4].z;
     //    
-    findDataByInterpol(points, CA->ini[i]->ck, CA->t_new[i]->intPts);
+    findDataByInterpol(points, CA->ini[i].ck, CA->t_new[i].intPts);
  }
  /**
   * 
@@ -951,9 +951,9 @@ void findAxis(typ_ca *CA, int i)
     //now find the directions
     for(int j=0; j<3; j++)
     {
-        CA->t_new[i]->fiberDir[j] = CA->t_new[i]->intPts[j][1] - CA->t_new[i]->intPts[j][0];
-        CA->t_new[i]->sheetDir[j] = CA->t_new[i]->intPts[j][3] - CA->t_new[i]->intPts[j][2];
-        CA->t_new[i]->nsheetDir[j]= CA->t_new[i]->intPts[j][5] - CA->t_new[i]->intPts[j][4];
+        CA->t_new[i].fiberDir[j] = CA->t_new[i].intPts[j][1] - CA->t_new[i].intPts[j][0];
+        CA->t_new[i].sheetDir[j] = CA->t_new[i].intPts[j][3] - CA->t_new[i].intPts[j][2];
+        CA->t_new[i].nsheetDir[j]= CA->t_new[i].intPts[j][5] - CA->t_new[i].intPts[j][4];
     }
     
  }
@@ -965,10 +965,10 @@ void findAxis(typ_ca *CA, int i)
     double velsIterTEMP[3][6] = { 0. };
     double velPts[3][4] = { 0. };
     
-    int iPt1=CA->ini[iElem]->iPt1;
-    int iPt2=CA->ini[iElem]->iPt2;
-    int iPt3=CA->ini[iElem]->iPt3;
-    int iPt4=CA->ini[iElem]->iPt4;
+    int iPt1=CA->ini[iElem].iPt1;
+    int iPt2=CA->ini[iElem].iPt2;
+    int iPt3=CA->ini[iElem].iPt3;
+    int iPt4=CA->ini[iElem].iPt4;
     
     velPts[0][0]    = CA->pnts_old[iPt1].xV;
     velPts[1][0]    = CA->pnts_old[iPt1].yV;
@@ -986,10 +986,10 @@ void findAxis(typ_ca *CA, int i)
         throw MyException("velsIterTEMP", __FILE__, __LINE__);
     if(velPts==NULL)
         throw MyException("velPts", __FILE__, __LINE__);
-    if(CA->ini[iElem]->ck==NULL)
-        throw MyException("CA->ini[iElem]->ck", __FILE__, __LINE__);
+    if(CA->ini[iElem].ck==NULL)
+        throw MyException("CA->ini[iElem].ck", __FILE__, __LINE__);
     //////// TODO FIXME nao sei porque este codigo estava replicado em vez de chamar a funcao
-    findDataByInterpol(velPts, CA->ini[iElem]->ck, velsIterTEMP);
+    findDataByInterpol(velPts, CA->ini[iElem].ck, velsIterTEMP);
     /*double sum = 0.0;
     for (int c = 0 ; c < 3 ; c++ )
     {
@@ -997,7 +997,7 @@ void findAxis(typ_ca *CA, int i)
         {
             for (int k = 0 ; k < 4 ; k++ )
             {
-                sum = sum + velPts[c][k]*CA->ini[iElem]->ck[k][d];
+                sum = sum + velPts[c][k]*CA->ini[iElem].ck[k][d];
             }
             velsIterTEMP[c][d] = sum;
             sum = 0.0;
@@ -1021,9 +1021,9 @@ void findAxis(typ_ca *CA, int i)
 void updateAxisDirectionOLD(typ_ca *CA, int i)
 {
     findAxis(CA, i);
-    CA->t_new[i]->axisLengthT[FIBER] = normalizeVector(CA->t_new[i]->fiberDir, i);
-    CA->t_new[i]->axisLengthT[SHEET] = normalizeVector(CA->t_new[i]->sheetDir, i);
-    CA->t_new[i]->axisLengthT[NORMAL]= normalizeVector(CA->t_new[i]->nsheetDir, i);
+    CA->t_new[i].axisLengthT[FIBER] = normalizeVector(CA->t_new[i].fiberDir, i);
+    CA->t_new[i].axisLengthT[SHEET] = normalizeVector(CA->t_new[i].sheetDir, i);
+    CA->t_new[i].axisLengthT[NORMAL]= normalizeVector(CA->t_new[i].nsheetDir, i);
 }
 
 /**
@@ -1034,13 +1034,13 @@ void updateAxisDirectionOLD(typ_ca *CA, int i)
  */
 void updateAlpha(int i, typ_ca *CA){    
     
-    CA->t_new[i]->alphaT_12 = dot(CA->t_old[i]->fiberDir, CA->t_old[i]->sheetDir);
-    CA->t_new[i]->alphaT_13 = dot(CA->t_old[i]->fiberDir, CA->t_old[i]->nsheetDir);
-    CA->t_new[i]->alphaT_23 = dot(CA->t_old[i]->sheetDir, CA->t_old[i]->nsheetDir);
+    CA->t_new[i].alphaT_12 = dot(CA->t_old[i].fiberDir, CA->t_old[i].sheetDir);
+    CA->t_new[i].alphaT_13 = dot(CA->t_old[i].fiberDir, CA->t_old[i].nsheetDir);
+    CA->t_new[i].alphaT_23 = dot(CA->t_old[i].sheetDir, CA->t_old[i].nsheetDir);
     
-    CA->t_new[i]->deltaAlpha_12 = CA->t_old[i]->alphaT_12 - CA->ini[i]->alpha0_12;
-    CA->t_new[i]->deltaAlpha_13 = CA->t_old[i]->alphaT_13 - CA->ini[i]->alpha0_13;
-    CA->t_new[i]->deltaAlpha_23 = CA->t_old[i]->alphaT_23 - CA->ini[i]->alpha0_23;
+    CA->t_new[i].deltaAlpha_12 = CA->t_old[i].alphaT_12 - CA->ini[i].alpha0_12;
+    CA->t_new[i].deltaAlpha_13 = CA->t_old[i].alphaT_13 - CA->ini[i].alpha0_13;
+    CA->t_new[i].deltaAlpha_23 = CA->t_old[i].alphaT_23 - CA->ini[i].alpha0_23;
     
 }
 
@@ -1056,15 +1056,15 @@ void updateAlpha(int i, typ_ca *CA){
 void updateGeometry(
     int i, typ_ca *CA)
 {
-    CA->t_new[i]->volCel = getVolumeTetrahedron( CA, i);    
+    CA->t_new[i].volCel = getVolumeTetrahedron( CA, i);    
     getBarycenter(CA, i);
     updateAxisDirectionOLD(CA, i);
     updateAlpha(i, CA);
     
     //atualiza areas
-    CA->t_new[i]->areaHexFST = CA->t_old[i]->axisLengthT[FIBER]*CA->t_old[i]->axisLengthT[SHEET];
-    CA->t_new[i]->areaHexFNT = CA->t_old[i]->axisLengthT[FIBER]*CA->t_old[i]->axisLengthT[NORMAL];
-    CA->t_new[i]->areaHexSNT = CA->t_old[i]->axisLengthT[SHEET]*CA->t_old[i]->axisLengthT[NORMAL];
+    CA->t_new[i].areaHexFST = CA->t_old[i].axisLengthT[FIBER]*CA->t_old[i].axisLengthT[SHEET];
+    CA->t_new[i].areaHexFNT = CA->t_old[i].axisLengthT[FIBER]*CA->t_old[i].axisLengthT[NORMAL];
+    CA->t_new[i].areaHexSNT = CA->t_old[i].axisLengthT[SHEET]*CA->t_old[i].axisLengthT[NORMAL];
 }
 /**
  * 

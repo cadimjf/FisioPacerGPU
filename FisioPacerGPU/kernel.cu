@@ -121,45 +121,45 @@ void initializeCA(typ_ca* CA)
         mass = 0.0;
         lst_item* cur = CA->omega_b[i];
         while (cur != NULL) {
-            mass += CA->ini[cur->value]->volCel_ini;
+            mass += CA->ini[cur->value].volCel_ini;
             cur = cur->next;
         }
         CA->pnts_new[i].mass = CA->pnts_old[i].mass = ro_mass_dens * mass / 4.0;
     }
     for (int i = 0; i < CA->params->elementsNum; i++)
     {
-        CA->t_old[i]->cellT = CA->t_new[i]->cellT = 0.0f;
-        CA->t_old[i]->ECTNC_force_t_ini = CA->t_new[i]->ECTNC_force_t_ini = 0.0f;
-        CA->t_old[i]->ECTNC_force_val_ini = CA->t_new[i]->ECTNC_force_val_ini = 0.0f;
-        CA->t_old[i]->ECTNC_ap_t_ini = CA->t_new[i]->ECTNC_ap_t_ini = 0.0f;
-        CA->t_old[i]->ECTNC_ap_val_ini = CA->t_new[i]->ECTNC_ap_val_ini = 0.0f;
-        CA->t_old[i]->ECTNC_ap_t_end = CA->t_new[i]->ECTNC_ap_t_end = 0.0f;
-        CA->t_old[i]->ECTNC_force_t_end = CA->t_new[i]->ECTNC_force_t_end = 0.0f;
+        CA->t_old[i].cellT = CA->t_new[i].cellT = 0.0f;
+        CA->t_old[i].ECTNC_force_t_ini = CA->t_new[i].ECTNC_force_t_ini = 0.0f;
+        CA->t_old[i].ECTNC_force_val_ini = CA->t_new[i].ECTNC_force_val_ini = 0.0f;
+        CA->t_old[i].ECTNC_ap_t_ini = CA->t_new[i].ECTNC_ap_t_ini = 0.0f;
+        CA->t_old[i].ECTNC_ap_val_ini = CA->t_new[i].ECTNC_ap_val_ini = 0.0f;
+        CA->t_old[i].ECTNC_ap_t_end = CA->t_new[i].ECTNC_ap_t_end = 0.0f;
+        CA->t_old[i].ECTNC_force_t_end = CA->t_new[i].ECTNC_force_t_end = 0.0f;
 
         //initially, all cells are healthy
-        CA->ini[i]->cellCond = HEALTHY;
+        CA->ini[i].cellCond = HEALTHY;
         //V state
-        CA->t_new[i]->V_state = CA->t_old[i]->V_state = V0;
+        CA->t_new[i].V_state = CA->t_old[i].V_state = V0;
         //F state
-        CA->t_new[i]->F_state = CA->t_old[i]->F_state = F0;
+        CA->t_new[i].F_state = CA->t_old[i].F_state = F0;
         iniGeometry(i, CA);
         //sets the pacemaker up
         for (int iS = 0; iS < CA->params->stimSize; iS++) {
             t_stim* s = CA->params->aStim[iS];
             if (
-                CA->t_old[i]->bary[0] > s->iniX && CA->t_old[i]->bary[0] < s->endX &&
-                CA->t_old[i]->bary[1] > s->iniY && CA->t_old[i]->bary[1] < s->endY &&
-                CA->t_old[i]->bary[2] > s->iniZ && CA->t_old[i]->bary[2] < s->endZ
+                CA->t_old[i].bary[0] > s->iniX && CA->t_old[i].bary[0] < s->endX &&
+                CA->t_old[i].bary[1] > s->iniY && CA->t_old[i].bary[1] < s->endY &&
+                CA->t_old[i].bary[2] > s->iniZ && CA->t_old[i].bary[2] < s->endZ
                 ) {
-                CA->ini[i]->cellCond = paceMaker;
-                CA->ini[i]->pmRegion = iS;
+                CA->ini[i].cellCond = paceMaker;
+                CA->ini[i].pmRegion = iS;
             }
         }
         restartAPDElectroTonic(i, CA);
-        CA->t_old[i]->APTime1 = CA->t_new[i]->APTime1;
-        CA->t_old[i]->APTime2 = CA->t_new[i]->APTime2;
-        CA->t_old[i]->APTime3 = CA->t_new[i]->APTime3;
-        CA->t_old[i]->APTime4 = CA->t_new[i]->APTime4;
+        CA->t_old[i].APTime1 = CA->t_new[i].APTime1;
+        CA->t_old[i].APTime2 = CA->t_new[i].APTime2;
+        CA->t_old[i].APTime3 = CA->t_new[i].APTime3;
+        CA->t_old[i].APTime4 = CA->t_new[i].APTime4;
 
     }
     iniPressure(CA);
@@ -187,7 +187,7 @@ int simulate(typ_ca* CA, bool save) {
 
     int count = 0;
     typ_point* aux3;
-    typ_dt_element** auxCA;
+    typ_dt_element* auxCA;
     char filename[255];
     sprintf(filename, "%sfisiopacer.txt", CA->params->outputFolder/*.c_str()*/);
     FILE* fileDt = fopen(filename, "w+");
@@ -208,7 +208,7 @@ int simulate(typ_ca* CA, bool save) {
     double sumDt = 0.0;
     CA->stats->volIni = 0.0;
     for (int i = 0; i < CA->params->elementsNum; i++) {
-        CA->stats->volIni += CA->t_old[i]->volCel;
+        CA->stats->volIni += CA->t_old[i].volCel;
     }
     CA->volume = CA->stats->volIni;
     int retValFinal = 0;
@@ -302,24 +302,24 @@ void simulationStep(typ_ca* CA,
         }
         computeForceOnElement(CA, forcesOnPts, i);
         //verifica se o volume da celula é menor que 1% do inicial - netste caso, mata o processo pq é sinal de erro.
-        if (CA->t_new[i]->volCel < 0.001 * CA->ini[i]->volCel_ini) {
+        if (CA->t_new[i].volCel < 0.001 * CA->ini[i].volCel_ini) {
             CA->params->mecSim = 0;
             CA->params->paSim = 0;
             if (CA->params->printOutput == 1) {
                 cout << "Mata por volume pequeno[" << i << "]: " << CA->time << endl;
-                cout << "Inicial: " << CA->ini[i]->volCel_ini << " | Atual: " << CA->t_new[i]->volCel << endl;
-                cout << CA->pnts_old[CA->ini[i]->iPt1].x << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt1].y << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt1].z << endl;
-                cout << CA->pnts_old[CA->ini[i]->iPt2].x << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt2].y << " " <<
-                    CA->pnts_old[CA->ini[i]->iPt2].z << endl;
+                cout << "Inicial: " << CA->ini[i].volCel_ini << " | Atual: " << CA->t_new[i].volCel << endl;
+                cout << CA->pnts_old[CA->ini[i].iPt1].x << " " <<
+                    CA->pnts_old[CA->ini[i].iPt1].y << " " <<
+                    CA->pnts_old[CA->ini[i].iPt1].z << endl;
+                cout << CA->pnts_old[CA->ini[i].iPt2].x << " " <<
+                    CA->pnts_old[CA->ini[i].iPt2].y << " " <<
+                    CA->pnts_old[CA->ini[i].iPt2].z << endl;
 
                 throw MyException("1percent volume.", __FILE__, __LINE__);
 
             }
         }
-        volT += CA->t_new[i]->volCel;
+        volT += CA->t_new[i].volCel;
     }//fim pragma
     //exit(0);
     if (CA->params->mecSim == 1) {
@@ -412,9 +412,11 @@ int startCA(string paramFile, bool save)
  */
 void deallocCA(typ_ca* CA) {
     try {
-        myArrayDeallocation<typ_dt_element>(CA->t_old, CA->params->elementsNum);
-        myArrayDeallocation<typ_dt_element>(CA->t_new, CA->params->elementsNum);
-        myArrayDeallocation<typ_t0_element>(CA->ini, CA->params->elementsNum);
+
+        if (CA->t_old != NULL)  free(CA->t_old);
+        if (CA->t_new != NULL)  free(CA->t_new);
+        if (CA->ini != NULL)    free(CA->ini);
+
         //
         if (CA->pnts_new    != NULL) free(CA->pnts_new);
         if (CA->pnts_old    != NULL) free(CA->pnts_old);
@@ -510,15 +512,15 @@ void allocCA(typ_ca* CA) {
             throw MyException("Allocation failure for CA->pnts_intrm.", __FILE__, __LINE__);
         }
         //elements
-        CA->t_old = myArrayAllocation<typ_dt_element>(CA->params->elementsNum);
+        CA->t_old = (typ_dt_element*)malloc(CA->params->elementsNum*sizeof(typ_dt_element));
         if (CA->t_old == NULL) {
             throw MyException("Allocation failure for CA->t_old.", __FILE__, __LINE__);
         }
-        CA->t_new = myArrayAllocation<typ_dt_element>(CA->params->elementsNum);
+        CA->t_new = (typ_dt_element*)malloc(CA->params->elementsNum * sizeof(typ_dt_element));
         if (CA->t_new == NULL) {
             throw MyException("Allocation failure for CA->t_new.", __FILE__, __LINE__);
         }
-        CA->ini = myArrayAllocation<typ_t0_element>(CA->params->elementsNum);
+        CA->ini = (typ_t0_element*)malloc(CA->params->elementsNum * sizeof(typ_dt_element));
         if (CA->ini == NULL) {
             throw MyException("Allocation failure for CA->ini.", __FILE__, __LINE__);
         }

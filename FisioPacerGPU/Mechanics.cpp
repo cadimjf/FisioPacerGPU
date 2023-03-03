@@ -109,27 +109,27 @@ int MecStep_i(typ_ca *CA, int i, double *forcesOnPts)
     for (int k = 0; k < 4; k++) {
         for (int j = 0; j < 3; j++) {
             //força na fibra interseçao 1
-            forcePts[j][k] += CA->ini[i]->ck[k][0] * forceFiber[j][0];
+            forcePts[j][k] += CA->ini[i].ck[k][0] * forceFiber[j][0];
             //força na fibra interseção 2
-            forcePts[j][k] += CA->ini[i]->ck[k][1] * forceFiber[j][1];
+            forcePts[j][k] += CA->ini[i].ck[k][1] * forceFiber[j][1];
             //força na sheet interseçao 3
-            forcePts[j][k] += CA->ini[i]->ck[k][2] * forceSheet[j][0];
+            forcePts[j][k] += CA->ini[i].ck[k][2] * forceSheet[j][0];
             //força na sheet interseção 4
-            forcePts[j][k] += CA->ini[i]->ck[k][3] * forceSheet[j][1];
+            forcePts[j][k] += CA->ini[i].ck[k][3] * forceSheet[j][1];
             //força na Nsheet interseçao 5
-            forcePts[j][k] += CA->ini[i]->ck[k][4] * forceNSheet[j][0];
+            forcePts[j][k] += CA->ini[i].ck[k][4] * forceNSheet[j][0];
             //força na Nsheet interseção 6
-            forcePts[j][k] += CA->ini[i]->ck[k][5] * forceNSheet[j][1];
+            forcePts[j][k] += CA->ini[i].ck[k][5] * forceNSheet[j][1];
 
         }
     }
     //adds the force computed above to the total force of the point.
     //This is necessary to take into account the force of all elements in a single point
     for (int jj = 0; jj < 3; jj++) {
-        forcesOnPts[I2d(CA->ini[i]->iPt1, jj, 3)] += forcePts[jj][0];
-        forcesOnPts[I2d(CA->ini[i]->iPt2, jj, 3)] += forcePts[jj][1];
-        forcesOnPts[I2d(CA->ini[i]->iPt3, jj, 3)] += forcePts[jj][2];
-        forcesOnPts[I2d(CA->ini[i]->iPt4, jj, 3)] += forcePts[jj][3];
+        forcesOnPts[I2d(CA->ini[i].iPt1, jj, 3)] += forcePts[jj][0];
+        forcesOnPts[I2d(CA->ini[i].iPt2, jj, 3)] += forcePts[jj][1];
+        forcesOnPts[I2d(CA->ini[i].iPt3, jj, 3)] += forcePts[jj][2];
+        forcesOnPts[I2d(CA->ini[i].iPt4, jj, 3)] += forcePts[jj][3];
 
         if (isnan(forcePts[jj][0]) || isnan(forcePts[jj][1]) || isnan(forcePts[jj][2]) || isnan(forcePts[jj][3]) ||
                 isinf(forcePts[jj][0]) || isinf(forcePts[jj][1]) || isinf(forcePts[jj][2]) || isinf(forcePts[jj][3])) {
@@ -151,30 +151,30 @@ int MecStep_i(typ_ca *CA, int i, double *forcesOnPts)
  * @param fAnf2
  */
 void getAngularForces(int iElem, int iAxis, typ_ca *CA, double fAng1[3], double fAng2[3], double axis[3]){
-    double deltaAlpha12 = CA->t_old[iElem]->deltaAlpha_12;
-    double deltaAlpha13 = CA->t_old[iElem]->deltaAlpha_13;
-    double deltaAlpha23 = CA->t_old[iElem]->deltaAlpha_23;
-    double k0 = CA->ini[iElem]->KAng[0];
-    double k1 = CA->ini[iElem]->KAng[1];
-    double k2 = CA->ini[iElem]->KAng[2];
+    double deltaAlpha12 = CA->t_old[iElem].deltaAlpha_12;
+    double deltaAlpha13 = CA->t_old[iElem].deltaAlpha_13;
+    double deltaAlpha23 = CA->t_old[iElem].deltaAlpha_23;
+    double k0 = CA->ini[iElem].KAng[0];
+    double k1 = CA->ini[iElem].KAng[1];
+    double k2 = CA->ini[iElem].KAng[2];
     if(iAxis==FIBER){
         for(int i=0;i<3;i++){
-            axis[i]  = CA->t_old[iElem]->fiberDir[i];
+            axis[i]  = CA->t_old[iElem].fiberDir[i];
         }
-        getForce_HookesLawAngular(fAng1, deltaAlpha12, k0, CA->t_old[iElem]->sheetDir);
-        getForce_HookesLawAngular(fAng2, deltaAlpha13, k1, CA->t_old[iElem]->nsheetDir);
+        getForce_HookesLawAngular(fAng1, deltaAlpha12, k0, CA->t_old[iElem].sheetDir);
+        getForce_HookesLawAngular(fAng2, deltaAlpha13, k1, CA->t_old[iElem].nsheetDir);
     }else if(iAxis==SHEET){
         for(int i=0;i<3;i++){
-            axis[i]  = CA->t_old[iElem]->sheetDir[i];
+            axis[i]  = CA->t_old[iElem].sheetDir[i];
         }
-        getForce_HookesLawAngular(fAng1, deltaAlpha12, k0, CA->t_old[iElem]->fiberDir);
-        getForce_HookesLawAngular(fAng2, deltaAlpha23, k2, CA->t_old[iElem]->nsheetDir);
+        getForce_HookesLawAngular(fAng1, deltaAlpha12, k0, CA->t_old[iElem].fiberDir);
+        getForce_HookesLawAngular(fAng2, deltaAlpha23, k2, CA->t_old[iElem].nsheetDir);
     }if(iAxis==NORMAL){
         for(int i=0;i<3;i++){
-            axis[i]  = CA->t_old[iElem]->nsheetDir[i];
+            axis[i]  = CA->t_old[iElem].nsheetDir[i];
         }
-        getForce_HookesLawAngular(fAng1, deltaAlpha13, k1, CA->t_old[iElem]->fiberDir);
-        getForce_HookesLawAngular(fAng2, deltaAlpha23, k2, CA->t_old[iElem]->sheetDir);
+        getForce_HookesLawAngular(fAng1, deltaAlpha13, k1, CA->t_old[iElem].fiberDir);
+        getForce_HookesLawAngular(fAng2, deltaAlpha23, k2, CA->t_old[iElem].sheetDir);
     }
 }
 
@@ -196,17 +196,17 @@ void getPassiveForce(
     getAngularForces(iElem, iAxis, CA, fAng1, fAng2, axis);    
     //find the hooke's law resulting force
     double k=1.0;
-    double FhookeAxis = getForce_HookesLawAxis(CA->ini[iElem]->KAxl[iAxis]*k, CA->t_old[iElem]->axisLengthT[iAxis], CA->ini[iElem]->axisLength0[iAxis]);
+    double FhookeAxis = getForce_HookesLawAxis(CA->ini[iElem].KAxl[iAxis]*k, CA->t_old[iElem].axisLengthT[iAxis], CA->ini[iElem].axisLength0[iAxis]);
     //volume force
-    double Fvol = getForce_VolPreserving(CA->t_old[iElem]->volCel, CA->ini[iElem]->volCel_ini, CA->ini[iElem]->KVol[iAxis]);
+    double Fvol = getForce_VolPreserving(CA->t_old[iElem].volCel, CA->ini[iElem].volCel_ini, CA->ini[iElem].KVol[iAxis]);
     double forceJ = 0.0;
     double modForca = FhookeAxis + Fvol;
     for (int j = 0; j < 3; j++) {        
         forceJ = axis[j]*(modForca) + fAng1[j] + fAng2[j];
         // - relativeVel[j]*ap->DAng[iAxis];
         /*area*(axis2[j]*(FhookeA1+FdampShear1) + axis3[j]*(FhookeA2+FdampShear2));*/
-        force[j][0] += -(forceJ) - CA->ini[iElem]->damp[j]*vel1[j] ;
-        force[j][1] +=  (forceJ) - CA->ini[iElem]->damp[j]*vel2[j] ;
+        force[j][0] += -(forceJ) - CA->ini[iElem].damp[j]*vel1[j] ;
+        force[j][1] +=  (forceJ) - CA->ini[iElem].damp[j]*vel2[j] ;
     }
 }
 
@@ -217,7 +217,7 @@ void getPassiveForce(
 void getExternalForce(double force[3][2], int i, typ_ca *CA)
 {
     // 9,80665 m/s2
-    double mass = (ro_mass_dens * CA->ini[i]->volCel_ini);
+    double mass = (ro_mass_dens * CA->ini[i].volCel_ini);
 
     force[0][0] += CA->params->gravityX*mass;
     force[0][1] += CA->params->gravityX*mass;
@@ -238,11 +238,11 @@ void getExternalForce(double force[3][2], int i, typ_ca *CA)
 void getActiveForce( int i, double force[3][2], typ_ca *CA)
 {
     double t = getActiveTension(i, CA);
-    //double mod = t*CA->t_old[i]->areaHexSNT;
-    double mod = t*CA->ini[i]->areaHexSNTIni;
+    //double mod = t*CA->t_old[i].areaHexSNT;
+    double mod = t*CA->ini[i].areaHexSNTIni;
     for (int j = 0; j < 3; j++) {
-        force[j][0] += +mod * CA->t_old[i]->fiberDir[j];
-        force[j][1] += -mod * CA->t_old[i]->fiberDir[j];
+        force[j][0] += +mod * CA->t_old[i].fiberDir[j];
+        force[j][1] += -mod * CA->t_old[i].fiberDir[j];
     }
 }
 /**

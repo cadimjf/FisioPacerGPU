@@ -80,10 +80,10 @@ void saveVTK_V_cell(
     fprintf(file, "<Cells>\n");
     fprintf(file, "<DataArray  type=\"UInt32\"  Name=\"connectivity\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%d ", CA->ini[i]->iPt1);
-        fprintf(file, "%d ", CA->ini[i]->iPt2);
-        fprintf(file, "%d ", CA->ini[i]->iPt3);
-        fprintf(file, "%d ", CA->ini[i]->iPt4);
+        fprintf(file, "%d ", CA->ini[i].iPt1);
+        fprintf(file, "%d ", CA->ini[i].iPt2);
+        fprintf(file, "%d ", CA->ini[i].iPt3);
+        fprintf(file, "%d ", CA->ini[i].iPt4);
         fprintf(file, " ");
     }
     fprintf(file, "</DataArray>\n");
@@ -126,13 +126,13 @@ void saveVTK_V_cell(
     */
     /*fprintf(file, "<DataArray type=\"Float32\" Name=\"F_State\" format=\"ascii\">\n");
     for(int i=0;i<p->elementsNum;i++){
-        fprintf(file, "%d ", el_old[i]->V_state);
+        fprintf(file, "%d ", el_old[i].V_state);
     }
     fprintf(file, "</DataArray>\n");*/
 
     /*fprintf(file, "<DataArray type=\"Float32\" Name=\"vol\" format=\"ascii\">\n");
     for(int i=0;i<p->elementsNum;i++){
-        fprintf(file, "%f ", elGeo_old[i]->volCel);
+        fprintf(file, "%f ", elGeo_old[i].volCel);
     }
     fprintf(file, "</DataArray>\n");*/
 
@@ -213,10 +213,10 @@ void saveVTK_V_point(
     fprintf(file, "<Cells>\n");
     fprintf(file, "<DataArray  type=\"UInt32\"  Name=\"connectivity\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%d ",CA->ini[i]->iPt1);
-        fprintf(file, "%d ",CA->ini[i]->iPt2);
-        fprintf(file, "%d ",CA->ini[i]->iPt3);
-        fprintf(file, "%d ",CA->ini[i]->iPt4);
+        fprintf(file, "%d ",CA->ini[i].iPt1);
+        fprintf(file, "%d ",CA->ini[i].iPt2);
+        fprintf(file, "%d ",CA->ini[i].iPt3);
+        fprintf(file, "%d ",CA->ini[i].iPt4);
         fprintf(file, " ");
     }
     fprintf(file, "</DataArray>\n");
@@ -250,7 +250,7 @@ void saveVTK_V_point(
     
     fprintf(file, "<DataArray type=\"Float32\" Name=\"APD\" format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%.2f ", CA->t_old[i]->APTime4);
+        fprintf(file, "%.2f ", CA->t_old[i].APTime4);
     }
     fprintf(file, "</DataArray>\n");
     
@@ -293,10 +293,10 @@ void saveDebug(
     fprintf(file, "<Cells>\n");
     fprintf(file, "<DataArray  type=\"UInt32\"  Name=\"connectivity\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%d ",CA->ini[i]->iPt1);
-        fprintf(file, "%d ",CA->ini[i]->iPt2);
-        fprintf(file, "%d ",CA->ini[i]->iPt3);
-        fprintf(file, "%d ",CA->ini[i]->iPt4);
+        fprintf(file, "%d ",CA->ini[i].iPt1);
+        fprintf(file, "%d ",CA->ini[i].iPt2);
+        fprintf(file, "%d ",CA->ini[i].iPt3);
+        fprintf(file, "%d ",CA->ini[i].iPt4);
         fprintf(file, " ");
     }
     fprintf(file, "</DataArray>\n");
@@ -364,7 +364,7 @@ void saveDebug(
 
     fprintf(file, "<DataArray type=\"Float32\" Name=\"v_cell\" format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%d ", CA->t_old[i]->V_state);
+        fprintf(file, "%d ", CA->t_old[i].V_state);
     }
     fprintf(file, "</DataArray>\n");
 
@@ -377,55 +377,55 @@ void saveDebug(
     //Fibra
     fprintf(file, "<DataArray type=\"Float32\" Name=\"Fiber\" format=\"ascii\" NumberOfComponents=\"3\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g %g %g ", CA->t_old[i]->fiberDir[0], CA->t_old[i]->fiberDir[1],CA->t_old[i]->fiberDir[2]);
+        fprintf(file, "%g %g %g ", CA->t_old[i].fiberDir[0], CA->t_old[i].fiberDir[1], CA->t_old[i].fiberDir[2]);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"sheet\" format=\"ascii\" NumberOfComponents=\"3\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g %g %g ", CA->t_old[i]->sheetDir[0], CA->t_old[i]->sheetDir[1], CA->t_old[i]->sheetDir[2]);
+        fprintf(file, "%g %g %g ", CA->t_old[i].sheetDir[0], CA->t_old[i].sheetDir[1], CA->t_old[i].sheetDir[2]);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"nsheet\" format=\"ascii\" NumberOfComponents=\"3\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g %g %g ", CA->t_old[i]->nsheetDir[0], CA->t_old[i]->nsheetDir[1], CA->t_old[i]->nsheetDir[2]);
+        fprintf(file, "%g %g %g ", CA->t_old[i].nsheetDir[0], CA->t_old[i].nsheetDir[1], CA->t_old[i].nsheetDir[2]);
     }
     fprintf(file, "</DataArray>\n");
     
     fprintf(file, "<DataArray type=\"Float32\" Name=\"KAng\" format=\"ascii\" NumberOfComponents=\"3\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g %g %g ", CA->ini[i]->KAng[0], CA->ini[i]->KAng[1],CA->ini[i]->KAng[2]);
+        fprintf(file, "%g %g %g ", CA->ini[i].KAng[0], CA->ini[i].KAng[1],CA->ini[i].KAng[2]);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"KAxl\" format=\"ascii\" NumberOfComponents=\"3\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g %g %g ", CA->ini[i]->KAxl[0], CA->ini[i]->KAxl[1],CA->ini[i]->KAxl[2]);
+        fprintf(file, "%g %g %g ", CA->ini[i].KAxl[0], CA->ini[i].KAxl[1],CA->ini[i].KAxl[2]);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"vol\" format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g ", CA->t_old[i]->volCel);
+        fprintf(file, "%g ", CA->t_old[i].volCel);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"alpha12\" format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g ", CA->t_old[i]->alphaT_12);
+        fprintf(file, "%g ", CA->t_old[i].alphaT_12);
     }
     fprintf(file, "</DataArray>\n");
     //
     fprintf(file, "<DataArray type=\"Float32\" Name=\"alpha13\" format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g ", CA->t_old[i]->alphaT_13);
+        fprintf(file, "%g ", CA->t_old[i].alphaT_13);
     }
     fprintf(file, "</DataArray>\n");
     //
     fprintf(file, "<DataArray type=\"Float32\" Name=\"alpha23\" format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g ", CA->t_old[i]->alphaT_23);
+        fprintf(file, "%g ", CA->t_old[i].alphaT_23);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "<DataArray type=\"Float32\" Name=\"axisLength\" format=\"ascii\"  NumberOfComponents=\"3\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%g %g %g ",  CA->t_old[i]->axisLengthT[0], CA->t_old[i]->axisLengthT[1], CA->t_old[i]->axisLengthT[2]);
+        fprintf(file, "%g %g %g ",  CA->t_old[i].axisLengthT[0], CA->t_old[i].axisLengthT[1], CA->t_old[i].axisLengthT[2]);
     }
     fprintf(file, "</DataArray>\n");
     fprintf(file, "</CellData>\n");
@@ -463,10 +463,10 @@ void saveVTK_Simples(
     fprintf(file, "<Cells>\n");
     fprintf(file, "<DataArray  type=\"UInt32\"  Name=\"connectivity\"  format=\"ascii\">\n");
     for(int i=0;i<CA->params->elementsNum;i++){
-        fprintf(file, "%d ",CA->ini[i]->iPt1);
-        fprintf(file, "%d ",CA->ini[i]->iPt2);
-        fprintf(file, "%d ",CA->ini[i]->iPt3);
-        fprintf(file, "%d ",CA->ini[i]->iPt4);
+        fprintf(file, "%d ",CA->ini[i].iPt1);
+        fprintf(file, "%d ",CA->ini[i].iPt2);
+        fprintf(file, "%d ",CA->ini[i].iPt3);
+        fprintf(file, "%d ",CA->ini[i].iPt4);
 
         fprintf(file, " ");
     }
@@ -500,7 +500,7 @@ void saveVTK_Simples(
         while(cur != NULL){
             adjacentElement = cur->value;
             V = getV(adjacentElement, CA);
-            vol = CA->t_old[adjacentElement]->volCel;
+            vol = CA->t_old[adjacentElement].volCel;
             numerador   += V*vol;
             denominador += vol;
             if(V>maior) maior=V;
