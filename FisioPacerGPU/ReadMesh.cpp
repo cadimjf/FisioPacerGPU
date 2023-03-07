@@ -6,10 +6,10 @@
  * @param CA
  */
 void omegaBAdjacency(int iElement, typ_ca *CA){
-    addItem(&(CA->omega_b[CA->ini[iElement]->iPt1]), iElement);
-    addItem(&(CA->omega_b[CA->ini[iElement]->iPt2]), iElement);
-    addItem(&(CA->omega_b[CA->ini[iElement]->iPt3]), iElement);
-    addItem(&(CA->omega_b[CA->ini[iElement]->iPt4]), iElement);
+    addItem(&(CA->omega_b[CA->ini[iElement].iPt1]), iElement);
+    addItem(&(CA->omega_b[CA->ini[iElement].iPt2]), iElement);
+    addItem(&(CA->omega_b[CA->ini[iElement].iPt3]), iElement);
+    addItem(&(CA->omega_b[CA->ini[iElement].iPt4]), iElement);
 }
 /**
  * 
@@ -217,19 +217,19 @@ void elementsFile(string fileName, typ_ca *CA)
                             throw MyException("This file is not Tt", __FILE__, __LINE__);
                     break;
                     case 1:
-                        CA->ini[countEl]->iPt1 = atoi(token.c_str());
+                        CA->ini[countEl].iPt1 = atoi(token.c_str());
                     break;
                     case 2:
-                        CA->ini[countEl]->iPt2 = atoi(token.c_str());
+                        CA->ini[countEl].iPt2 = atoi(token.c_str());
                     break;
                     case 3:
-                        CA->ini[countEl]->iPt3 = atoi(token.c_str());
+                        CA->ini[countEl].iPt3 = atoi(token.c_str());
                     break;
                     case 4:
-                        CA->ini[countEl]->iPt4 = atoi(token.c_str());
+                        CA->ini[countEl].iPt4 = atoi(token.c_str());
                     break;
                     case 5://regiao
-                        CA->ini[countEl]->iRegion = atoi(token.c_str())-1;
+                        CA->ini[countEl].iRegion = atoi(token.c_str())-1;
                     break;
                     default:
                         cout<<"Invalid position for an element"<<endl;
@@ -315,14 +315,14 @@ void OmegaANeighborhood(typ_ca *CA){
             if(iElBusca!=iElBase)
             {
                 int check=0;
-                check += hasAtLeastOnePtEqual(CA->ini[iElBase]->iPt1, CA->ini[iElBusca]->iPt1,
-                    CA->ini[iElBusca]->iPt2, CA->ini[iElBusca]->iPt3, CA->ini[iElBusca]->iPt4);
-                check += hasAtLeastOnePtEqual(CA->ini[iElBase]->iPt2, CA->ini[iElBusca]->iPt1,
-                    CA->ini[iElBusca]->iPt2, CA->ini[iElBusca]->iPt3, CA->ini[iElBusca]->iPt4);
-                check += hasAtLeastOnePtEqual(CA->ini[iElBase]->iPt3, CA->ini[iElBusca]->iPt1,
-                    CA->ini[iElBusca]->iPt2, CA->ini[iElBusca]->iPt3, CA->ini[iElBusca]->iPt4);
-                check += hasAtLeastOnePtEqual(CA->ini[iElBase]->iPt4, CA->ini[iElBusca]->iPt1,
-                    CA->ini[iElBusca]->iPt2, CA->ini[iElBusca]->iPt3, CA->ini[iElBusca]->iPt4);
+                check += hasAtLeastOnePtEqual(CA->ini[iElBase].iPt1, CA->ini[iElBusca].iPt1,
+                    CA->ini[iElBusca].iPt2, CA->ini[iElBusca].iPt3, CA->ini[iElBusca].iPt4);
+                check += hasAtLeastOnePtEqual(CA->ini[iElBase].iPt2, CA->ini[iElBusca].iPt1,
+                    CA->ini[iElBusca].iPt2, CA->ini[iElBusca].iPt3, CA->ini[iElBusca].iPt4);
+                check += hasAtLeastOnePtEqual(CA->ini[iElBase].iPt3, CA->ini[iElBusca].iPt1,
+                    CA->ini[iElBusca].iPt2, CA->ini[iElBusca].iPt3, CA->ini[iElBusca].iPt4);
+                check += hasAtLeastOnePtEqual(CA->ini[iElBase].iPt4, CA->ini[iElBusca].iPt1,
+                    CA->ini[iElBusca].iPt2, CA->ini[iElBusca].iPt3, CA->ini[iElBusca].iPt4);
                 if(check>=1){
                     addItem(&(CA->omega_a[iElBase]), iElBusca);
                 }

@@ -13,7 +13,7 @@
  */
 double getActiveTension(int i, typ_ca *CA)
 {
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i].iRegion;
     t_par_ac* aP = CA->params->aParam[iRegion];
     double f = getActiveTensionNormalized(i, CA);
     return f * aP->forceMultiplier;
@@ -21,9 +21,9 @@ double getActiveTension(int i, typ_ca *CA)
 
 double getActiveTensionNormalized(int i, typ_ca *CA){
 
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i].iRegion;
     t_par_ac* aP = CA->params->aParam[iRegion];
-    if(CA->ini[i]->cellCond==DEAD)return 0.0;
+    if(CA->ini[i].cellCond==DEAD)return 0.0;
 
     if(CA->params->paSim==0 ) //Se o automato esta desligado, retorna sempre o parametro do modulo da forca
        return 0.0;//aP->forceMultiplier;
@@ -64,9 +64,9 @@ double getActiveTensionNormalized(int i, typ_ca *CA){
  */
 double getActiveTensionDiscrete( int i, typ_ca *CA)
 {
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i].iRegion;
     t_par_ac* aP = CA->params->aParam[iRegion];
-    if(CA->ini[i]->cellCond==DEAD)return 0.0;
+    if(CA->ini[i].cellCond==DEAD)return 0.0;
     if(CA->params->paSim==0 ) //Se o automato estÃƒÂ¡ desligado, retorna sempre o parametro do modulo da forca
        return aP->forceMultiplier;
     double f=0.0;
@@ -100,7 +100,7 @@ double getActiveTensionDiscrete( int i, typ_ca *CA)
  */
 double getV(int i ,typ_ca *CA)
 {
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i].iRegion;
     t_par_ac* ap = CA->params->aParam[iRegion];
 
     double m;
@@ -132,7 +132,7 @@ double getV(int i ,typ_ca *CA)
  */
 double getVdiscret( int i,typ_ca *CA)
 {
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i]. iRegion;
     t_par_ac* ap = CA->params->aParam[iRegion];
     switch(CA->t_old[i]->V_state){
         case V0:
@@ -157,7 +157,7 @@ double getVdiscret( int i,typ_ca *CA)
 // */
 int isStimulationTime(int i, typ_ca *CA){
     double t = CA->time;
-    t_stim *s = CA->params->aStim[ CA->ini[i]->pmRegion];
+    t_stim *s = CA->params->aStim[ CA->ini[i].pmRegion];
     return (((t>=s->iniTime)&&(((t-s->iniTime)-(floor(((t-s->iniTime)/s->period))*s->period))<=CA->params->dt)))?1:0;
 
 }
@@ -170,7 +170,7 @@ int isStimulationTime(int i, typ_ca *CA){
  */
 double getPropagationTime(int iElemNeighbor, int i, typ_ca *CA)
 {
-    t_par_ac* ap = CA->params->aParam[CA->ini[iElemNeighbor]->iRegion];
+    t_par_ac* ap = CA->params->aParam[CA->ini[iElemNeighbor].iRegion];
 
     double dir[3] = { 0., 0., 0. }, dirN[3] = {0., 0., 0.};
     //get the vector between the elements position
@@ -196,7 +196,7 @@ double getPropagationTime(int iElemNeighbor, int i, typ_ca *CA)
 void cellActivation(int i, typ_ca *CA)
 {
      //if the cell is dead, it doesnt increment any states
-    if(CA->ini[i]->cellCond==DEAD)
+    if(CA->ini[i].cellCond==DEAD)
         return;
 
     CA->t_new[i]->cellT    = 0.0f;
@@ -219,10 +219,10 @@ void cellActivation(int i, typ_ca *CA)
  */
 void incStates(int i, double dt, typ_ca *CA)
 {
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i].iRegion;
     t_par_ac* ap = CA->params->aParam[iRegion];
     //if the cell is dead, it doesnt increment any states
-    if(CA->ini[i]->cellCond==DEAD)
+    if(CA->ini[i].cellCond==DEAD)
         return;
     if(CA->t_old[i]->V_state==V0 && CA->t_old[i]->F_state==F0){
 
@@ -323,7 +323,7 @@ void CAStep_i(int i, typ_ca* CA)
 	}//end of visiting neighbors
     int activate=0;
     //verifies if it is time to activate cell
-    if( (CA->ini[i]->cellCond==paceMaker) ){//if it is pacemaker and the stimulation time has come
+    if( (CA->ini[i].cellCond==paceMaker) ){//if it is pacemaker and the stimulation time has come
         if( isStimulationTime(i, CA)==1 ){
             activate=1;
         }
@@ -379,7 +379,7 @@ double getAVGNeighborAPDElectroTonic(int i, typ_ca *CA)
  * @return 
  */
 double getIoutElectroTonic(int i ,typ_ca *CA){
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i].iRegion;
     t_par_ac* par = CA->params->aParam[iRegion];
     return par->pEletroTonic*getActiveTensionNormalized(i, CA);
 }
@@ -417,7 +417,7 @@ void computeNewAPDElectroTonic(int i, typ_ca *CA){
  */
 void restartAPDElectroTonic(int i, typ_ca *CA)
 {
-    int iRegion = CA->ini[i]->iRegion;
+    int iRegion = CA->ini[i].iRegion;
     t_par_ac* ap = CA->params->aParam[iRegion]; 
     CA->t_new[i]->APTime1  = ap->APTime1ini;
     CA->t_new[i]->APTime2  = ap->APTime2ini;

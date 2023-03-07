@@ -12,10 +12,10 @@
   */  
  void assemblyXMatrix(typ_point *points, double X[3][3], int i, typ_ca *CA)
  {
-    int iPt1=CA->ini[i]->iPt1;
-    int iPt2=CA->ini[i]->iPt2;
-    int iPt3=CA->ini[i]->iPt3;
-    int iPt4=CA->ini[i]->iPt4;
+    int iPt1=CA->ini[i].iPt1;
+    int iPt2=CA->ini[i].iPt2;
+    int iPt3=CA->ini[i].iPt3;
+    int iPt4=CA->ini[i].iPt4;
     //first column
     X[0][0] = points[iPt2].x - points[iPt1].x;
     X[1][0] = points[iPt2].y - points[iPt1].y;
