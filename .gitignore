@@ -30,3 +30,8 @@ FisioPacerGPU/.vs/FisioPacerGPU/v17/.suo
 *.enc
 *.ilk
 *.log
+*.ilk
+*.log
+*.pdb
+*.idb
+*.pdb
