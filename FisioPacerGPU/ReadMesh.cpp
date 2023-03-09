@@ -379,6 +379,11 @@ void readStimFile(string strFileSt, typ_ca * CA){
             string token;
             int countColumns=0;
             t_stim *stim = (t_stim*)malloc(sizeof(t_stim));
+            if (stim == NULL) {
+                stringstream ss;               
+                ss << "Stim File: allocation: " << line;
+                throw MyException(ss.str(), __FILE__, __LINE__);
+            }
             while (getline(strstream, token, ' ')) {
                 switch(countColumns){
                     case 0:
@@ -478,6 +483,12 @@ void readParameterFile(string fName, typ_ca *CA){
         if(CA->params->nRegions<1)  throw MyException("Nregions has to be >=1", __FILE__, __LINE__);
         //aloca memoria para os parametros
         CA->params->aParam = (t_par_ac**)malloc(sizeof(t_par_ac*)*CA->params->nRegions);
+        if (CA->params->aParam == NULL) {
+            stringstream ss;
+            ss << "CA->params->aParam: allocation: " << line;
+            throw MyException(ss.str(), __FILE__, __LINE__);
+        }
+
         int contParam = 0;
         while ( myfile.good() )
         {
@@ -488,6 +499,11 @@ void readParameterFile(string fName, typ_ca *CA){
             int countColumns=0;
             stringstream strstream(line);
             t_par_ac *parAC = (t_par_ac*)malloc(sizeof(t_par_ac));
+            if (parAC == NULL) {
+                stringstream ss;
+                ss << "parAC File: allocation: " << line;
+                throw MyException(ss.str(), __FILE__, __LINE__);
+            }
             while (getline(strstream, token, ' ')) {
                 switch(countColumns){
                     case 0:
@@ -658,8 +674,8 @@ void readBoundaryFile(string boundFile, typ_ca *CA){
             stringstream strstream(line);
             string token;
             int countColumns=0;
-            int iPnt, iAxis;
-            double preMov;
+            int iPnt=0, iAxis=0;
+            double preMov=0.;
             while (getline(strstream, token, ' ')) {
                 switch(countColumns){
                     case 0:
@@ -735,6 +751,11 @@ void readPressFile(string strFilePress, typ_ca *CA){
         getline(myfile2, line);
         CA->params->pressure = atof(line.c_str());        
         CA->params->aFaces = (typ_face**)malloc(sizeof(typ_face*)*CA->params->numFaces);
+        if (CA->params->aFaces == NULL) {
+            stringstream ss;
+            ss << "CA->params->aFaces: allocation: " << line;
+            throw MyException(ss.str(), __FILE__, __LINE__);
+        }
         int cont = 0;
         while ( myfile2.good() )
         {
@@ -749,6 +770,11 @@ void readPressFile(string strFilePress, typ_ca *CA){
             string token;
             int countColumns=0;
             typ_face *face = (typ_face*)malloc(sizeof(typ_face));
+            if (face == NULL) {
+                stringstream ss;
+                ss << "face File: allocation: " << line;
+                throw MyException(ss.str(), __FILE__, __LINE__);
+            }
             while (getline(strstream, token, ' ')) {
                 switch(countColumns){
                     case 0:
