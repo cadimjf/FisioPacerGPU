@@ -41,3 +41,7 @@ FisioPacerGPU/x64/Debug/vc143.idb
 FisioPacerGPU/x64/Debug/vc143.pdb
 *.idb
 FisioPacerGPU/x64/Debug/vc143.idb
+*.log
+*.pdb
+*.ilk
+*.pdb

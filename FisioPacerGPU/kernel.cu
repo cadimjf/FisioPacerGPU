@@ -19,14 +19,14 @@ typ_ca *deviceCA;
 typ_stats *deviceStats;
 typ_press *devicePressureCA;
 typ_param* deviceParams;
-
+typ_t0_element* deviceIni;
 void deviceAlloc(typ_ca *CA) {
 
     chker(cudaMalloc((void**)&deviceCA,         sizeof(typ_ca)));
     chker(cudaMalloc((void**)&deviceStats,      sizeof(typ_stats)));
     chker(cudaMalloc((void**)&devicePressureCA, sizeof(typ_press)));
     chker(cudaMalloc((void**)&deviceParams,     sizeof(typ_param)));
-
+    chker(cudaMalloc((void**)&deviceIni,        sizeof(typ_t0_element) * CA->params->elementsNum));
    
   
     /*
@@ -53,6 +53,7 @@ void deviceCopy(typ_ca *hCA) {
     chker(cudaMemcpy(deviceStats,      hCA->stats,          sizeof(typ_stats),  cudaMemcpyHostToDevice));
     chker(cudaMemcpy(devicePressureCA, hCA->pressureCA,     sizeof(typ_press),  cudaMemcpyHostToDevice));
     chker(cudaMemcpy(deviceParams,     hCA->params,         sizeof(typ_param), cudaMemcpyHostToDevice));
+    chker(cudaMemcpy(deviceIni,        hCA->ini,            sizeof(typ_t0_element), cudaMemcpyHostToDevice));
     for (int i = 0; i < hCA->params->numFaces; i++) {
        // chker(cudaMemcpy(deviceAFaces[i], hCA->params->aFaces[i], sizeof(typ_face), cudaMemcpyHostToDevice));
 
@@ -76,8 +77,10 @@ __global__ void teste(
 void deviceDealloc( ) {
     chker(cudaFree(deviceStats));
     chker(cudaFree(devicePressureCA));
-    chker(cudaFree(deviceCA));
+    
     chker(cudaFree(deviceParams));
+    chker(cudaFree(deviceIni));
+    chker(cudaFree(deviceCA));
 }
 
 /*
