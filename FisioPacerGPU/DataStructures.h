@@ -262,7 +262,7 @@ typedef struct str_cellularautomata{
     double time;
     double timeSaving;
     typ_stats *stats;//
-    typ_press *pressureCA;
+    ///typ_press *pressureCA;
 }typ_ca;// automato cellular
 /**
 */

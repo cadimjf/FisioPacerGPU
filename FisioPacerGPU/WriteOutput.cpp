@@ -19,7 +19,7 @@ void save_step(FILE *fileDt, typ_ca *CA, string strFolderOut, double *forcesOnPt
             getActiveTensionDiscrete( 0, CA),
             getV(1, CA), getV(0, CA), 
             getV(2, CA), getVdiscret(0, CA), 
-            getPressurePercent(CA), getPressureDiscrete(CA),
+            getPressurePercent(), getPressureDiscrete(),
             CA->stats->min[0], CA->stats->min[1], CA->stats->min[2], 
             CA->stats->max[0], CA->stats->max[1], CA->stats->max[2],
             CA->volume);

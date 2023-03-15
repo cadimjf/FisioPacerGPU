@@ -11,15 +11,18 @@
  * Created on 24 de Janeiro de 2020, 16:03
  */
 #include "DataStructures.h"
+#include "cudacommons.h"
 
 #ifndef PRESSURE_H
 #define PRESSURE_H
+void gpucopyPressureCA();
 
-
-void iniPressure(typ_ca *CA);
-double getPressurePercent(typ_ca *CA);
-void incPressureStates(typ_ca *CA);
-double getPressureDiscrete(typ_ca *CA);
+void allocPressureCA();
+void deallocPressureCA();
+void iniPressure();
+double getPressurePercent();
+void incPressureStates(double dt);
+double getPressureDiscrete();
 
 #endif /* PRESSURE_H */
 

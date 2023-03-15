@@ -82,6 +82,7 @@
     <ClInclude Include="CellularAutomaton.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ContinuumMech.h" />
+    <ClInclude Include="cudacommons.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="kernel.h" />
@@ -103,7 +104,7 @@
     <ClCompile Include="Mechanics.cpp" />
     <ClCompile Include="MyStdLib.cpp" />
     <ClCompile Include="NumericalMethods.cpp" />
-    <ClCompile Include="pressure.cpp" />
+    <ClCompile Include="pressure.cu" />
     <ClCompile Include="ReadMesh.cpp" />
     <ClCompile Include="WriteOutput.cpp" />
   </ItemGroup>

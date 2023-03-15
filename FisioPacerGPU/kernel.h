@@ -1,6 +1,6 @@
 #pragma once
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
+#include "cudacommons.h"
+#include <vector>
 
 #include <stdio.h>
 #include "Constants.h"

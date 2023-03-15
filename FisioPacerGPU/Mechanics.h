@@ -20,7 +20,7 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "Mechanics.h"
+
 #include "MyStdLib.h"
 #include "pressure.h"
 
