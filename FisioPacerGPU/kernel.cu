@@ -155,7 +155,7 @@ void initializeCA(typ_ca* CA)
         CA->t_old[i]->APTime4 = CA->t_new[i]->APTime4;
 
     }
-    iniPressure();
+    iniPressureHost();
 }
 
 
@@ -238,7 +238,10 @@ int simulate(typ_ca* CA, bool save) {
             // EulerMethod(CA, forcesOnPts);
             VelocityVerletMethod(CA, forcesOnPts, forcesOnPts_interm);
         }
-        incPressureStates(CA->params->dt);
+        pressureStep(CA->params->dt);
+
+        
+           
         if (save) {
             save_step(fileDt, CA, CA->params->outputFolder, forcesOnPts);
         }

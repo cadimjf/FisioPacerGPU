@@ -16,13 +16,13 @@
 #ifndef PRESSURE_H
 #define PRESSURE_H
 void gpucopyPressureCA();
-
 void allocPressureCA();
 void deallocPressureCA();
-void iniPressure();
+void iniPressureHost();
 double getPressurePercent();
-void incPressureStates(double dt);
+//void incPressureStates(double dt);
 double getPressureDiscrete();
+void pressureStep(double dt);
 
 #endif /* PRESSURE_H */
 

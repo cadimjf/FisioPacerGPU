@@ -92,6 +92,7 @@
     <ClInclude Include="NumericalMethods.h" />
     <ClInclude Include="pressure.h" />
     <ClInclude Include="ReadMesh.h" />
+    <ClInclude Include="Stats.h" />
     <ClInclude Include="WriteOutput.h" />
   </ItemGroup>
   <ItemGroup>
@@ -104,12 +105,13 @@
     <ClCompile Include="Mechanics.cpp" />
     <ClCompile Include="MyStdLib.cpp" />
     <ClCompile Include="NumericalMethods.cpp" />
-    <ClCompile Include="pressure.cu" />
     <ClCompile Include="ReadMesh.cpp" />
+    <ClCompile Include="Stats.cu" />
     <ClCompile Include="WriteOutput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="Pressure.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

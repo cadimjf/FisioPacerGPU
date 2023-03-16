@@ -14,6 +14,7 @@
 #include "WriteOutput.h"
 #include "NumericalMethods.h"
 
+
 int simulate(typ_ca* CA, bool save);
 void initializeCA(typ_ca* CA);
 void stats(typ_ca* CA, double* forcesOnPts);

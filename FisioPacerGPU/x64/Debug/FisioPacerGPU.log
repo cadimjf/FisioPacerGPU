@@ -1,24 +1,16 @@
 ﻿  Compiling CUDA source file kernel.cu...
+  Compiling CUDA source file Pressure.cu...
   
   D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU>"D:\Programas\CudaToolkit\dev\bin\nvcc.exe" -gencode=arch=compute_50,code=\"sm_50,compute_50\" --use-local-env -ccbin "D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\bin\HostX64\x64" -x cu   -ID:\Programas\CudaToolkit\dev\include -ID:\Programas\CudaToolkit\dev\include  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /FS /Zi /RTC1 /MDd " -Xcompiler "/Fdx64\Debug\vc143.pdb" -o D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\kernel.cu.obj "D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\kernel.cu" 
+  
+  D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU>"D:\Programas\CudaToolkit\dev\bin\nvcc.exe" -gencode=arch=compute_50,code=\"sm_50,compute_50\" --use-local-env -ccbin "D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\bin\HostX64\x64" -x cu   -ID:\Programas\CudaToolkit\dev\include -ID:\Programas\CudaToolkit\dev\include  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /FS /Zi /RTC1 /MDd " -Xcompiler "/Fdx64\Debug\vc143.pdb" -o D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\Pressure.cu.obj "D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Pressure.cu" 
   kernel.cu
-  tmpxft_00001ac4_00000000-7_kernel.cudafe1.cpp
-  CellularAutomaton.cpp
-  ContinuumMech.cpp
-  DataStructures.cpp
-  Geometry.cpp
-  LinearAlg.cpp
-D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\LinearAlg.cpp(368,9): warning C4297: 'invertMatrix': função não deveria lançar uma exceção, mas ela lança
-D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\LinearAlg.cpp(368,9): message : __declspec(nothrow), throw(), noexcept(true) ou noexcept foi especificado na função
-  main.cpp
+  Pressure.cu
+  tmpxft_00000654_00000000-7_Pressure.cudafe1.cpp
+  tmpxft_000010c8_00000000-7_kernel.cudafe1.cpp
   Mechanics.cpp
-  MyStdLib.cpp
-D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\MyStdLib.cpp(120,16): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   NumericalMethods.cpp
-  pressure.cu
-  ReadMesh.cpp
-D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\ReadMesh.cpp(635,9): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\ReadMesh.cpp(637,9): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Stats.cu
   WriteOutput.cpp
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(39,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(40,18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -32,6 +24,7 @@ D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cp
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(275,18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(447,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\WriteOutput.cpp(449,18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  main.cpp
   Gerando Código...
      Criando biblioteca D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\FisioPacerGPU.lib e objeto D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Debug\FisioPacerGPU.exp
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
