@@ -13,22 +13,22 @@ void save_step(FILE *fileDt, typ_ca *CA, string strFolderOut, double *forcesOnPt
     if(diff>=0.0)
     {//checks if diff is too close to zero
         fprintf(fileDt, "%d %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n", 
-            CA->stats->contSave , 
-            CA->params->dt, CA->stats->avgVel, CA->stats->tol, CA->stats->err, 
+            statsGetContSave(),
+            CA->params->dt, statsGetAvgVel(), statsGetTol(), statsGetErr(),
             getActiveTensionNormalized(0, CA),
             getActiveTensionDiscrete( 0, CA),
             getV(1, CA), getV(0, CA), 
             getV(2, CA), getVdiscret(0, CA), 
             getPressurePercent(), getPressureDiscrete(),
-            CA->stats->min[0], CA->stats->min[1], CA->stats->min[2], 
-            CA->stats->max[0], CA->stats->max[1], CA->stats->max[2],
+            statsGetMin()[0], statsGetMin()[1], statsGetMin()[2],
+            statsGetMax()[0], statsGetMax()[1], statsGetMax()[2],
             CA->volume);
         //saveDebug(CA, strFolderOut, forcesOnPts);
         saveVTK_V_point(CA, strFolderOut);
         /*saveCSV(contSave, CA, strFolderOut);
         saveVTK_V_cell(contSave, POINTS_OLD, strFolderOut);*/
         CA->timeSaving += CA->params->dtSave;
-        CA->stats->contSave++;
+        statsIncContSave();
     }
 }
 
@@ -36,7 +36,7 @@ void save_step(FILE *fileDt, typ_ca *CA, string strFolderOut, double *forcesOnPt
 void saveCSV( typ_ca *CA, string outFolder)
 {
     char filename[255];
-    sprintf(filename, "%sfile.%05d.csv", outFolder.c_str(), CA->stats->contSave);
+    sprintf(filename, "%sfile.%05d.csv", outFolder.c_str(), statsGetContSave());
     FILE *file = fopen(filename, "w+");
     if(file==NULL){
         stringstream ss;
@@ -148,7 +148,7 @@ void saveNormals(
         typ_ca *CA, string outFile)
 {
     char filename[255];
-    sprintf(filename, "%snormal_%d.vtk", outFile.c_str(), CA->stats->contSave);
+    sprintf(filename, "%snormal_%d.vtk", outFile.c_str(), statsGetContSave());
     FILE *file = fopen(filename, "w+");
     fprintf(file, "# vtk DataFile Version 3.0\n");
     fprintf(file, "vtk output\n");
@@ -190,7 +190,7 @@ void saveVTK_V_point(
         string outFile)
 {
     char filename[255];
-    sprintf(filename, "%sfile_%d.vtu", outFile.c_str(), CA->stats->contSave);
+    sprintf(filename, "%sfile_%d.vtu", outFile.c_str(), statsGetContSave());
 
     FILE *file = fopen(filename, "w+");
 
@@ -270,7 +270,7 @@ void saveDebug(
     saveNormals(CA, outFile);
             
     char filename[255];
-    sprintf(filename, "%sfile_%d.vtu", outFile.c_str(), CA->stats->contSave);
+    sprintf(filename, "%sfile_%d.vtu", outFile.c_str(), statsGetContSave());
 
     FILE *file = fopen(filename, "w+");
 

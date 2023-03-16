@@ -1,5 +1,5 @@
 
-#include "pressure.h"
+#include "Pressure.h"
 #define P1 0
 #define P2 1
 #define P3 2

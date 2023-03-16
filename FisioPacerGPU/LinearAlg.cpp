@@ -365,7 +365,9 @@ void invertMatrix(double M[3][3], double N[3][3]){
         ss<<M[1][0]<<" "<<M[1][1]<<" "<<M[1][2]<<endl;
         ss<<M[2][0]<<" "<<M[2][1]<<" "<<M[2][2]<<endl;
         string str = ss.str();
-        throw MyException(str, __FILE__, __LINE__);
+        cout << str << endl;
+        exit(0);
+        //throw MyException(str, __FILE__, __LINE__);
     }
     double tol=1.0e-4;
     //very small determinant, compute the inverse via eigen decomposition

@@ -3,7 +3,7 @@ double my_max(double a, double b){
     if(a>b)return a;
     else return b;
 }
-double min(double a, double b){
+double my_min(double a, double b){
     if(a<b)return a;
     else return b;
 }

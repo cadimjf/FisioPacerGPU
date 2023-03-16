@@ -227,19 +227,6 @@ struct lst_item{
 
 
 
-typedef struct str_stats{
-    double max[3];
-    double min[3];
-    double avgVel;
-    double maxVol;
-    double minVol;
-    double volIni;
-    double volMaxDelta;
-    double maxDeltaVol;
-    int contSave;
-    double tol;
-    double err;
-} typ_stats;
 
 typedef struct str_cellularautomata{
     typ_t0_element *ini;//
@@ -254,7 +241,7 @@ typedef struct str_cellularautomata{
     double volume;
     double time;
     double timeSaving;
-    typ_stats *stats;//
+    //typ_stats *stats;//
     ///typ_press *pressureCA;
 }typ_ca;// automato cellular
 /**

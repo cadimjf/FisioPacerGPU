@@ -13,11 +13,11 @@
 //#include "Stopwatch.h"
 #include "WriteOutput.h"
 #include "NumericalMethods.h"
-
+#include "Stats.h"
 
 int simulate(typ_ca* CA, bool save);
 void initializeCA(typ_ca* CA);
-void stats(typ_ca* CA, double* forcesOnPts);
+void computeStats(double);
 int startCA(string paramFile, bool save);
 void simulationStep(typ_ca* CA, double* forcesOnPts);
 void allocCA(typ_ca* CA);

@@ -25,6 +25,7 @@
 #include "DataStructures.h"
 #include "Constants.h"
 #include "MyStdLib.h"
+#include "Stats.h"
 void EulerMethod(typ_ca *CA, double *forcesOnPts);
 void EulerOnPoint(typ_ca *CA, int k, double *forcesOnPts);
 void VelocityVerletMethod(typ_ca *CA, double *forcesOnPts, double*);

@@ -21,7 +21,7 @@
 
 using namespace std;
 double my_max(double a, double b);
-double min(double a, double b);
+double my_min(double a, double b);
 
 int midpoint(int imin, int imax);
 int binary_search(int A[], int key, int imin, int imax);

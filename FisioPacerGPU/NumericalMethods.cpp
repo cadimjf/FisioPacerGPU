@@ -90,8 +90,8 @@ void VelocityVerletMethod(typ_ca *CA, double *forcesOnPts,  double *forcesOnPts_
     CA->pnts_intrm = CA->pnts_old;
     CA->pnts_old   = aux2;
     getNewDt(greatError, greatTol, CA);
-    CA->stats->tol = greatTol;
-    CA->stats->err = greatError;
+    statsSetTol( greatTol);
+    statsSetErr( greatError);
 }
 /**
  * 

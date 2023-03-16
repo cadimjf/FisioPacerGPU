@@ -90,7 +90,8 @@
     <ClInclude Include="Mechanics.h" />
     <ClInclude Include="MyStdLib.h" />
     <ClInclude Include="NumericalMethods.h" />
-    <ClInclude Include="pressure.h" />
+    <ClInclude Include="Points.h" />
+    <ClInclude Include="Pressure.h" />
     <ClInclude Include="ReadMesh.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="WriteOutput.h" />
@@ -111,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="Points.cu" />
     <CudaCompile Include="Pressure.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,7 +3,6 @@
 
 
 typ_ca* deviceCA;
-typ_stats* deviceStats;
 typ_param* deviceParams;
 typ_t0_element* deviceIniElem;
 double* deviceForcesOnPtsInterm;
@@ -22,7 +21,6 @@ __global__ void deviceIniForces(double* devForcesOnPtsInterm, double* devForcesO
 void deviceAlloc(typ_ca *CA) {
 
     chker(cudaMalloc((void**)&deviceCA,         sizeof(typ_ca)));
-    chker(cudaMalloc((void**)&deviceStats,      sizeof(typ_stats)));
     
     chker(cudaMalloc((void**)&deviceParams,     sizeof(typ_param)));
     chker(cudaMalloc((void**)&deviceIniElem,        sizeof(typ_t0_element) * CA->params->elementsNum));
@@ -49,7 +47,6 @@ void deviceAlloc(typ_ca *CA) {
 
 void deviceCopy(typ_ca *hCA) {
     chker(cudaMemcpy(deviceCA,         hCA,                 sizeof(typ_ca),     cudaMemcpyHostToDevice));
-    chker(cudaMemcpy(deviceStats,      hCA->stats,          sizeof(typ_stats),  cudaMemcpyHostToDevice));
     gpucopyPressureCA();
     chker(cudaMemcpy(deviceParams,     hCA->params,         sizeof(typ_param), cudaMemcpyHostToDevice));
     chker(cudaMemcpy(deviceIniElem,    hCA->ini,            sizeof(typ_t0_element)*hCA->params->elementsNum, cudaMemcpyHostToDevice));
@@ -61,20 +58,16 @@ void deviceCopy(typ_ca *hCA) {
 
 
 __global__ void teste(
-    typ_ca* devCA,
-    typ_stats* devStats)
+    typ_ca* devCA)
 {
     //int i = threadIdx.x;
     //devCA->time = deviceAFaces[0]->pt1;
-    devStats->volIni = devStats->volIni * 2.0;
 //    devAFaces[0]-> = 666;;
 }
 
 
 void deviceDealloc( ) {
-    chker(cudaFree(deviceStats));
-
-    
+       
     chker(cudaFree(deviceParams));
     chker(cudaFree(deviceIniElem));
     chker(cudaFree(deviceCA));
@@ -173,10 +166,8 @@ int simulate(typ_ca* CA, bool save) {
     //time units in SECONDS
     CA->time = 0.0;
     CA->timeSaving = 0.0;
-    CA->stats->contSave = 0;
 
-    CA->stats->minVol = DBL_MAX;
-    CA->stats->maxVol = 0.0;
+    iniStats();
 
     int count = 0;
     typ_point* aux3;
@@ -201,31 +192,27 @@ int simulate(typ_ca* CA, bool save) {
 
     initializeCA(CA);
     double sumDt = 0.0;
-    CA->stats->volIni = 0.0;
+    
+    double vol = 0.0;
     for (int i = 0; i < CA->params->elementsNum; i++) {
-        CA->stats->volIni += CA->t_old[i]->volCel;
+         vol += CA->t_old[i]->volCel;
     }
-    CA->volume = CA->stats->volIni;
+    CA->volume = vol;
+    statsSetVolIni(vol);
     int retValFinal = 0;
 
-    CA->stats->maxDeltaVol = 0.0;
-    CA->stats->volMaxDelta = 0.0;
-    CA->stats->avgVel = 0.0;
+    
 
-
-    stats(CA, forcesOnPts);
+    computeStats(CA->volume);
 
     deviceAlloc(CA);
     deviceCopy(CA);
     //zero the forces vector on gpu
     deviceIniForces <<<1, 1 >>> (deviceForcesOnPts, deviceForcesOnPtsInterm, deviceParams);
 
-    cout << "vol ini antes: "<<CA->stats->volIni << endl;
-    teste <<< 1, 1>>> (deviceCA, deviceStats);
-    cudaMemcpy(CA->stats, deviceStats, sizeof(typ_stats), cudaMemcpyDeviceToHost);
+    teste <<< 1, 1>>> (deviceCA);
     cudaMemcpy(CA, deviceCA, sizeof(typ_ca), cudaMemcpyDeviceToHost);
     cout << "time: "<<CA->time << endl;
-    cout << "volini depois : " << CA->stats->volIni << endl;
     
 
     // exit(0);
@@ -273,7 +260,9 @@ int simulate(typ_ca* CA, bool save) {
     forcesOnPts_interm = NULL;
     if (CA->params->printOutput == 1) {
         printf("final time: %.3f\n", CA->time);
-        printf("Volume: [%.3f %.3f] [%.3e %.3e] \n", CA->stats->minVol / CA->stats->volIni * 100.0, CA->stats->maxVol / CA->stats->volIni * 100.0, CA->stats->volIni, CA->volume);
+        double iniVol = statsGetVolIni();
+
+        printf("Volume: [%.3f %.3f] [%.3e %.3e] \n", statsGetMinVol() / iniVol * 100.0, statsGetMaxVol() / iniVol * 100.0, iniVol, CA->volume);
         printf("iterações: %d. Dt medio %g\n", count, sumDt / count);
     }
     deviceDealloc();
@@ -329,38 +318,6 @@ void simulationStep(typ_ca* CA,
 }
 
 
-/**
- *
- * @param CA
- * @param forcesOnPts
- */
-void stats(typ_ca* CA, double* forcesOnPts) {
-    if (CA->volume > CA->stats->maxVol) CA->stats->maxVol = CA->volume;
-    if (CA->volume < CA->stats->minVol) CA->stats->minVol = CA->volume;
-    double deltaVol = fabs(CA->volume - CA->stats->volIni);
-    if (deltaVol > CA->stats->maxDeltaVol) {
-        CA->stats->volMaxDelta = CA->volume;
-        CA->stats->maxDeltaVol = deltaVol;
-    }
-    CA->stats->max[0] = CA->stats->max[1] = CA->stats->max[2] = -DBL_MAX;
-    CA->stats->min[0] = CA->stats->min[1] = CA->stats->min[2] = +DBL_MAX;
-    double sumVel = 0.0;
-    for (int k = 0; k < CA->params->pointsNum; k++) {
-        //Zero the forces
-        //Essa linha foi pra o método de verlet forcesOnPts[I2d(k,0,3)]=forcesOnPts[I2d(k,1,3)]=forcesOnPts[I2d(k,2,3)]=0.0f;
-        //
-        CA->stats->min[0] = min(CA->stats->min[0], CA->pnts_old[k].x);
-        CA->stats->min[1] = min(CA->stats->min[1], CA->pnts_old[k].y);
-        CA->stats->min[2] = min(CA->stats->min[2], CA->pnts_old[k].z);
-        CA->stats->max[0] = my_max(CA->stats->max[0], CA->pnts_old[k].x);
-        CA->stats->max[1] = my_max(CA->stats->max[1], CA->pnts_old[k].y);
-        CA->stats->max[2] = my_max(CA->stats->max[2], CA->pnts_old[k].z);
-
-        double v[3] = { CA->pnts_old[k].xV, CA->pnts_old[k].yV, CA->pnts_old[k].zV };
-        sumVel += my_norm(v);
-    }
-    CA->stats->avgVel = sumVel / CA->params->pointsNum;
-}
 
 
 
@@ -442,7 +399,7 @@ void deallocCA(typ_ca* CA) {
         }
         if (CA->params->aParam != NULL) free(CA->params->aParam);
         if (CA->params != NULL) free(CA->params);
-        if (CA->stats != NULL) free(CA->stats);
+        deallocStats();
         deallocPressureCA();
         if (CA != NULL) free(CA);
     }
@@ -524,10 +481,7 @@ void allocCA(typ_ca* CA) {
 
         //
 
-        CA->stats = (typ_stats*)malloc(sizeof(typ_stats));
-        if (CA->stats == NULL) {
-            throw MyException("Allocation failure for stats structure.", __FILE__, __LINE__);
-        }
+        allocStats();
         //opens the files and fill arrays
         openFile(CA, strPtsFile, strEleFile, strFibFile, strBoundFile, strPressFile, strStmFile);
         allocPressureCA();

@@ -7,7 +7,7 @@
 
 #ifndef WRITEOUTPUT_H
 #define	WRITEOUTPUT_H
-
+#include "Stats.h"
 #include <stdio.h>
 #include "DataStructures.h"
 #include "Constants.h"
