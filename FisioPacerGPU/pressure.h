@@ -15,6 +15,16 @@
 
 #ifndef PRESSURE_H
 #define PRESSURE_H
+
+ //pressure ap
+typedef struct str_press {
+    double vals[4];
+    double times[4];
+    int state;
+    double time;
+}typ_press;
+
+
 void gpucopyPressureCA();
 void allocPressureCA();
 void deallocPressureCA();

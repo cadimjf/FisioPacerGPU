@@ -225,13 +225,6 @@ struct lst_item{
     struct lst_item* next;
 };
 
-//pressure ap
-typedef struct str_press{
-    double vals[4];
-    double times[4];    
-    int state;
-    double time;
-}typ_press;
 
 
 typedef struct str_stats{
