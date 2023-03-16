@@ -130,12 +130,11 @@ void initializeCA(typ_ca* CA)
         CA->t_new[i]->F_state = CA->t_old[i]->F_state = F0;
         iniGeometry(i, CA);
         //sets the pacemaker up
-        for (int iS = 0; iS < CA->params->stimSize; iS++) {
-            t_stim* s = CA->params->aStim[iS];
+        for (int iS = 0; iS < stimGetSize(); iS++) {
             if (
-                CA->t_old[i]->bary[0] > s->iniX && CA->t_old[i]->bary[0] < s->endX &&
-                CA->t_old[i]->bary[1] > s->iniY && CA->t_old[i]->bary[1] < s->endY &&
-                CA->t_old[i]->bary[2] > s->iniZ && CA->t_old[i]->bary[2] < s->endZ
+                CA->t_old[i]->bary[0] > stimGetIniX(iS) && CA->t_old[i]->bary[0] < stimGetEndX(iS) &&
+                CA->t_old[i]->bary[1] > stimGetIniY(iS) && CA->t_old[i]->bary[1] < stimGetEndY(iS) &&
+                CA->t_old[i]->bary[2] > stimGetIniZ(iS) && CA->t_old[i]->bary[2] < stimGetEndZ(iS)
                 ) {
                 CA->ini[i].cellCond = paceMaker;
                 CA->ini[i].pmRegion = iS;
@@ -378,11 +377,7 @@ void deallocCA(typ_ca* CA) {
         //
         freeAList(CA->omega_a, CA->params->elementsNum);
         freeAList(CA->omega_b, CA->params->pointsNum);
-
-        for (int i = 0; i < CA->params->stimSize; i++) {
-            if (CA->params->aStim[i] != NULL) free(CA->params->aStim[i]);
-        }
-        if (CA->params->aStim != NULL) free(CA->params->aStim);
+        stimDealloc();
         //
         for (int i = 0; i < CA->params->numFaces; i++) {
             if (CA->params->aFaces[i] != NULL) free(CA->params->aFaces[i]);

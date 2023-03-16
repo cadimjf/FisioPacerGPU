@@ -272,7 +272,7 @@ void openFile(typ_ca *CA,
 {
 
     
-    readStimFile(strStmFile, CA);
+    readStimFile(strStmFile);
     //reads the points file
     pointsFile(strFilePts,CA);
     //reads the boundary conditions
@@ -333,108 +333,7 @@ void OmegaANeighborhood(typ_ca *CA){
 
 }
 
-/**
- * 
- * @param strFileSt
- * @param CA
- */
-void readStimFile(string strFileSt, typ_ca * CA){
-    //temp string to read lines
-    CA->params->stimSize =0;
-    string line;
-    ifstream myfile2(strFileSt.c_str());
 
-    if (myfile2.is_open()){
-        //first line contains the file's number of lines
-        if(!getline(myfile2, line))  throw MyException("Stim File: failed to read line", __FILE__, __LINE__);
-        CA->params->stimSize = atoi(line.c_str());
-        if(CA->params->stimSize<0){
-            stringstream ss;
-            ss <<"Invalid number of stimulus: "<<CA->params->stimSize<<endl<<strFileSt;
-            string str = ss.str();
-            throw MyException(str, __FILE__, __LINE__);
-            return;
-        }
-        CA->params->aStim = (t_stim**)malloc(sizeof(t_stim*)*CA->params->stimSize);
-        if (!CA->params->aStim) {
-            stringstream ss;
-            ss << "Stim allocation problem: "<< endl << strFileSt;
-            string str = ss.str();
-            throw MyException(str, __FILE__, __LINE__);
-        }
-        int cont = 0;
-        while ( myfile2.good() && CA->params->stimSize>0)
-        {
-            if(!getline(myfile2, line)){
-                stringstream ss;
-                ss <<"Number of stimulus: "<<CA->params->stimSize<<endl;
-                ss<<strFileSt<<endl;
-                ss <<"Line number: "<<cont<<endl;
-                ss <<"Stim File: failed to read line: "<<line;
-                string str = ss.str();
-                throw MyException(str, __FILE__, __LINE__);
-                return;
-            }
-            stringstream strstream(line);
-            string token;
-            int countColumns=0;
-            t_stim *stim = (t_stim*)malloc(sizeof(t_stim));
-            if (stim == NULL) {
-                stringstream ss;               
-                ss << "Stim File: allocation: " << line;
-                throw MyException(ss.str(), __FILE__, __LINE__);
-            }
-            while (getline(strstream, token, ' ')) {
-                switch(countColumns){
-                    case 0:
-                        stim->iniTime = atof(token.c_str());
-                    break;
-                    case 1:
-                        stim->period = atof(token.c_str());
-                    break;
-                    case 2:
-                        stim->iniX = atof(token.c_str());
-                    break;
-                    case 3:
-                        stim->endX = atof(token.c_str());
-                    break;
-                    case 4:
-                        stim->iniY = atof(token.c_str());
-                    break;
-                    case 5:
-                        stim->endY = atof(token.c_str());
-                    break;
-                    case 6:
-                        stim->iniZ = atof(token.c_str());
-                    break;
-                    case 7:
-                        stim->endZ = atof(token.c_str());
-                    break;
-                    default:
-                        cout<<"Error: "<<strFileSt.c_str()<<" - Invalid stim file: "
-                                <<countColumns<<" columns! "<<line<<endl;
-                }
-                countColumns++;
-            }
-            //fills the neighboring array
-            CA->params->aStim[cont] = stim;
-            if(cont>=CA->params->stimSize){
-                stringstream ss;
-                ss <<"There are more stim lines than allowed: "<<CA->params->stimSize<<endl<<strFileSt;
-                string str = ss.str();
-                throw MyException(str, __FILE__, __LINE__);
-                break;
-            }
-            cont++;
-        }
-        myfile2.close();
-    }else{
-        stringstream ss;
-        ss <<"Unable to open file "<<strFileSt;
-        string str = ss.str();
-        throw MyException(str, __FILE__, __LINE__);
-    }
-}
 
 /**
  *

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -90,10 +90,12 @@
     <ClInclude Include="Mechanics.h" />
     <ClInclude Include="MyStdLib.h" />
     <ClInclude Include="NumericalMethods.h" />
+    <ClInclude Include="Params.h" />
     <ClInclude Include="Points.h" />
     <ClInclude Include="Pressure.h" />
     <ClInclude Include="ReadMesh.h" />
     <ClInclude Include="Stats.h" />
+    <ClInclude Include="Stimulus.h" />
     <ClInclude Include="WriteOutput.h" />
   </ItemGroup>
   <ItemGroup>
@@ -112,8 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="Params.cu" />
     <CudaCompile Include="Points.cu" />
     <CudaCompile Include="Pressure.cu" />
+    <CudaCompile Include="Stimulus.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

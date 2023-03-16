@@ -23,17 +23,7 @@ typedef struct sSurfacePressure {
     int pt2;
     int pt3;
 } typ_face;
-//stimulus
-typedef struct str_sim{
-    double iniTime;
-    double period;
-    double iniX;
-    double endX;
-    double iniY;
-    double endY;
-    double iniZ;
-    double endZ;
-} t_stim;
+
 //cellular automata parameters
 typedef struct str_par_ac{
     //
@@ -89,9 +79,6 @@ typedef struct sParam {
     double gravityY;
     double gravityZ;
     int printOutput;
-    //stimulus regions
-    int stimSize;
-    t_stim **aStim; //
     int nRegions;
     t_par_ac **aParam;//
     //pressure faces

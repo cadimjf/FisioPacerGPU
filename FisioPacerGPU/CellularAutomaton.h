@@ -12,7 +12,7 @@
 #include "Geometry.h"
 #include "DataStructures.h"
 #include "MyStdLib.h"
-
+#include "Stimulus.h"
 //#include "pressure.h"
 #include <iostream>
 #include <stdio.h>
@@ -35,7 +35,7 @@ double getActiveTensionDiscrete( int i, typ_ca *CA);
 
 double getV(int i ,typ_ca *CA);
 double getVdiscret( int i,typ_ca *CA);
-int isStimulationTime(int i, typ_ca *CA);
+
 double getPropagationTime(int iElemNeighbor, int i, typ_ca *CA);
 void cellActivation(int i, typ_ca *CA);
 void incStates(int i, double dt, typ_ca *CA);

@@ -149,18 +149,8 @@ double getVdiscret( int i,typ_ca *CA)
             return ap->VV0;
     }
 }
-/**
- *
- * @param t
- * @param dt
- * @return
-// */
-int isStimulationTime(int i, typ_ca *CA){
-    double t = CA->time;
-    t_stim *s = CA->params->aStim[ CA->ini[i].pmRegion];
-    return (((t>=s->iniTime)&&(((t-s->iniTime)-(floor(((t-s->iniTime)/s->period))*s->period))<=CA->params->dt)))?1:0;
 
-}
+
 /**
  *
  * @param cellsPosT_old
@@ -324,7 +314,7 @@ void CAStep_i(int i, typ_ca* CA)
     int activate=0;
     //verifies if it is time to activate cell
     if( (CA->ini[i].cellCond==paceMaker) ){//if it is pacemaker and the stimulation time has come
-        if( isStimulationTime(i, CA)==1 ){
+        if(isStimulationTime(CA->ini[i].pmRegion, CA->time, CA->params->dt) ==1 ){
             activate=1;
         }
     }

@@ -17,6 +17,7 @@
 #include "MyStdLib.h"
 #include "DataStructures.h"
 #include "LinearAlg.h"
+#include "Stimulus.h"
 using namespace std;
 
 void omegaBAdjacency(int iElement, typ_ca *CA);
@@ -35,7 +36,7 @@ void openFile(typ_ca *CA,
         string strFilePts, string strFileEle, string strFileFib, string boundFile,
         string strPressFile, string stimFile);
 void OmegaANeighborhood(typ_ca *CA);
-void readStimFile(string strFileSt, typ_ca * CA);
+
 void readParameterFile(string fName, typ_ca *CA);
 void readBoundaryFile(string boundFile, typ_ca *CA);
 void readPressFile(string strFilePress, typ_ca *CA);
