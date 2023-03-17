@@ -17,25 +17,25 @@ typedef struct str_stats {
     double err;
 } typ_stats;
 
-double* statsGetMax();
-double* statsGetMin();
-double statsGetAvgVel();
-double statsGetMaxVol();
-double statsGetMinVol();
-double statsGetVolIni();
-double statsGetVolMaxDelta();
-double statsGetMaxDeltaVol();
-int statsGetContSave();
-double statsGetTol();
-double statsGetErr();
-void statsSetTol(double);
-void statsSetErr(double);
+__host__ double* statsGetMax();
+__host__ double* statsGetMin();
+__host__ double statsGetAvgVel();
+__host__ double statsGetMaxVol();
+__host__ double statsGetMinVol();
+__host__ double statsGetVolIni();
+__host__ double statsGetVolMaxDelta();
+__host__ double statsGetMaxDeltaVol();
+__host__ int statsGetContSave();
+__host__ double statsGetTol();
+__host__ double statsGetErr();
+__host__ void statsSetTol(double);
+__host__ void statsSetErr(double);
 
 
-double statsGetVolIni();
+__host__ double statsGetVolIni();
 
 __host__ void allocStats();
 __host__ void deallocStats();
 __host__ void iniStats();
 __host__ void statsSetVolIni(double vol);
-void statsIncContSave();
+__host__ void statsIncContSave();

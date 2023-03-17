@@ -2,22 +2,22 @@
 
 typ_stats* stats;
 
-double* statsGetMax() { return stats->max; }
-double* statsGetMin() { return stats->min; }
-double statsGetAvgVel() { return stats->avgVel; }
-double statsGetMaxVol() { return stats->maxVol; }
-double statsGetMinVol() { return stats->minVol; }
-double statsGetVolIni() { return stats->volIni; }
-double statsGetVolMaxDelta() { return stats->volMaxDelta; }
-double statsGetMaxDeltaVol() { return stats->maxDeltaVol; }
-int statsGetContSave() { return stats->contSave; }
-double statsGetTol() { return stats->tol; }
-double statsGetErr() { return stats->err; }
+__host__ double* statsGetMax() { return stats->max; }
+__host__ double* statsGetMin() { return stats->min; }
+__host__ double statsGetAvgVel() { return stats->avgVel; }
+__host__ double statsGetMaxVol() { return stats->maxVol; }
+__host__ double statsGetMinVol() { return stats->minVol; }
+__host__ double statsGetVolIni() { return stats->volIni; }
+__host__ double statsGetVolMaxDelta() { return stats->volMaxDelta; }
+__host__ double statsGetMaxDeltaVol() { return stats->maxDeltaVol; }
+__host__ int statsGetContSave() { return stats->contSave; }
+__host__ double statsGetTol() { return stats->tol; }
+__host__ double statsGetErr() { return stats->err; }
 
-void statsSetTol(double tol) {
+__host__ void statsSetTol(double tol) {
     stats->tol = tol;
 }
-void statsSetErr(double err) {
+__host__ void statsSetErr(double err) {
     stats->err = err;
 }
 
@@ -43,7 +43,6 @@ __host__ void iniStats() {
     stats->volMaxDelta = 0.0;
     stats->avgVel = 0.0;
     stats->volIni = 0.0;
-
 }
 /*
 */
@@ -54,7 +53,7 @@ __host__ void statsSetVolIni(double vol) {
  *
  * @param CA
  */
-void computeStats(double volume) {
+__host__ void computeStats(double volume) {
     if (volume > stats->maxVol) stats->maxVol = volume;
     if (volume < stats->minVol) stats->minVol = volume;
     double deltaVol = fabs(volume - stats->volIni);
@@ -65,7 +64,8 @@ void computeStats(double volume) {
     pointsStats(stats->max, stats->min, &(stats->avgVel));
 }
 
-
-void statsIncContSave() {
+/*
+*/
+__host__ void statsIncContSave() {
     stats->contSave++;
 }
