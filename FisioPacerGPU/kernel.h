@@ -15,6 +15,7 @@
 #include "NumericalMethods.h"
 #include "Stats.h"
 #include "Stimulus.h"
+
 int simulate(typ_ca* CA, bool save);
 void initializeCA(typ_ca* CA);
 void computeStats(double);

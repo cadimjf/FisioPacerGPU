@@ -49,9 +49,9 @@ template <typename T> void allocateHostVar(T** host) {
     }
 }
 
-template <typename T> void allocateDeviceVar(T** device) {
+template <typename T> void allocateDeviceVar(T** device, int size=1) {
     if (GPUMODE == 1) {
-        chker(cudaMalloc((void**)device, sizeof(T)));
+        chker(cudaMalloc((void**)device, sizeof(T)*size));
     }    
 }
 /*

@@ -1,43 +1,59 @@
 #include "Stimulus.h"
 
-
-
 //stimulus regions
 int stimSize;
-t_stim* aStim;
+t_stim* aStimHost;
+__device__ t_stim* aStimDevice;
+t_stim* gpuPntr;
 
-t_stim getItemStimulus(int i) {
-    if (i>= stimSize || i< 0) {
-        stringstream ss;
-        ss << "Invalid index for a stimulus: " << i << endl;
-        ss << "Valid range: [0: " << stimSize<<"]" << endl;
-        string str = ss.str();
-        throw MyException(str, __FILE__, __LINE__);
-    }
-    return aStim[i];
-
+/*
+* returns the array of stimulus
+* checks if the index is inside the valid range
+* returns the data on gpu or cpu according to the function caller (is it host or device?)
+*/
+__host__ __device__ t_stim getItemStimulus(int i) {
+        //is it device ou host
+        #if defined(__CUDA_ARCH__)
+            // Device
+            return aStimDevice[i];
+        #else
+            // Host
+            if (i<0 || i>stimSize) {
+                stringstream ss;
+                ss << "Invalid index for a stimulus: " << i << endl;
+                ss << "Valid range: [0: " << stimSize << "]" << endl;
+                string str = ss.str();
+                throw MyException(str, __FILE__, __LINE__);
+            }
+            else {
+                return aStimHost[i];
+            }
+        #endif    
 }
 /*
 */
-int isStimulationTime(int pmRegion, double t, double dt) {
+__host__ __device__ int isStimulationTime(int pmRegion, double t, double dt) {
     t_stim s = getItemStimulus(pmRegion);
     return (((t >= s.iniTime) && (((t - s.iniTime) - (floor(((t - s.iniTime) / s.period)) * s.period)) <= dt))) ? 1 : 0;
 }
 
-double stimGetIniTime(int i) { return getItemStimulus(i).iniTime; }
-double stimGetPeriod(int i) { return getItemStimulus(i).period; }
-double stimGetIniX(int i) { return getItemStimulus(i).iniX; }
-double stimGetEndX(int i) { return getItemStimulus(i).endX; }
-double stimGetIniY(int i) { return getItemStimulus(i).iniY; }
-double stimGetEndY(int i) { return getItemStimulus(i).endY; }
-double stimGetIniZ(int i) { return getItemStimulus(i).iniZ; }
-double stimGetEndZ(int i) { return getItemStimulus(i).endZ; }
-int stimGetSize() { return stimSize; }
+__host__ double stimGetIniTime(int i) { return getItemStimulus(i).iniTime; }
+__host__ double stimGetPeriod(int i) { return getItemStimulus(i).period; }
+__host__ double stimGetIniX(int i) { return getItemStimulus(i).iniX; }
+__host__ double stimGetEndX(int i) { return getItemStimulus(i).endX; }
+__host__ double stimGetIniY(int i) { return getItemStimulus(i).iniY; }
+__host__ double stimGetEndY(int i) { return getItemStimulus(i).endY; }
+__host__ double stimGetIniZ(int i) { return getItemStimulus(i).iniZ; }
+__host__ double stimGetEndZ(int i) { return getItemStimulus(i).endZ; }
+__host__ int stimGetSize() { return stimSize; }
 
 /*
 */
-void stimDealloc() {
-    if (aStim != NULL) free(aStim);
+__host__ void stimDealloc() {
+    if (aStimHost != NULL) free(aStimHost);
+    if (GPUMODE == 1) {
+        chker(cudaFree(gpuPntr));
+    }
 }
 
 
@@ -46,7 +62,7 @@ void stimDealloc() {
  * @param strFileSt
  * @param CA
  */
-void readStimFile(string strFileSt) {
+__host__ void readStimFile(string strFileSt) {
     //temp string to read lines
     stimSize = 0;
     string line;
@@ -63,8 +79,8 @@ void readStimFile(string strFileSt) {
             throw MyException(str, __FILE__, __LINE__);
             return;
         }
-        aStim = (t_stim*)malloc(sizeof(t_stim) * stimSize);
-        if (!aStim) {
+        aStimHost = (t_stim*)malloc(sizeof(t_stim) * stimSize);
+        if (!aStimHost) {
             stringstream ss;
             ss << "Stim allocation problem: " << endl << strFileSt;
             string str = ss.str();
@@ -119,7 +135,7 @@ void readStimFile(string strFileSt) {
                 }
                 countColumns++;
             }
-            aStim[cont] = stim;
+            aStimHost[cont] = stim;
             
             if (cont >= stimSize) {
                 stringstream ss;
@@ -138,4 +154,11 @@ void readStimFile(string strFileSt) {
         string str = ss.str();
         throw MyException(str, __FILE__, __LINE__);
     }
+
+    if(GPUMODE==1){
+        cudaGetSymbolAddress((void**)&gpuPntr, aStimDevice);
+        allocateDeviceVar(&gpuPntr, stimSize);
+        chker(cudaMemcpy(gpuPntr, aStimHost, sizeof(t_stim) * stimSize, cudaMemcpyHostToDevice));
+    }
+    
 }

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "MyStdLib.h"
+#include "cudacommons.h"
 using namespace std;
 //stimulus
 typedef struct str_sim {
@@ -18,17 +19,16 @@ typedef struct str_sim {
 } t_stim;
 
 
-void readStimFile(string strFileSt);
+__host__ void readStimFile(string strFileSt);
+__host__ double stimGetIniTime(int i);
+__host__ double stimGetPeriod(int i);
+__host__ double stimGetIniX(int i);
+__host__ double stimGetEndX(int i);
+__host__ double stimGetIniY(int i);
+__host__ double stimGetEndY(int i);
+__host__ double stimGetIniZ(int i);
+__host__ double stimGetEndZ(int i);
+__host__ int stimGetSize();
 
-double stimGetIniTime(int i);
-double stimGetPeriod(int i);
-double stimGetIniX(int i);
-double stimGetEndX(int i);
-double stimGetIniY(int i);
-double stimGetEndY(int i);
-double stimGetIniZ(int i);
-double stimGetEndZ(int i);
-int stimGetSize();
-
-void stimDealloc();
-int isStimulationTime(int pmRegion, double t, double dt);
+__host__ void stimDealloc();
+__host__ __device__ int isStimulationTime(int pmRegion, double t, double dt);
