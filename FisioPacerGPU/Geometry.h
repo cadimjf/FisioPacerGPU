@@ -11,7 +11,7 @@
 #include "CellularAutomaton.h"
 #include "MyStdLib.h"
 #include "ContinuumMech.h"
-
+#include "Pressure.h"
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>

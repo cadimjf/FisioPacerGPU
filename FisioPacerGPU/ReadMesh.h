@@ -18,6 +18,7 @@
 #include "DataStructures.h"
 #include "LinearAlg.h"
 #include "Stimulus.h"
+#include "Pressure.h"
 using namespace std;
 
 void omegaBAdjacency(int iElement, typ_ca *CA);
@@ -27,7 +28,7 @@ void elementsFile(string fileName, typ_ca *CA);
 
 void OmegaANeighborhood();
 int readSize(string file);
-void readPressFile(string strFilePress, typ_ca *CA);
+
 void omegaBAdjacency(int iElement, typ_ca *CA);
 void fillFiberFile(string fileName, typ_ca *CA);
 void pointsFile(string fileName, typ_ca *CA);
@@ -39,6 +40,6 @@ void OmegaANeighborhood(typ_ca *CA);
 
 void readParameterFile(string fName, typ_ca *CA);
 void readBoundaryFile(string boundFile, typ_ca *CA);
-void readPressFile(string strFilePress, typ_ca *CA);
+
 #endif	/* READMESH_H */
 

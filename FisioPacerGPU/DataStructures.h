@@ -17,12 +17,17 @@
 #include <time.h>
 
 using namespace std;
+
+
 //Contains the points ids that define a tetrahedron face on the surface, where is applied external pressure
 typedef struct sSurfacePressure {
     int pt1;
     int pt2;
     int pt3;
-} typ_face;
+} typ_pressureface;
+
+
+
 
 //cellular automata parameters
 typedef struct str_par_ac{
@@ -81,14 +86,15 @@ typedef struct sParam {
     int printOutput;
     int nRegions;
     t_par_ac **aParam;//
-    //pressure faces
-    int numFaces;
-    typ_face **aFaces;//
-    double pressure;
     int numThreads;
     double simulationTime;
     char inputFolder[260];
     char outputFolder[260];
+
+
+    typ_pressureface** aFaces;//
+
+
 } typ_param;
 
 

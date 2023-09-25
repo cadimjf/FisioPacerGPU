@@ -5,7 +5,7 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-#define GPUMODE 1
+#define GPUMODE 0
 /*
  * EXECMODE:
  * 0 stands for HOST 

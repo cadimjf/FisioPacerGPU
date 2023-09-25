@@ -295,13 +295,13 @@ void computeForceIntermediaria(
 *      forcesOnPts[I2d(k,0,3)] += 1/3 * força
 *
 */
-void getForceOnSurface(typ_face *face, typ_ca *CA, double *aForce)
+void getForceOnSurface(typ_pressureface *face, typ_ca *CA, double *aForce)
 {
     double force=0.0;
     double normal[3]={0.0}, bary[3]={0.0};
     
     double area = getFaceAreaNormal(face, CA, normal, bary);
-    force = -/*getPressurePercent(CA) * TODO FIXME retirar o comeentario para o modelo de pressao*/CA->params->pressure* area/3.0;
+    force = -/*getPressurePercent(CA) * TODO FIXME retirar o comeentario para o modelo de pressao*/pressureGetPressure()* area/3.0;
     //
     aForce[0] = force*normal[0];
     aForce[1] = force*normal[1];
@@ -316,7 +316,7 @@ void getForceOnSurface(typ_face *face, typ_ca *CA, double *aForce)
  * @param bary
  * @return 
  */
-double getFaceAreaNormal(typ_face *face, typ_ca *CA, double normal[3], double bary[3]){
+double getFaceAreaNormal(typ_pressureface *face, typ_ca *CA, double normal[3], double bary[3]){
     double vPt1[3], vPt2[3], vPt3[3];
     getPtsInVector(CA->pnts_old, face->pt1, vPt1);
     getPtsInVector(CA->pnts_old, face->pt2, vPt2);
@@ -333,10 +333,10 @@ double getFaceAreaNormal(typ_face *face, typ_ca *CA, double normal[3], double ba
  * @param forcesOnPts
  */
 void computePressurePoints(typ_ca *CA, double *forcesOnPts){
-    typ_face *face;    
+    typ_pressureface *face;    
     double surfaceForces[3] = {0.0,0.0,0.0};
     double max=DBL_MIN, min=DBL_MAX, sum=0.0;
-    for(int iF=0; iF < CA->params->numFaces; iF++){
+    for(int iF=0; iF < pressureGetNumFaces(); iF++){
         face = CA->params->aFaces[iF];
         getForceOnSurface(face, CA, surfaceForces);
         applyPressureForcePoint(CA, surfaceForces, forcesOnPts, face->pt1);

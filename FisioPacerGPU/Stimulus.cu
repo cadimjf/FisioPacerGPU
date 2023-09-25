@@ -52,7 +52,7 @@ __host__ int stimGetSize() { return stimSize; }
 __host__ void stimDealloc() {
     if (aStimHost != NULL) free(aStimHost);
     if (GPUMODE == 1) {
-        chker(cudaFree(gpuPntr));
+        // TODO FIXME chker(cudaFree(gpuPntr));
     }
 }
 

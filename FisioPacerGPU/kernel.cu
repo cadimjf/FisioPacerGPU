@@ -50,7 +50,7 @@ void deviceCopy(typ_ca *hCA) {
     gpucopyPressureCA();
     chker(cudaMemcpy(deviceParams,     hCA->params,         sizeof(typ_param), cudaMemcpyHostToDevice));
     chker(cudaMemcpy(deviceIniElem,    hCA->ini,            sizeof(typ_t0_element)*hCA->params->elementsNum, cudaMemcpyHostToDevice));
-    for (int i = 0; i < hCA->params->numFaces; i++) {
+    for (int i = 0; i < pressureGetNumFaces(); i++) {
        // chker(cudaMemcpy(deviceAFaces[i], hCA->params->aFaces[i], sizeof(typ_face), cudaMemcpyHostToDevice));
 
     }
@@ -67,12 +67,14 @@ __global__ void teste(
 
 
 void deviceDealloc( ) {
-       
+      
+    /* TODO FIXME
     chker(cudaFree(deviceParams));
     chker(cudaFree(deviceIniElem));
     chker(cudaFree(deviceCA));
     chker(cudaFree(deviceForcesOnPts));
     chker(cudaFree(deviceForcesOnPtsInterm));
+    */
 }
 
 /*
@@ -206,12 +208,14 @@ int simulate(typ_ca* CA, bool save) {
 
     deviceAlloc(CA);
     deviceCopy(CA);
-    //zero the forces vector on gpu
-    deviceIniForces <<<1, 1 >>> (deviceForcesOnPts, deviceForcesOnPtsInterm, deviceParams);
+    if (GPUMODE == 1) {
+        //zero the forces vector on gpu
+        deviceIniForces <<<1, 1 >>> (deviceForcesOnPts, deviceForcesOnPtsInterm, deviceParams);
 
-    teste <<< 1, 1>>> (deviceCA);
-    cudaMemcpy(CA, deviceCA, sizeof(typ_ca), cudaMemcpyDeviceToHost);
-    cout << "time: "<<CA->time << endl;
+        teste <<< 1, 1 >>> (deviceCA);
+        cudaMemcpy(CA, deviceCA, sizeof(typ_ca), cudaMemcpyDeviceToHost);
+    }
+    cout << "time: " << CA->time << endl;
     
 
     // exit(0);
@@ -234,9 +238,10 @@ int simulate(typ_ca* CA, bool save) {
         for (int k = 0; k < CA->params->pointsNum; k++) {
             forcesOnPts[I2d(k, 0, 3)] = forcesOnPts[I2d(k, 1, 3)] = forcesOnPts[I2d(k, 2, 3)] = 0.0f;
         }
-        //zero the forces vector on gpu
-        deviceIniForces << <1, 1 >> > (deviceForcesOnPts, deviceForcesOnPtsInterm, deviceParams);
-
+        if (GPUMODE == 1) {
+            //zero the forces vector on gpu
+            deviceIniForces <<<1, 1 >>> (deviceForcesOnPts, deviceForcesOnPtsInterm, deviceParams);
+        }
         CA->time += CA->params->dt;
         auxCA = CA->t_old;
         CA->t_old = CA->t_new;
@@ -379,10 +384,6 @@ void deallocCA(typ_ca* CA) {
         freeAList(CA->omega_b, CA->params->pointsNum);
         stimDealloc();
         //
-        for (int i = 0; i < CA->params->numFaces; i++) {
-            if (CA->params->aFaces[i] != NULL) free(CA->params->aFaces[i]);
-        }
-        if (CA->params->aFaces != NULL) free(CA->params->aFaces);
         //
 
         for (int i = 0; i < CA->params->nRegions; i++) {
@@ -478,8 +479,9 @@ void allocCA(typ_ca* CA) {
 
         allocStats();
         //opens the files and fill arrays
-        openFile(CA, strPtsFile, strEleFile, strFibFile, strBoundFile, strPressFile, strStmFile);
         allocPressureCA();
+        openFile(CA, strPtsFile, strEleFile, strFibFile, strBoundFile, strPressFile, strStmFile);
+        
     }
     catch (MyException& caught) {
         std::cout << caught.getMessage() << std::endl;

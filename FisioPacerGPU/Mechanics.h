@@ -35,11 +35,11 @@ void getActiveForce( int i, double force[3][2], typ_ca *CA);
 
 void computeForceOnElement(typ_ca *CA, double *forcesOnPts, int i);
 void computeForceIntermediaria(typ_ca *CA, double *forcesOnPts);
-void getForceOnSurface(typ_face *face, typ_ca *CA, double *aForce);
+void getForceOnSurface(typ_pressureface *face, typ_ca *CA, double *aForce);
 void computePressurePoints(typ_ca *CA, double *forcesOnPts);
 
 void applyPressureForcePoint(typ_ca *CA, double surfaceForces[3], double *forcesOnPts, int iPnt);
-double getFaceAreaNormal(typ_face *face, typ_ca *CA, double normal[3], double bary[3]);
+double getFaceAreaNormal(typ_pressureface *face, typ_ca *CA, double normal[3], double bary[3]);
 //void getForceOnSurfaceVirtualHex(typ_ca *CA, int i, int iAxis, double *aForce,typ_face *face);
 //void getPressIntPnt(typ_ca *CA, int i, double forceFiber[3][2],
 //                    double forceSheet[3][2], double forceNSheet[3][2]);

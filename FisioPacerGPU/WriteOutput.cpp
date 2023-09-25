@@ -154,25 +154,25 @@ void saveNormals(
     fprintf(file, "vtk output\n");
     fprintf(file, "ASCII\n");
     fprintf(file, "DATASET UNSTRUCTURED_GRID\n");
-    fprintf(file, "POINTS %d double\n", CA->params->numFaces);
-    typ_face *face;    
-    for(int iF=0; iF < CA->params->numFaces; iF++){
+    fprintf(file, "POINTS %d double\n", pressureGetNumFaces());
+    typ_pressureface *face;    
+    for(int iF=0; iF < pressureGetNumFaces(); iF++){
         face = CA->params->aFaces[iF];
         double normal[3]={0.0}, bary[3]={0.0};
         getFaceAreaNormal(face, CA, normal,bary);
         fprintf(file, "%f %f %f\n", bary[0], bary[1], bary[2]);
     }   
-    fprintf(file, "CELLS %d %d\n", CA->params->numFaces,CA->params->numFaces*2);
-    for(int iF=0; iF < CA->params->numFaces; iF++){
+    fprintf(file, "CELLS %d %d\n", pressureGetNumFaces(),pressureGetNumFaces()*2);
+    for(int iF=0; iF < pressureGetNumFaces(); iF++){
         fprintf(file, "1 %d\n",iF);
     }  
-    fprintf(file, "CELL_TYPES %d\n", CA->params->numFaces);
-    for(int iF=0; iF < CA->params->numFaces; iF++){
+    fprintf(file, "CELL_TYPES %d\n", pressureGetNumFaces());
+    for(int iF=0; iF < pressureGetNumFaces(); iF++){
         fprintf(file, "1\n");
     }  
-    fprintf(file, "POINT_DATA %d\n", CA->params->numFaces);
+    fprintf(file, "POINT_DATA %d\n", pressureGetNumFaces());
     fprintf(file, "NORMALS n double\n");
-    for(int iF=0; iF < CA->params->numFaces; iF++){
+    for(int iF=0; iF < pressureGetNumFaces(); iF++){
         face = CA->params->aFaces[iF];
         double normal[3]={0.0}, bary[3]={0.0};
         getFaceAreaNormal(face, CA, normal,bary);

@@ -582,7 +582,7 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
   * @param face
   * @return 
   */
- int checkFaceByPnt(int pt, typ_face *f)
+ int checkFaceByPnt(int pt, typ_pressureface *f)
  {
     if(f->pt1 == pt || f->pt2 == pt || f->pt3 == pt){
         return 1;
@@ -590,7 +590,7 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
     return 0;
  }
  //Verifica se a face de pressao pertence a face 1: 123
- int checkFace1(int i, typ_ca *CA, typ_face *face){
+ int checkFace1(int i, typ_ca *CA, typ_pressureface *face){
      if(checkFaceByPnt(CA->ini[i].iPt1, face)==0)
          return 0;
      if(checkFaceByPnt(CA->ini[i].iPt2, face)==0)
@@ -600,7 +600,7 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
     return 1;
  }
  //Verifica se a face de pressao pertence a face 3: 124
- int checkFace2(int i, typ_ca *CA, typ_face *face){
+ int checkFace2(int i, typ_ca *CA, typ_pressureface *face){
      if(checkFaceByPnt(CA->ini[i].iPt1, face)==0)
          return 0;
      if(checkFaceByPnt(CA->ini[i].iPt2, face)==0)
@@ -610,7 +610,7 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
     return 1;
  }
   //Verifica se a face de pressao pertence a face 3: 134
- int checkFace3(int i, typ_ca *CA, typ_face *face){
+ int checkFace3(int i, typ_ca *CA, typ_pressureface *face){
      if(checkFaceByPnt(CA->ini[i].iPt1, face)==0)
          return 0;
      if(checkFaceByPnt(CA->ini[i].iPt3, face)==0)
@@ -620,7 +620,7 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
     return 1;
  }
  //Verifica se a face de pressao pertence a face 3: 234
- int checkFace4(int i, typ_ca *CA, typ_face *face){
+ int checkFace4(int i, typ_ca *CA, typ_pressureface *face){
      if(checkFaceByPnt(CA->ini[i].iPt2, face)==0)
          return 0;
      if(checkFaceByPnt(CA->ini[i].iPt3, face)==0)
@@ -635,8 +635,8 @@ void swapInterpolationCols(int i, int j, int k, typ_ca *CA)
  * @param CA
  */
 void interceptionPntPressure(int i, typ_ca *CA){
-    for(int iF=0; iF < CA->params->numFaces; iF++){
-        typ_face *face = CA->params->aFaces[iF];
+    for(int iF=0; iF < pressureGetNumFaces(); iF++){
+        typ_pressureface *face = CA->params->aFaces[iF];
         CA->ini[i].pressFaces[0] = checkFace1(i, CA, face);
         CA->ini[i].pressFaces[1] = checkFace2(i, CA, face);
         CA->ini[i].pressFaces[2] = checkFace3(i, CA, face);

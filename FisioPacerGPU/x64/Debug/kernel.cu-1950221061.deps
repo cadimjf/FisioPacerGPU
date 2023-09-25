@@ -38,80 +38,81 @@ D:\Programas\CudaToolkit\dev\include\texture_types.h
 D:\Programas\CudaToolkit\dev\include\vector_functions.h
 D:\Programas\CudaToolkit\dev\include\vector_functions.hpp
 D:\Programas\CudaToolkit\dev\include\vector_types.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\atomic
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cctype
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cerrno
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cfloat
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\climits
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\clocale
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cmath
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\concurrencysal.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\crtdefs.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstddef
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstdint
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstdio
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstdlib
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cstring
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\ctime
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\cwchar
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\eh.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\exception
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\fstream
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\initializer_list
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\intrin0.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\intrin0.inl.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\ios
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\iosfwd
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\iostream
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\isa_availability.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\istream
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\iterator
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\limits
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\limits.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\memory
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\new
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\omp.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\ostream
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\sal.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\sstream
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\stdexcept
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\stdint.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\streambuf
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\string
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\system_error
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\typeinfo
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\type_traits
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\use_ansi.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\utility
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vadefs.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_exception.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_new.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_new_debug.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_string.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vcruntime_typeinfo.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\vector
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xatomic.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xcall_once.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xerrc.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xfacet
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xiosbase
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xkeycheck.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xlocale
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xlocinfo
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xlocnum
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xmemory
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xstddef
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xstring
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xthreads.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xtimec.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xtr1common
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\xutility
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\yvals.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\yvals_core.h
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\__msvc_iter_core.hpp
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\__msvc_system_error_abi.hpp
-D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\include\__msvc_xlocinfo_types.hpp
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\atomic
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cctype
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cerrno
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cfloat
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\climits
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\clocale
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cmath
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\concurrencysal.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\crtdefs.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cstddef
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cstdint
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cstdio
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cstdlib
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cstring
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\ctime
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\cwchar
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\eh.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\exception
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\fstream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\initializer_list
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\intrin0.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\intrin0.inl.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\ios
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\iosfwd
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\iostream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\isa_availability.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\istream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\iterator
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\limits
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\limits.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\memory
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\new
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\omp.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\ostream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\sal.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\sstream
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\stdexcept
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\stdint.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\streambuf
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\string
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\system_error
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\typeinfo
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\type_traits
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\use_ansi.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\utility
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vadefs.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vcruntime.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vcruntime_exception.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vcruntime_new.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vcruntime_new_debug.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vcruntime_string.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vcruntime_typeinfo.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\vector
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xatomic.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xcall_once.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xerrc.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xfacet
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xiosbase
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xkeycheck.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xlocale
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xlocinfo
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xlocnum
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xmemory
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xstring
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xthreads.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xtimec.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xtr1common
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\xutility
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\yvals.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\yvals_core.h
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\__msvc_filebuf.hpp
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\__msvc_iter_core.hpp
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\__msvc_sanitizer_annotate_container.hpp
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\__msvc_system_error_abi.hpp
+D:\Programas\visual studio\ide\VC\Tools\MSVC\14.37.32822\include\__msvc_xlocinfo_types.hpp
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\CellularAutomaton.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Constants.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\ContinuumMech.h
@@ -124,7 +125,7 @@ D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Mechanics.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\MyStdLib.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\NumericalMethods.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Points.h
-D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\pressure.h
+D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Pressure.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\ReadMesh.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Stats.h
 D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\Stimulus.h
