@@ -1,12 +1,1 @@
-﻿  Compiling CUDA source file kernel.cu...
-  
-  D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU>"D:\Programas\CudaToolkit\dev\bin\nvcc.exe" -gencode=arch=compute_50,code=\"sm_50,compute_50\" --use-local-env -ccbin "D:\Programas\visual studio\ide\VC\Tools\MSVC\14.34.31933\bin\HostX64\x64" -x cu   -ID:\Programas\CudaToolkit\dev\include -ID:\Programas\CudaToolkit\dev\include     --keep-dir x64\Release  -maxrregcount=0  --machine 64 --compile -cudart static    -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /FS   /MD " -Xcompiler "/Fdx64\Release\vc143.pdb" -o D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Release\kernel.cu.obj "D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\kernel.cu" 
-  kernel.cu
-  tmpxft_00002dec_00000000-7_kernel.cudafe1.cpp
-     Criando biblioteca D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Release\FisioPacerGPU.lib e objeto D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Release\FisioPacerGPU.exp
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
-  Gerando código
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 346 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finalizada a geração de código
-  FisioPacerGPU.vcxproj -> D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Release\FisioPacerGPU.exe
+﻿  FisioPacerGPU.vcxproj -> D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Release\FisioPacerGPU.exe

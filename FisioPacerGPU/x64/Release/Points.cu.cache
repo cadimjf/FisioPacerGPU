@@ -1,4 +1,4 @@
-Identity=kernel.cu
+Identity=Points.cu
 AdditionalCompilerOptions=
 AdditionalCompilerOptions=
 AdditionalDependencies=
@@ -8,7 +8,7 @@ AdditionalOptions=
 AdditionalOptions=
 CodeGeneration=compute_50,sm_50
 CodeGeneration=compute_50,sm_50
-CompileOut=D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Release\kernel.cu.obj
+CompileOut=D:\Ricardo\OneDrive\Documentos\GitHub\FisioPacerGPU\FisioPacerGPU\x64\Release\Points.cu.obj
 CudaRuntime=Static
 CudaToolkitCustomDir=
 DebugInformationFormat=None
