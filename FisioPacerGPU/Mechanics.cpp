@@ -12,8 +12,6 @@
 double getForce_HookesLawAxis(double k, double lengthT, double length0) {
     double deltaL = lengthT - length0;
     return -k * (deltaL);
-    //    double deltaL = lengthT/length0;
-    //    return -k*log10(deltaL);
 }
 
 /**
@@ -195,8 +193,7 @@ void getPassiveForce(
     double fAng1[3]={0.0}, fAng2[3]={0.0};
     getAngularForces(iElem, iAxis, CA, fAng1, fAng2, axis);    
     //find the hooke's law resulting force
-    double k=1.0;
-    double FhookeAxis = getForce_HookesLawAxis(CA->ini[iElem].KAxl[iAxis]*k, CA->t_old[iElem]->axisLengthT[iAxis], CA->ini[iElem].axisLength0[iAxis]);
+    double FhookeAxis = getForce_HookesLawAxis(CA->ini[iElem].KAxl[iAxis], CA->t_old[iElem]->axisLengthT[iAxis], CA->ini[iElem].axisLength0[iAxis]);
     //volume force
     double Fvol = getForce_VolPreserving(CA->t_old[iElem]->volCel, CA->ini[iElem].volCel_ini, CA->ini[iElem].KVol[iAxis]);
     double forceJ = 0.0;

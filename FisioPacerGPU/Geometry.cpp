@@ -827,6 +827,7 @@ void computeKs(typ_ca *CA, int iElem){
     for(int i =0;i<3;i++){
         ini->KAxl[i] = area_L0[i]*ap->EAxl[i];
         ini->KVol[i] = area_L0[i]*ap->EVol[i];
+        //TODO FIXME CHECK THIS por que a area dessas forças nao está sendo dividida pelo tamanho do eixo
         ini->KAng[i] = area[i]*ap->EAng[i];
         ini->damp[i] = area[i]*ap->kDamp;
     }
